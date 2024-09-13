@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int count_words(File *file){
+int count_words(FILE *file){
     int count = 0; 
+    char word[256];
 
-    while (fget(file) != EOF){
+    while (fscanf(file, "%255s", word)==1){
         // Somehow iterate over each word and trim all words. 
         count++; 
     }
@@ -14,10 +15,10 @@ int count_words(File *file){
 int main(){
 
     char file_path[256];
-    File *file;
+    FILE *file;
 
     printf("Enter the full filepath for the .txt file:");
-    scanf("%s", file_path);
+    scanf("%255s", file_path);
     
     file = fopen(file_path, "r");
     if (file == NULL){
@@ -34,3 +35,7 @@ int main(){
     return 0;
 
 }
+
+// gcc scanner.c -o scantest
+// ./scantest
+// /Users/annesofiedahl-petersen/Desktop/Thesis/Sandbox_Rust/rustengine/rustengine/target/Data/enwiki-tiny.txt
