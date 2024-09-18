@@ -18,3 +18,6 @@ fn main() {
 
     println!("The file holds {} words.", word_count);
 }
+
+// cargo run 
+// /Users/annesofiedahl-petersen/Desktop/Thesis/Sandbox_Rust/rustengine/rustengine/target/Data/enwiki-tiny.txt
