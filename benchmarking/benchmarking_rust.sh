@@ -5,7 +5,7 @@
 #type -a time
 
 #This creates a 'variable' that contains the path to the file I want to use in my program
-input_file="../../data/the-champion.txt"
+input_file="../../../data/the-champion.txt"
 
 #Go into the directory of the file you want to time
 cd ../rustengine_1point1/target/debug

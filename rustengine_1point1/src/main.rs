@@ -28,6 +28,7 @@ fn main() {
 
     let file_path = &args[1];
 
+    //sæt loop rundt om denne her så vi kører det x antal gange
     let word_count = count_words(file_path);
 
     println!("The file contains {} words.", word_count);
