@@ -20,4 +20,4 @@ fn main() {
 }
 
 // cargo run 
-// /Users/annesofiedahl-petersen/Desktop/Thesis/Sandbox_Rust/rustengine/rustengine/target/Data/enwiki-tiny.txt
+// Copy the full path for the file
