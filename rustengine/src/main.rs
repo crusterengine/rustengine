@@ -1,9 +1,11 @@
 use std::fs; 
 use std::io;
 
-// fn count_words(String content) -> usize{
-//     let mut count: usize = 0; 
-// }
+fn count_words(String content) -> usize{
+    let mut count: usize = 0; 
+    let content_splitted = content.split_whitespace();
+
+}
 
 fn print_type_of<T>(_: &T) {
     println!("{}", std::any::type_name::<T>());
@@ -22,12 +24,15 @@ fn main() {
     let content = fs::read_to_string(file_path)
     .expect("Should have been able to read the file");
 
-    let word_count = content.split_whitespace().count();
+    let word_count = content.split_whitespace();
 
     //println!("The type of word_count is {}", type.of(&word_count));
+
+    print_type_of(&content);
     print_type_of(&word_count );
 
-    println!("The file holds {} words.", word_count);
+
+    //println!("The file holds {} words.", word_count);
 }
 
 // cargo run 
