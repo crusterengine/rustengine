@@ -1,5 +1,6 @@
 use std::fs; 
-use std::io;
+use std::env;
+
 
 fn count_words(file: &str) -> i32{
     let mut count: i32 = 0; 
@@ -17,14 +18,15 @@ fn count_words(file: &str) -> i32{
 }
 
 fn main() {
-    let mut file_path = String::new();
-    println!("Enter the full filepath to .txt file: ");
 
-    io::stdin()
-        .read_line(&mut file_path)
-        .expect("file not found");
+    let args: Vec<String> = env::args().collect();
 
-    let file_path = file_path.trim();
+    if args.len() < 2 {
+        eprintln!("Usage: {} <file_path>", args[0]);
+        return;
+    }
+
+    let file_path = &args[1];
 
     let word_count = count_words(file_path);
 
