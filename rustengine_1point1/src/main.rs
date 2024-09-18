@@ -1,10 +1,10 @@
 use std::fs; 
 use std::io;
 
-fn count_words(file: &str) -> usize{
-    let mut count: usize = 0; 
+fn count_words(file: &str) -> i32{
+    let mut count: i32 = 0; 
 
-    let content = fs::read_to_string(file)
+    let content = fs::read_to_string(file) //this turns it into a String and therefore uses heap
     .expect("Should have been able to read the file");
 
     let mut content_splitted = content.split_whitespace();
@@ -31,6 +31,3 @@ fn main() {
     println!("The file contains {} words.", word_count);
 
 }
-
-// cargo run 
-// /Users/annesofiedahl-petersen/Desktop/Thesis/Sandbox_Rust/rustengine/rustengine/target/Data/enwiki-tiny.txt
