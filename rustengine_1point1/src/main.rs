@@ -32,8 +32,6 @@ fn main() {
     let mut word_count = 0; //look at which type, so we can ensure that it is able to hold all the words
     let number_of_iterations: usize = args[2].trim().parse().expect("Not a valid number of iterations");
 
-    print_type_of(&word_count);
-
     for _ in 0..number_of_iterations{
         word_count += count_words(file_path);
     } 
@@ -43,6 +41,6 @@ fn main() {
 }
 
 //Hjælpe funktion til at se hvilken type ens variabler har
-fn print_type_of<T>(_: &T) {
-    println!("{}", std::any::type_name::<T>());
-}
+// fn print_type_of<T>(_: &T) {
+//     println!("{}", std::any::type_name::<T>());
+// }
