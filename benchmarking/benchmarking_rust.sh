@@ -4,6 +4,9 @@
 #which time
 #type -a time
 
+#The following command tells you which system you are running on:
+#system_profiler SPHardwareDataType
+
 #This creates a folder for the logs if it does not already exist
 mkdir -p "log_folder_rust"
 
@@ -12,7 +15,7 @@ log_folder="../../../benchmarking/log_folder_rust"
 
 #This creates a 'variable' that contains the path to the file you want to use in the benchmarking 
 input_file="../../../data/the-champion.txt"
-number_of_iterations="100"
+number_of_iterations="100000"
 
 #Go into the directory of the file you want to time
 cd ../rustengine_1point1/target/release

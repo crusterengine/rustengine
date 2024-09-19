@@ -4,6 +4,9 @@
 #which time
 #type -a time
 
+#The following command tells you which system you are running on:
+#system_profiler SPHardwareDataType
+
 #This creates a folder for the logs if it does not already exist
 mkdir -p "log_folder_c"
 
@@ -13,7 +16,7 @@ log_folder="../benchmarking/log_folder_c"
 #This creates a 'variable' that contains the path to the file I want to use in my program
 input_file="../data/the-champion.txt"
 
-number_of_iterations="1000"
+number_of_iterations="100000"
 
 #Go into the directory of the file you want to time
 cd ../cengine
@@ -25,8 +28,9 @@ fi
 gtime -f "$(date +%Y-%m-%d\ %H:%M:%S),%e,%U,%S,%P,%M,%F,%R,%c,%w,"$number_of_iterations"" ./scanner "$input_file" "$number_of_iterations" 2>> "$log_folder/results_c.csv"
 
 #Benchmarks the time it takes to run the program and puts the information into a txt file and saves it in a different directory
-gtime -v ./scanner "$input_file" "$number_of_iterations" 2> "$log_folder/time_output.txt"
+#gtime -v ./scanner "$input_file" "$number_of_iterations" 2> "$log_folder/time_output.txt"
 
+#gtime -v ./scanner "$input_file" "$number_of_iterations"
 
 #To redirect the log
 #time -o timing.log ls -l

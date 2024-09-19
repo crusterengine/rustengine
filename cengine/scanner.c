@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int count_words(FILE *file){
-    int count = 0; 
+long count_words(FILE *file){
+    long count = 0; 
     char word[256];
 
     while (fscanf(file, "%255s", word)==1){
@@ -26,7 +26,7 @@ int main(int argc, char *argv[]){
     }
 
     int number_of_iterations = (int) atoi(argv[2]);
-    int word_count = 0;
+    long word_count = 0;
 
     for (size_t i = 0; i < number_of_iterations; i++)
     {
@@ -35,7 +35,7 @@ int main(int argc, char *argv[]){
     }
     
     
-    printf("The file contains %d words. \n", word_count);
+    printf("The file contains %ld words. \n", word_count);
 
     fclose(file);
     
