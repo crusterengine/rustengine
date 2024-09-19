@@ -12,22 +12,29 @@ int count_words(FILE *file){
     return count;
 }
 
-int main(){
+int main(int argc, char *argv[]){
 
-    char file_path[256];
-    FILE *file;
-
-    printf("Enter the full filepath for the .txt file:");
-    scanf("%255s", file_path);
-    
-    file = fopen(file_path, "r");
-    if (file == NULL){
-        printf("file not found\n");
+    if (argc != 3) {
+        printf("Not enough arguments %d", argc);
         return 1;
     }
 
-    int word_count = count_words(file); 
+    FILE *file = fopen(argv[1], "r");
+    if (file == NULL){
+        printf("file not found %s\n", argv[1]);
+        return 1;
+    }
 
+    int number_of_iterations = (int) atoi(argv[2]);
+    int word_count = 0;
+
+    for (size_t i = 0; i < number_of_iterations; i++)
+    {
+        rewind(file);
+        word_count += count_words(file);
+    }
+    
+    
     printf("The file contains %d words. \n", word_count);
 
     fclose(file);

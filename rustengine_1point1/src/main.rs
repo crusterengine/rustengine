@@ -17,6 +17,7 @@ fn count_words(file: &str) -> i32{
     count
 }
 
+
 fn main() {
 
     let args: Vec<String> = env::args().collect();
@@ -28,9 +29,18 @@ fn main() {
 
     let file_path = &args[1];
 
-    //sæt loop rundt om denne her så vi kører det x antal gange
-    let word_count = count_words(file_path);
+    let mut word_count = 0; 
+    let number_of_iterations: i32 = args[2].trim().parse().expect("Not a valid number of iterations");
+
+    for _ in 0..number_of_iterations{
+        word_count += count_words(file_path);
+    } 
 
     println!("The file contains {} words.", word_count);
 
 }
+
+//Hjælpe funktion til at se hvilken type ens variabler har
+// fn print_type_of<T>(_: &T) {
+//     println!("{}", std::any::type_name::<T>());
+// }
