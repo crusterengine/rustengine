@@ -10,13 +10,13 @@
 #Overvej hvor mange gange
 
 #This creates a folder for the logs if it does not already exist
-mkdir -p "log_folder_c"
+mkdir -p "log_folder_c_tiny"
 
 #This captures the path to where the log files should be located
-log_folder="../benchmarking/log_folder_c"
+log_folder="../benchmarking/log_folder_c_tiny"
 
 #This creates a 'variable' that contains the path to the file I want to use in my program
-input_file="../data/the-champion.txt"
+input_file="../data/enwiki-tiny.txt"
 
 number_of_iterations="1"
 
@@ -29,7 +29,7 @@ fi
 
 for i in {0..10}
 do
-gtime -f "$(date +%Y-%m-%d\ %H:%M:%S),%e,%U,%S,%P,%M,%F,%R,%c,%w,"$number_of_iterations"" ./scanner "$input_file" "$number_of_iterations" 2>> "$log_folder/results_c.csv"
+gtime -f "$(date +%Y-%m-%d\ %H:%M:%S),%e,%U,%S,%P,%M,%F,%R,%c,%w,"$number_of_iterations"" ./fast_scanner "$input_file" "$number_of_iterations" 2>> "$log_folder/results_c.csv"
 done
 
 #Benchmarks the time it takes to run the program and puts the information into a txt file and saves it in a different directory
