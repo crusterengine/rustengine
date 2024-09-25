@@ -18,7 +18,7 @@ log_folder="../benchmarking/log_folder_c_file_reader_new"
 #This creates a 'variable' that contains the path to the file I want to use in my program
 input_file="../data/enwiki-large.txt"
 
-number_of_iterations="10"
+number_of_iterations="100"
 
 #Go into the directory of the file you want to time
 cd ../cengine_1point1
