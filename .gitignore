@@ -23,7 +23,8 @@ benchmarking/
 .DS_Store
 
 fast_scanner
-
+cengine
+scanner
 
 # RustRover
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
