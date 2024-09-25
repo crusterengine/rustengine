@@ -15,9 +15,10 @@ Cargo.lock
 
 #Ensures that the datafiles and logs are not pushed to github
 data/
-benchmarking/log_folder_c/
-benchmarking/log_folder_rust/
+#benchmarking/log_folder_c/
+#benchmarking/log_folder_rust/
 
+benchmarking/
 
 # RustRover
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
