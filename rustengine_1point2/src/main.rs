@@ -13,7 +13,7 @@ fn count_words(file_path: &str) -> usize{
     let reader = io::BufReader::new(file); //Type = std::io::buffered::bufreader::BufReader<std::fs::File>
 
     for line in reader.lines() {
-        let line: &str = &line.expect("Expected to find a line");
+        let line = line.expect("Expected to find a line");
         count += line.split_whitespace().count();
     }
 

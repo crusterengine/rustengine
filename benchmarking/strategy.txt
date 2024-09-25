@@ -1,0 +1,5 @@
+Consider running it 10 times (or something) for each number of iteration and take the average of these results
+
+To ting jeg gerne vil:
+Lav shell scripts om til at køre i et loop - har lavet det, overvej om det giver mening også at lave det med hvor det ændrer antal iterationer
+I graferne lav en således at alle tiderne er med
