@@ -6,7 +6,7 @@ long count_words(char* file_path){
 
     FILE *file = fopen(file_path, "r");
     if (file == NULL){
-        printf("file could not be found %s\n", file_path);
+        printf("Should have been able to read the file %s\n", file_path);
         return 1;
     }
 
