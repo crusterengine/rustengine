@@ -7,7 +7,6 @@
 
 long count_words(char *file_path) {
    long count = 0;
-   long numnber_of_lines = 0;
 
    FILE *file = fopen(file_path, "r");
    if (file == NULL) {
@@ -22,7 +21,6 @@ long count_words(char *file_path) {
    bool new_word = false;
 
    while (fgets(line, sizeof(line), file) != NULL) {
-    numnber_of_lines++;
        for (int i = 0; line[i] != '\0'; i++) {
            if (isspace(line[i])) {
                    new_word = false; // Resets the word
@@ -38,7 +36,7 @@ long count_words(char *file_path) {
    //     count++;
    // }
        fclose(file);
-    return numnber_of_lines;
+    return count;
 }
 
 
@@ -57,7 +55,7 @@ int main(int argc, char *argv[]) {
        word_count += count_words(file_path);
    }
   
-   printf("The file contains %ld lines.\n", word_count);
+   printf("The file contains %ld words.\n", word_count);
 
 
    return 0;

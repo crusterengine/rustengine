@@ -2,19 +2,19 @@
 #Costumizable parameters for the script: 
 
 #How many times to read over the same inputfile (to simulate a larger file size)
-number_of_iterations="1"
+number_of_iterations="100"
 
 #The program to be benchmarked
 compiled_program="./cengine01"
 
 #This creates a 'variable' that contains the path to the file I want to use in my program
-input_file="../data/the-champion.txt"
+input_file="../data/enwiki-large.txt"
 
 #This creates a folder for the logs if it does not already exist
-mkdir -p "log_folder"
+mkdir -p "log_folder_cmf"
 
 #This captures the path to where the log files should be located
-log_folder="../Benchmark/log_folder"
+log_folder="../Benchmark/log_folder_cmf"
 
 # Tag for the log-file
 input_filename=$(basename "$input_file")

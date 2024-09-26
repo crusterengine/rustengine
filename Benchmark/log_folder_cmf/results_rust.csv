@@ -1,0 +1,5 @@
+      Total Number of Cores: 4,MacBookPro16,3
+timestamp,elapsed_time,user_time,sys_time,cpu_usage,max_memory,major_faults,minor_faults,voluntary_switches,involuntary_switches,number_of_iterations,program,file
+2024-09-26 16:13:21,6.23,5.79,0.10,94%,752,0,400,1117,2,1,./rustengine,enwiki-large.txt
+2024-09-26 16:13:38,57.90,57.04,0.79,99%,800,0,412,6904,2,10,./rustengine,enwiki-large.txt
+2024-09-26 16:14:55,585.24,576.46,8.11,99%,772,0,430,72540,0,100,./rustengine,enwiki-large.txt
