@@ -19,7 +19,11 @@ data/
 
 # Ignores the .csv logfiles
 .csv
-cengine01
+
+#To ignore all the compiled versions of C code
+cengine/*.o
+cengine/*.out
+cengine/*.exe
 
 # RustRover
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
