@@ -21,9 +21,7 @@ data/
 .csv
 
 #To ignore all the compiled versions of C code
-cengine/*.o
-cengine/*.out
-cengine/*.exe
+cengine/*
 
 # RustRover
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
