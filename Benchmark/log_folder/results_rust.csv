@@ -1,0 +1,3 @@
+      Total Number of Cores: 8 (4 performance and 4 efficiency),MacBookPro17,1
+timestamp,elapsed_time,user_time,sys_time,cpu_usage,max_memory,major_faults,minor_faults,voluntary_switches,involuntary_switches,number_of_iterations,program,file
+2024-09-26 10:40:30,0.00,0.00,0.00,25%,1168,15,166,13,0,1,./rustengine,the-champion.txt
