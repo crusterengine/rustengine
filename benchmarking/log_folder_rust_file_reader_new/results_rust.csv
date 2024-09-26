@@ -1,0 +1,5 @@
+timestamp,elapsed_time,user_time,sys_time,cpu_usage,max_memory,major_faults,minor_faults,voluntary_switches,involuntary_switches,number_of_iterations
+2024-09-25 15:37:54,5.87,5.76,0.08,99%,668,28,334,1542,0,1
+2024-09-25 15:38:06,58.15,57.30,0.78,99%,708,0,372,6269,0,10
+2024-09-25 16:18:17,592.18,582.22,8.67,99%,708,0,372,83879,5,100
+2024-09-25 17:35:39,6.12,5.88,0.14,98%,668,28,334,4122,6,1,./rustengine_1point2,enwiki-large.txt

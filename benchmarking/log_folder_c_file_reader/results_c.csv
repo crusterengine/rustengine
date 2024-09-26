@@ -1,0 +1,4 @@
+timestamp,elapsed_time,user_time,sys_time,cpu_usage,max_memory,major_faults,minor_faults,voluntary_switches,involuntary_switches,number_of_iterations
+2024-09-25 15:09:53,0.00,0.00,0.00,33%,476,0,312,4,0,1
+2024-09-25 15:09:58,4.19,3.99,0.15,98%,476,0,310,1840,4,1
+2024-09-25 15:32:16,42.36,40.16,1.28,97%,508,3,317,42418,4,10

@@ -1,0 +1,4 @@
+timestamp;elapsed_time;user_time;sys_time;cpu_usage;max_memory;major_faults;minor_faults;voluntary_switches;involuntary_switches;number_of_iterations
+25.09.2024 15:36;4,17;4,01;0.13;99%;496;3;317;2281;2;1
+25.09.2024 15:36;40,31;39,26;0.99;99%;512;0;321;6185;3;10
+25.09.2024 16:28;406.46;395.75;10,11;99%;512;3;318;54635;0;100

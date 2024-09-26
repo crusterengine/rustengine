@@ -1,0 +1,8 @@
+timestamp,elapsed_time,user_time,sys_time,cpu_usage,max_memory,major_faults,minor_faults,voluntary_switches,involuntary_switches,number_of_iterations,program,file
+2024-09-25 17:17:34,0.00,0.00,0.00,50%,492,0,316,5,3,1,,enwiki-tiny.txt
+2024-09-25 17:20:05,0.00,0.00,0.00,20%,488,3,312,6,3,1,cengine,enwiki-tiny.txt
+gtime: cannot run Missing argument, check file or counter: No such file or directory
+Command exited with non-zero status 127
+2024-09-25 17:27:26,0.00,0.00,0.00,12%,408,0,120,5,26,1,Missing argument, check file or counter,enwiki-tiny.txt
+2024-09-25 17:27:49,0.00,0.00,0.00,25%,472,0,311,2,3,1,./cengine,enwiki-tiny.txt
+2024-09-25 17:27:57,0.00,0.00,0.00,33%,472,0,311,2,0,1,./cengine,enwiki-tiny.txt

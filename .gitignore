@@ -18,13 +18,7 @@ data/
 #benchmarking/log_folder_c/
 #benchmarking/log_folder_rust/
 
-benchmarking/log**
-
 .DS_Store
-
-fast_scanner
-cengine
-scanner
 
 # RustRover
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
