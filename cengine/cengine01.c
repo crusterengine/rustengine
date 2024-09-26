@@ -6,7 +6,7 @@
 
 
 long count_words(char *file_path) {
-   int count = 0;
+   long count = 0;
 
    FILE *file = fopen(file_path, "r");
    if (file == NULL) {
