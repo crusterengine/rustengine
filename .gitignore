@@ -15,10 +15,11 @@ Cargo.lock
 
 # Ignores the Data directory
 data/
-.DS_store/
+.DS_store
 
 # Ignores the .csv logfiles
 .csv
+cengine01
 
 # RustRover
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
