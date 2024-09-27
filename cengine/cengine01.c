@@ -22,6 +22,10 @@ long count_words(char *file_path, char *query) {
    bool query_found = false; 
 
    while (fgets(line, sizeof(line), file) != NULL) {
+        if (query != NULL && strstr(line, query) != NULL){
+            query_found = true; 
+            printf("Found query '%s' in line: %s", query, buffer);
+        }
        for (int i = 0; line[i] != '\0'; i++) {
            if (isspace(line[i])) {
                    new_word = false; // Resets the word
@@ -32,14 +36,8 @@ long count_words(char *file_path, char *query) {
        }
    }
 
-    // Skal det printes eller samles i et index? 
-    if (query != NULL && strstr(buffer, query) != NULL) {
-        query_found = true; 
-        printf("Found query '%s' in line: %s", query, buffer);
-    } 
-
     fclose(file);
-    
+
     if (!query_found){
         printf("Query '%s' not found", query);
     }
