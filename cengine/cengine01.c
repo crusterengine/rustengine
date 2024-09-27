@@ -15,7 +15,7 @@ long count_words(char *file_path) {
    }
 
    char buffer[8192];
-   setvbuf(file, buffer, _IOFBF, sizeof(buffer));
+   setvbuf(file, buffer, _IOFBF, sizeof(buffer)); // Ensures that the buf size is equal to rust 
 
    char line[512];
    bool new_word = false;
