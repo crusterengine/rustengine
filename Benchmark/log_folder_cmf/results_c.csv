@@ -1,0 +1,4 @@
+      Total Number of Cores: 4;MacBookPro16;3;;;;;;;;;;
+timestamp;elapsed_time;user_time;sys_time;cpu_usage;max_memory;major_faults;minor_faults;voluntary_switches;involuntary_switches;number_of_iterations;program;file
+27.09.2024 08:54;4,20;04.okt;0.09;99%;596;3;368;316;0;1;./cengine01;enwiki-large.txt
+27.09.2024 08:54;41.89;40.95;0.91;99%;620;0;377;2468;2;10;./cengine01;enwiki-large.txt
