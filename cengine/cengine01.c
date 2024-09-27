@@ -14,9 +14,6 @@ long count_words(char *file_path) {
        return 1;
    }
 
-   char buffer[8192];
-   setvbuf(file, buffer, _IOFBF, sizeof(buffer));
-
    char line[512];
    bool new_word = false;
 
@@ -31,11 +28,8 @@ long count_words(char *file_path) {
        }
    }
 
+    fclose(file);
 
-   // while (fscanf(file, "%255s", word) == 1) {
-   //     count++;
-   // }
-       fclose(file);
     return count;
 }
 
