@@ -7,13 +7,13 @@ number_of_iterations="100"
 compiled_program="./rustengine"
 
 #This creates a 'variable' that contains the path to the file you want to use in the benchmarking 
-input_file="../../../data/enwiki-large.txt"
+input_file="../../../data/the-champion.txt"
 
 #This creates a folder for the logs if it does not already exist
-mkdir -p "log_folder_cmf"
+mkdir -p "log_folder"
 
 #This captures the path to where the log files should be located
-log_folder="../../../Benchmark/log_folder_cmf"
+log_folder="../../../Benchmark/log_folder"
 
 # Tag for the log-file
 input_filename=$(basename "$input_file")
