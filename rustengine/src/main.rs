@@ -12,6 +12,7 @@ fn count_words(file_path: &str) -> usize{
         let line = line.expect("Expected to find a line");
         count += line.split_whitespace().count();
     }
+
     count
 }
 
@@ -24,7 +25,7 @@ fn main() {
         return;
     }
 
-    let file_path = &args[1];
+    let file_path = &args[1]; //&alloc::string::String
 
     let mut word_count = 0;
     let number_of_iterations: usize = args[2].trim().parse().expect("Not a valid number of iterations");

@@ -1,7 +1,7 @@
 #Costumizable parameters for the script: 
 
 #How many times to read over the same inputfile (to simulate a larger file size)
-number_of_iterations="1"
+number_of_iterations="100"
 
 #The program to be benchmarked
 compiled_program="./rustengine"
