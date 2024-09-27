@@ -16,14 +16,27 @@ int count_words(char *file_path, char *query, long *count, int *appear) {
    char line[512];
    bool new_word = false;
    int line_no = 0;
+   int page = 1; 
+   bool new_page = true; 
 
    while (fgets(line, sizeof(line), file) != NULL) {
         line_no++;
 
+       if (line_no >= 50){
+        page += (line_no/50);
+        line_no = 0; 
+        new_page = true; 
+       }
+
         if (strstr(line, query) != NULL){
              *appear+=1;
-            printf("Found query '%s' in line: %d\n", query, line_no); // Later to be modified for a list/map. 
+             if (new_page){
+                new_page = false; 
+                printf("Found query '%s' appears in page: %d\n", query, page); // Later to be modified for a list/map. and then at last print all. 
+
+             }
         }
+
        for (int i = 0; line[i] != '\0'; i++) {
            if (isspace(line[i])) {
                    new_word = false; // Resets the word
@@ -32,6 +45,7 @@ int count_words(char *file_path, char *query, long *count, int *appear) {
                    *count+=1;
            }
        }
+
    }
     fclose(file);
     return 0;
