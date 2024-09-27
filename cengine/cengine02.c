@@ -5,7 +5,7 @@
 #include <stdbool.h>
 
 
-int count_words(char *file_path, char *query, long *count, int *appear) {
+int track_query(char *file_path, char *query, long *count, int *appear) {
 
    FILE *file = fopen(file_path, "r");
    if (file == NULL) {
@@ -16,14 +16,29 @@ int count_words(char *file_path, char *query, long *count, int *appear) {
    char line[512];
    bool new_word = false;
    int line_no = 0;
+   int page = 1; 
+   bool new_page = true; 
 
    while (fgets(line, sizeof(line), file) != NULL) {
         line_no++;
-
+    // Calculates the current page. 
+       if (line_no >= 50){
+        page += (line_no/50);
+        line_no = 0; 
+        new_page = true; 
+       }
+       
+    // Tracks if the query appears in the current line.
         if (strstr(line, query) != NULL){
              *appear+=1;
-            printf("Found query '%s' in line: %d\n", query, line_no); // Later to be modified for a list/map. 
+             if (new_page){
+                new_page = false; 
+                printf("Found query '%s' appears in page: %d\n", query, page); // Later to be modified for a list/map. and then at last print all. 
+
+             }
         }
+
+    // for-loop countling the words of the .txt file. 
        for (int i = 0; line[i] != '\0'; i++) {
            if (isspace(line[i])) {
                    new_word = false; // Resets the word
@@ -32,6 +47,7 @@ int count_words(char *file_path, char *query, long *count, int *appear) {
                    *count+=1;
            }
        }
+
    }
     fclose(file);
     return 0;
@@ -51,7 +67,7 @@ int main(int argc, char *argv[]) {
     int total_appearances = 0;
 
    for (int i = 0; i < number_of_iterations; i++) {
-        count_words(file_path, query, &total_word_count, &total_appearances);
+        track_query(file_path, query, &total_word_count, &total_appearances);
    }
   
     if (total_appearances < 1){
