@@ -1,14 +1,17 @@
 
 #Costumizable parameters for the script: 
 
-#How many times to read over the same inputfile (to simulate a larger file size)
-number_of_iterations="100"
-
 #The program to be benchmarked
 compiled_program="./cengine01"
 
 #This creates a 'variable' that contains the path to the file I want to use in my program
 input_file="../data/the-champion.txt"
+
+#How many times to read over the same inputfile (to simulate a larger file size)
+number_of_iterations="100"
+
+#Query
+query="Hat"
 
 #This creates a folder for the logs if it does not already exist
 mkdir -p "log_folder"
@@ -35,5 +38,5 @@ fi
 
 #for i in {0..10}
 #do
-gtime -f "$(date +%Y-%m-%d\ %H:%M:%S),%e,%U,%S,%P,%M,%F,%R,%c,%w,"$number_of_iterations","$compiled_program","$input_filename"" "$compiled_program" "$input_file" "$number_of_iterations" 2>> "$log_folder/results_c.csv"
+gtime -f "$(date +%Y-%m-%d\ %H:%M:%S),%e,%U,%S,%P,%M,%F,%R,%c,%w,"$number_of_iterations","$compiled_program","$input_filename"" "$compiled_program" "$input_file" "$number_of_iterations" "$query" 2>> "$log_folder/results_c.csv"
 #done

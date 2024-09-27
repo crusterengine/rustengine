@@ -5,7 +5,7 @@
 #include <stdbool.h>
 
 
-long count_words(char *file_path) {
+long count_words(char *file_path, char *query) {
    long count = 0;
 
    FILE *file = fopen(file_path, "r");
@@ -19,6 +19,7 @@ long count_words(char *file_path) {
 
    char line[512];
    bool new_word = false;
+   bool query_found = false; 
 
    while (fgets(line, sizeof(line), file) != NULL) {
        for (int i = 0; line[i] != '\0'; i++) {
@@ -31,17 +32,24 @@ long count_words(char *file_path) {
        }
    }
 
+    // Skal det printes eller samles i et index? 
+    if (query != NULL && strstr(buffer, query) != NULL) {
+        query_found = true; 
+        printf("Found query '%s' in line: %s", query, buffer);
+    } 
 
-   // while (fscanf(file, "%255s", word) == 1) {
-   //     count++;
-   // }
-       fclose(file);
+    fclose(file);
+    
+    if (!query_found){
+        printf("Query '%s' not found", query);
+    }
+
     return count;
 }
 
 
 int main(int argc, char *argv[]) {
-   if (argc != 3) {
+   if (argc != 4) {
        printf("Missing argument, check file or counter\n");
        return 1;
    }
@@ -50,9 +58,10 @@ int main(int argc, char *argv[]) {
 
    long word_count = 0;
    int number_of_iterations = (int)atoi(argv[2]);
+   char *query = argv[3];
 
    for (int i = 0; i < number_of_iterations; i++) {
-       word_count += count_words(file_path);
+       word_count += count_words(file_path, query);
    }
   
    printf("The file contains %ld words.\n", word_count);
