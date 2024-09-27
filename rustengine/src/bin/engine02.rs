@@ -2,34 +2,37 @@ use std::env;
 use std::fs::File;
 use std::io::{self, BufRead};
 
-fn count_words(file_path: &str, query: &str, total_word_count: &mut usize, total_appearances: &mut usize){
+fn track_query(file_path: &str, query: &str, total_word_count: &mut usize, total_appearances: &mut usize){
 
-    let file = File::open(file_path).expect("Should have been able to read the file"); //Type = std::fs::File
-    let reader = io::BufReader::new(file); //Type = std::io::buffered::bufreader::BufReader<std::fs::File>
+    let file = File::open(file_path).expect("Should have been able to read the file"); 
+    let reader = io::BufReader::new(file); 
 
     let mut line_no = 0;
+    let mut page = 1;
+    let mut new_page = true; 
 
     for line in reader.lines() {
         let line = line.expect("Expected to find a line");
         line_no += 1;
 
-        for word in line.split_whitespace(){
-            *total_word_count += 1;
-            if word == query {
-                *total_appearances += 1; 
-                println!("Found query {} in line: {}", query, line_no);
-            }
+        if line_no == 50 {
+            page += 1;
+            line_no = 0;
+            new_page = true;
         }
 
-        // let words = line.split_whitespace();
-
-        // for str in 0..size(&words){
-        //     *total_word_count += 1;
-        //     if str == query {
-        //         *total_appearances += 1; 
-        //     }
+        for word in line.split_whitespace(){
+            *total_word_count += 1;
             
-        // }
+            if word == query {
+                *total_appearances += 1; 
+
+                if new_page {
+                    new_page = false;
+                    println!("Found query {} in page: {}", query, page);
+                }
+            }
+        }
     }
 }
 
@@ -50,7 +53,7 @@ fn main() {
     let mut total_appearances = 0;
 
     for _ in 0..number_of_iterations{
-        count_words(file_path, query, &mut total_word_count, &mut total_appearances);
+        track_query(file_path, query, &mut total_word_count, &mut total_appearances);
     } 
 
     if total_appearances < 1 {
