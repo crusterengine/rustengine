@@ -10,10 +10,10 @@ compiled_program="./cengine01"
 input_file="../data/the-champion.txt"
 
 #How many times to read over the same inputfile (to simulate a larger file size)
-number_of_iterations="100"
+number_of_iterations="2"
 
 #Query
-query="Hat"
+query="Ebook"
 
 #Command line
 "$compiled_program" "$input_file" "$number_of_iterations" "$query"
