@@ -6,7 +6,7 @@
 
 
 long count_words(char *file_path) {
-   int count = 0;
+   long count = 0;
 
    FILE *file = fopen(file_path, "r");
    if (file == NULL) {
@@ -15,11 +15,14 @@ long count_words(char *file_path) {
    }
 
    char buffer[8192];
+   setvbuf(file, buffer, _IOFBF, sizeof(buffer)); // Ensures that the buf size is equal to rust 
+
+   char line[512];
    bool new_word = false;
 
-   while (fgets(buffer, 8192, file) != NULL) {
-       for (int i = 0; buffer[i] != '\0'; i++) {
-           if (isspace(buffer[i])) {
+   while (fgets(line, sizeof(line), file) != NULL) {
+       for (int i = 0; line[i] != '\0'; i++) {
+           if (isspace(line[i])) {
                    new_word = false; // Resets the word
            } else if (!new_word) {
                    new_word = true; //Indicates we're in a new word
