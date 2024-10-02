@@ -2,39 +2,68 @@ use std::env;
 use std::fs::File;
 use std::io::{self, BufRead};
 
-fn count_words(file_path: &str) -> usize{
-    let mut count = 0; 
+fn track_query(file_path: &str, query: &str, total_word_count: &mut usize, total_appearances: &mut usize){
 
-    let file = File::open(file_path).expect("Should have been able to read the file"); //Type = std::fs::File
-    let reader = io::BufReader::new(file); //Type = std::io::buffered::bufreader::BufReader<std::fs::File>
+    let file = File::open(file_path).expect("File not found"); 
+    let reader = io::BufReader::new(file); 
+
+    let mut line_no = 0;
+    let mut page = 1;
+    let mut new_page = true; 
 
     for line in reader.lines() {
         let line = line.expect("Expected to find a line");
-        count += line.split_whitespace().count();
-    }
+        line_no += 1;
 
-    count
+        if line_no == 50 {
+            page += 1;
+            line_no = 0;
+            new_page = true;
+        }
+
+        for word in line.split_whitespace(){
+            *total_word_count += 1;
+            
+            let trimmed_word =  word.trim_matches(|c: char| !c.is_alphabetic());
+
+            if trimmed_word == query {
+                *total_appearances += 1; 
+
+                if new_page {
+                    new_page = false;
+                    println!("Rust found query '{}' appears in page: {}", query, page);
+                }
+            }
+        }
+    }
 }
 
 fn main() {
 
     let args: Vec<String> = env::args().collect();
 
-    if args.len() < 2 {
+    if args.len() != 4 {
         eprintln!("Usage: {} <file_path>", args[0]);
         return;
     }
 
-    let file_path = &args[1]; //&alloc::string::String
+    let file_path = &args[1];
+    let query = &args[3];
 
-    let mut word_count = 0;
     let number_of_iterations: usize = args[2].trim().parse().expect("Not a valid number of iterations");
+    let mut total_word_count = 0;
+    let mut total_appearances = 0;
 
     for _ in 0..number_of_iterations{
-        word_count += count_words(file_path);
+        track_query(file_path, query, &mut total_word_count, &mut total_appearances);
     } 
 
-    println!("The file contains {} words.", word_count);
+    if total_appearances < 1 {
+        println!("The query {} was not found.", query);
+    } else{
+        println!("The file contains the query '{}' {} times.", query, total_appearances);
+    }
+    println!("The file contains {} words.", total_word_count);
 
 }
 

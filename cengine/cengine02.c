@@ -27,8 +27,7 @@ int track_query(char *file_path, char *query, long *count, int *appear) {
         line_no = 0; 
         new_page = true; 
        }
-       
-    // Tracks if the query appears in the current line.
+     
         if (strstr(line, query) != NULL){
              *appear+=1;
              if (new_page){
@@ -73,7 +72,7 @@ int main(int argc, char *argv[]) {
     if (total_appearances < 1){
         printf("The query '%s' was not found.\n", query);
     } else{
-        printf("The file contains the query %s '%d' times.\n", query, total_appearances);
+        printf("The file contains the query '%s' %d times.\n", query, total_appearances);
     }
 
     printf("The file contains %ld words.\n", total_word_count);
