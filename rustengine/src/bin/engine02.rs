@@ -4,7 +4,7 @@ use std::io::{self, BufRead};
 
 fn track_query(file_path: &str, query: &str, total_word_count: &mut usize, total_appearances: &mut usize){
 
-    let file = File::open(file_path).expect("Should have been able to read the file"); 
+    let file = File::open(file_path).expect("File not found"); 
     let reader = io::BufReader::new(file); 
 
     let mut line_no = 0;
@@ -23,7 +23,7 @@ fn track_query(file_path: &str, query: &str, total_word_count: &mut usize, total
 
         for word in line.split_whitespace(){
             *total_word_count += 1;
-            
+
             if word == query {
                 *total_appearances += 1; 
 
@@ -59,7 +59,7 @@ fn main() {
     if total_appearances < 1 {
         println!("The query {} was not found.", query);
     } else{
-        println!("The file contains the query {} {} times.", query, total_appearances);
+        println!("The file contains the query '{}' {} times.", query, total_appearances);
     }
     println!("The file contains {} words.", total_word_count);
 
