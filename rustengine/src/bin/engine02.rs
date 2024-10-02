@@ -31,7 +31,7 @@ fn track_query(file_path: &str, query: &str, total_word_count: &mut usize, total
 
                 if new_page {
                     new_page = false;
-                    println!("Found query {} in page: {}", query, page);
+                    println!("Rust found query '{}' appears in page: {}", query, page);
                 }
             }
         }
