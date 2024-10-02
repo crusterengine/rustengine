@@ -4,34 +4,52 @@
 #include <ctype.h>
 #include <stdbool.h>
 
+bool next_word(char *word, FILE *file)
+{
 
-int read_file(char* word, FILE* file){
-long count = 0;
-    while (fscanf(file, "%255s", word)==1){
-        printf("%s\n", word);
-        count++;
+    char current_char;
+    int array_index = 0;
+    memset(word, '\0', 512);
+
+    while ((current_char = fgetc(file)) != EOF)
+    {
+        if (!isspace(current_char))
+        {
+            word[array_index] = current_char;
+            array_index++;
+        }
+        else if (array_index > 0)
+        {
+            return true;
+        }
     }
-
-    printf("%ld", count);
-
-    return 0;
-
+    if (array_index > 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
+long count_words(char *file_path)
+{
 
-long open_file(char *file_path) {
-
-   FILE* file = fopen(file_path, "r");
-   if (file == NULL) {
-       printf("File not found: %s\n", file_path);
-       return 1;
-   }
+    FILE *file = fopen(file_path, "r");
+    if (file == NULL)
+    {
+        printf("File not found: %s\n", file_path);
+        return 1;
+    }
 
     long count = 0;
     char word[512];
 
-    while (read_file(word, file)){
+    while (next_word(word, file))
+    {
         count++;
+        printf("%s\n", word);
     }
 
     fclose(file);
@@ -39,24 +57,25 @@ long open_file(char *file_path) {
     return count;
 }
 
+int main(int argc, char *argv[])
+{
+    if (argc != 3)
+    {
+        printf("Missing argument, check file or counter\n");
+        return 1;
+    }
 
-int main(int argc, char *argv[]) {
-   if (argc != 3) {
-       printf("Missing argument, check file or counter\n");
-       return 1;
-   }
+    char *file_path = argv[1];
 
-   char *file_path = argv[1];
+    long word_count = 0;
+    int number_of_iterations = (int)atoi(argv[2]);
 
-   long word_count = 0;
-   int number_of_iterations = (int)atoi(argv[2]);
+    for (int i = 0; i < number_of_iterations; i++)
+    {
+        word_count += count_words(file_path);
+    }
 
-   for (int i = 0; i < number_of_iterations; i++) {
-       word_count += open_file(file_path);
-   }
-  
-   printf("The file contains %ld words.\n", word_count);
+    printf("The file contains %ld words.\n", word_count);
 
-
-   return 0;
+    return 0;
 }
