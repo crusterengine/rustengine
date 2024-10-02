@@ -23,8 +23,10 @@ fn track_query(file_path: &str, query: &str, total_word_count: &mut usize, total
 
         for word in line.split_whitespace(){
             *total_word_count += 1;
+            
+            let trimmed_word =  word.trim_matches(|c: char| !c.is_alphabetic());
 
-            if word == query {
+            if trimmed_word == query {
                 *total_appearances += 1; 
 
                 if new_page {
