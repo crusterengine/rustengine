@@ -27,9 +27,7 @@ int track_query(char *file_path, char *query, long *count, int *appear) {
         line_no = 0; 
         new_page = true; 
        }
-
-       
-    //Tracks if the query appears in the current line.
+     
         if (strstr(line, query) != NULL){
              *appear+=1;
              if (new_page){
