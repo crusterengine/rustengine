@@ -19,7 +19,13 @@ bool next_word(char *word, FILE *file, int* line)
         if (!isspace(current_char)){
             word[array_index] = current_char;
             array_index++;
-        } else if (array_index > 0){
+        } 
+//Overvej at skifte ovenstående ud med det her, så slipper vi for at trimme ordene senere (men det betyder at fellow-ship altid vil være fellowship), er der tilfælde hvor det vil give problemer??        
+        //  if (isalpha(current_char)) {
+        //     word[array_index++] = current_char;
+        // }
+        
+        else if (array_index > 0){
             return true;
         }
     }
