@@ -4,7 +4,7 @@
 #include <ctype.h>
 #include <stdbool.h>
 
-bool next_word(char *word, FILE *file, int* line)
+bool next_word(FILE *file, char *word, int* line)
 {
     char current_char;
     int array_index = 0;
@@ -15,23 +15,17 @@ bool next_word(char *word, FILE *file, int* line)
         if (current_char == '\n') {
             *line += 1;
         }
-
         if (!isspace(current_char)){
             word[array_index] = current_char;
             array_index++;
         } 
-//Overvej at skifte ovenstående ud med det her, så slipper vi for at trimme ordene senere (men det betyder at fellow-ship altid vil være fellowship), er der tilfælde hvor det vil give problemer??        
-        //  if (isalpha(current_char)) {
-        //     word[array_index++] = current_char;
-        // }
-        
+
         else if (array_index > 0){
             return true;
         }
     }
     if (array_index > 0)
     {
-        *line += 1;
         return true;
     }
     else
@@ -50,18 +44,20 @@ long track_query(char *file_path, char *query, long *total_word_count, int *tota
 
     long count = 0;
     char word[512];
+    int line_no = 1;
     int page = 1;
-    int line_no = 0;
-    bool new_page = false;
 
-    while (next_word(word, file, &line_no)){
+    while (next_word(file, word, &line_no)){
         *total_word_count += 1;
 
-        if (line_no == 50){
-        page += (line_no/50);
-        line_no = 0; 
-        new_page = true; 
-       }
+    //     if (line_no == 50){
+    //     page += 1;
+    //     line_no = 0; 
+    //    }
+
+        printf("word: %s found on page: %d\n", word, line_no);
+
+
         //This does not work, we don't get the new lines as words!!
         // if (strcmp(word, "\n") == 0)
         // {
@@ -84,11 +80,11 @@ long track_query(char *file_path, char *query, long *total_word_count, int *tota
 
         if(strcmp(trimmed_word, query) == 0){
             *total_appearances += 1;
-            if (new_page){
-                new_page = false; 
-                printf("Found query '%s' appears in page: %d\n", query, page); // Later to be modified for a list/map. and then at last print all. 
+            // if (new_page){
+            //     new_page = false; 
+            //     printf("Found query '%s' appears in page: %d\n", query, page); // Later to be modified for a list/map. and then at last print all. 
 
-             }
+            //  }
             int array_index = 0;
             memset(trimmed_word, '\0', 512);   
         }
