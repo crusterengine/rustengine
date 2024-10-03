@@ -44,6 +44,7 @@ int word_processing(FILE* file, char* word, int* line){
     //Ensure that the last word of the file is always handled eventhough we meet the EOF tag.  
     if (index>0)
     {
+        trim_word(word); 
         return 1;
     }
     else
