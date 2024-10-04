@@ -34,6 +34,13 @@ bool next_word(FILE *file, char *word, int* line)
     }
 }
 
+
+int get_page(int* line){
+    int page = 1;
+    page = *line/50;
+    return page;
+}
+
 long track_query(char *file_path, char *query, long *total_word_count, int *total_appearances) {
 
    FILE* file = fopen(file_path, "r");
@@ -45,20 +52,18 @@ long track_query(char *file_path, char *query, long *total_word_count, int *tota
     long count = 0;
     char word[512];
     int line_no = 1;
-    int page = 1;
-    int* ptr_to_page = &page;
+    // int page = 1;
+    // int* ptr_to_page = &page;
 
     while (next_word(file, word, &line_no)){
         *total_word_count += 1;
 
-        *ptr_to_page = line_no/50;
+        // *ptr_to_page = line_no/50;
 
     //     if (line_no >= 50){
     //         *ptr_to_page += 1;
     //         line_no = 1; 
     //    }
-
-        //printf("word: %s found on line: %d\n", word, line_no);
 
         char trimmed_word[512];
         int array_index = 0;
@@ -76,7 +81,9 @@ long track_query(char *file_path, char *query, long *total_word_count, int *tota
 
         if(strcmp(trimmed_word, query) == 0){
             *total_appearances += 1;
-            printf("Found query '%s' appears in page: %d\n", query, *ptr_to_page); 
+            int page = get_page(&line_no);
+
+            printf("Found query '%s' appears in page: %d\n", query, page); 
 
             // if (new_page){
             //     new_page = false; 

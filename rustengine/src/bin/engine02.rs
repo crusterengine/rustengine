@@ -8,18 +8,13 @@ fn track_query(file_path: &str, query: &str, total_word_count: &mut usize, total
     let reader = io::BufReader::new(file); 
 
     let mut line_no = 1;
-    let mut page = 1;
     //let mut new_page = true; 
 
     for line in reader.lines() {
         let line = line.expect("Expected to find a line");
-        line_no += 1;
 
-        if line_no == 50 {
-            page += 1;
-            line_no = 1;
-            //new_page = true;
-        }
+        line_no += 1;
+        let page = line_no/50 + 1;
 
         for word in line.split_whitespace(){
             *total_word_count += 1;
