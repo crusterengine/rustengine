@@ -58,7 +58,7 @@ int get_page(int* line){
     return page;
 }
 
-int file_processing(char* file_path){
+int file_processing(char* file_path, long* word_count){
     
     FILE *file = fopen(file_path, "r");
     if (file == NULL) {
@@ -66,33 +66,37 @@ int file_processing(char* file_path){
        return 1;
    }
 
-    int count = 0;
     char word[512];
     int line = 1; 
     
 
    while(word_processing(file, word, &line)){
-    count++; 
+    (*word_count)++; 
     int page = get_page(&line);
     printf("%s is on page: %d\n", word, page); 
     //set up a datastructure
    }
-   printf("%d\n", count);
+   printf("file_processing found: %ld\n", *word_count);
   
    fclose(file);
-   return count;
+   return 0;
 }
 
 int main(int argc, char *argv[]) {
- if (argc != 2) {
+ if (argc != 3) {
        printf("Missing argument, check file or counter\n");
        return 1;
    }
 
-   char *file_path = argv[1];
+   char* file_path = argv[1];
    long word_count = 0;
+   int itr = (int)atoi(argv[2]);
 
-   file_processing(file_path);
+for (size_t i = 0; i < itr; i++)
+{
+ file_processing(file_path, &word_count);
+}
 
+    printf("main got: %ld\n", word_count);
    return 0;
 }
