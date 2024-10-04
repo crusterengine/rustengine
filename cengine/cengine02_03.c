@@ -92,10 +92,11 @@ int main(int argc, char *argv[]) {
    long word_count = 0;
    int itr = (int)atoi(argv[2]);
 
-for (size_t i = 0; i < itr; i++)
-{
- file_processing(file_path, &word_count);
-}
+
+    for (size_t i = 0; i < itr; i++)
+    {
+        file_processing(file_path, &word_count);
+    }
 
     printf("main got: %ld\n", word_count);
    return 0;
