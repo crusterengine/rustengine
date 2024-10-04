@@ -46,23 +46,19 @@ long track_query(char *file_path, char *query, long *total_word_count, int *tota
     char word[512];
     int line_no = 1;
     int page = 1;
+    int* ptr_to_page = &page;
 
     while (next_word(file, word, &line_no)){
         *total_word_count += 1;
 
-    //     if (line_no == 50){
-    //     page += 1;
-    //     line_no = 0; 
+        *ptr_to_page = line_no/50;
+
+    //     if (line_no >= 50){
+    //         *ptr_to_page += 1;
+    //         line_no = 1; 
     //    }
 
-        printf("word: %s found on page: %d\n", word, line_no);
-
-
-        //This does not work, we don't get the new lines as words!!
-        // if (strcmp(word, "\n") == 0)
-        // {
-        //    page++;
-        // }
+        //printf("word: %s found on line: %d\n", word, line_no);
 
         char trimmed_word[512];
         int array_index = 0;
@@ -80,6 +76,8 @@ long track_query(char *file_path, char *query, long *total_word_count, int *tota
 
         if(strcmp(trimmed_word, query) == 0){
             *total_appearances += 1;
+            printf("Found query '%s' appears in page: %d\n", query, *ptr_to_page); 
+
             // if (new_page){
             //     new_page = false; 
             //     printf("Found query '%s' appears in page: %d\n", query, page); // Later to be modified for a list/map. and then at last print all. 

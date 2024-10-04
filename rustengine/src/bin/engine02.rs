@@ -7,9 +7,9 @@ fn track_query(file_path: &str, query: &str, total_word_count: &mut usize, total
     let file = File::open(file_path).expect("File not found"); 
     let reader = io::BufReader::new(file); 
 
-    let mut line_no = 0;
+    let mut line_no = 1;
     let mut page = 1;
-    let mut new_page = true; 
+    //let mut new_page = true; 
 
     for line in reader.lines() {
         let line = line.expect("Expected to find a line");
@@ -17,22 +17,26 @@ fn track_query(file_path: &str, query: &str, total_word_count: &mut usize, total
 
         if line_no == 50 {
             page += 1;
-            line_no = 0;
-            new_page = true;
+            line_no = 1;
+            //new_page = true;
         }
 
         for word in line.split_whitespace(){
             *total_word_count += 1;
             
-            let trimmed_word =  word.trim_matches(|c: char| !c.is_alphabetic());
+            let trimmed_word = word.trim_matches(|c: char| !c.is_alphabetic());
+            
+            //println!("{}", trimmed_word);
 
             if trimmed_word == query {
                 *total_appearances += 1; 
 
-                if new_page {
-                    new_page = false;
-                    println!("Rust found query '{}' appears in page: {}", query, page);
-                }
+                println!("Rust found query '{}' appears in page: {}", query, page);
+
+                // if new_page {
+                //     new_page = false;
+                //     println!("Rust found query '{}' appears in page: {}", query, page);
+                // }
             }
         }
     }
