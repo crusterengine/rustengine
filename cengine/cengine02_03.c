@@ -83,36 +83,16 @@ int file_processing(char* file_path){
    return count;
 }
 
-
 int main(int argc, char *argv[]) {
- if (argc != 3) {
+ if (argc != 2) {
        printf("Missing argument, check file or counter\n");
        return 1;
    }
 
    char *file_path = argv[1];
    long word_count = 0;
-   int number_of_iterations = (int)atoi(argv[2]);
-   //char query = argv[3];
 
-for (int i = 0; i < number_of_iterations; i++) {
    file_processing(file_path);
-}
-//     FILE *file = fopen(file_path, "r");
-//     if (file == NULL) {
-//        printf("File not found: %s\n", file_path);
-//        return 1;
-//    }
 
-//     char word[512];
-
-//   for (int i = 0; i < number_of_iterations; i++) {
-//     while(word_processing(file, word, page)){ 
-//         word_count++; 
-//         //put word in datastructure   
-//    }
-//    rewind(file);
-  //printf("The file contains %ld words.\n", word_count);
-   //}fclose(file);
    return 0;
 }
