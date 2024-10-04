@@ -3,7 +3,6 @@
 #include <string.h>
 #include <ctype.h>
 
-
 void trim_word(char* word){
     int len = strlen(word);
     
@@ -21,17 +20,12 @@ void trim_word(char* word){
     
 }
 
-
-int word_processing(FILE* file, char* word, int* line){
+int word_processing(FILE* file, char* word){
     char current;
     int index = 0;
     memset(word, '\0', 512);
 
     while((current = fgetc(file)) != EOF){
-        
-        if (current == '\n'){
-            *line += 1;
-        }
 
         if(!isspace(current)){
             word[index] = current;
@@ -44,7 +38,6 @@ int word_processing(FILE* file, char* word, int* line){
     //Ensure that the last word of the file is always handled eventhough we meet the EOF tag.  
     if (index>0)
     {
-        trim_word(word); 
         return 1;
     }
     else
@@ -53,12 +46,7 @@ int word_processing(FILE* file, char* word, int* line){
     }
 }
 
-int get_page(int* line){
-    int page = *line/50;
-    return page;
-}
-
-int file_processing(char* file_path, long* word_count){
+int file_processing(char* file_path){
     
     FILE *file = fopen(file_path, "r");
     if (file == NULL) {
@@ -66,21 +54,19 @@ int file_processing(char* file_path, long* word_count){
        return 1;
    }
 
+    int count = 0;
     char word[512];
-    int line = 1; 
-    
 
-   while(word_processing(file, word, &line)){
-    (*word_count)++; 
-    int page = get_page(&line);
-    printf("%s is on page: %d\n", word, page); 
-    //set up a datastructure
+   while(word_processing(file, word)){
+    count++; 
+    printf("%s\n", word); 
    }
-   printf("file_processing found: %ld\n", *word_count);
+   printf("%d\n", count);
   
    fclose(file);
-   return 0;
+   return count;
 }
+
 
 int main(int argc, char *argv[]) {
  if (argc != 3) {
@@ -88,16 +74,15 @@ int main(int argc, char *argv[]) {
        return 1;
    }
 
-   char* file_path = argv[1];
+   char *file_path = argv[1];
+
    long word_count = 0;
-   int itr = (int)atoi(argv[2]);
+   int number_of_iterations = (int)atoi(argv[2]);
 
-
-    for (size_t i = 0; i < itr; i++)
-    {
-        file_processing(file_path, &word_count);
-    }
-
-    printf("main got: %ld\n", word_count);
+   for (int i = 0; i < number_of_iterations; i++) {
+        word_count += file_processing(file_path);
+   }
+  
+   printf("The file contains %ld words.\n", word_count);
    return 0;
 }
