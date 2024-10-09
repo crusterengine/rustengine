@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <glib.h>
 
+
 bool next_word(FILE *file, char *word, int* line)
 {
     char current_char;
@@ -36,28 +37,20 @@ bool next_word(FILE *file, char *word, int* line)
 }
 
 int create_hashtable(GHashTable* hash_map, char* word){
+    
+    int* count = g_hash_table_lookup(hash_map, word);
 
-    char* str = malloc(strlen(word)+1);
-
-    if (g_hash_table_lookup(hash_map, str) == NULL)
+    if (count == NULL)
     {
         int* count = malloc(sizeof(int));
-        g_hash_table_insert(hash_map, str, (gpointer)count);
+        *count = 1;
+        g_hash_table_insert(hash_map, g_strdup(word), (gpointer)(count));
         return 1;
-
     } else {
-        int* current_count = (int*) g_hash_table_lookup(hash_map, word);
-        
-
-        // gpointer current_count = g_hash_table_lookup(hash_map, word);
-        // g_hash_table_insert(hash_map, word, g_malloc(current_count+1));
+        *count += 1;
         return 1;
-
-        // int* current_count = (int*) g_hash_table_lookup(hash_map, word);
-        // int new_count = *current_count + 1;
-        // g_hash_table_insert(hash_map, word, (gpointer)&new_count);
-        // return 1;
     }
+
     return 0;
 }
 
@@ -69,7 +62,7 @@ int search_hashtable(GHashTable* hash_map, char* word) {
        return 1;
     } else {
         int* count = (int*) g_hash_table_lookup(hash_map, word);
-        printf("%d\n", *count);
+        printf("The query is there: %d\n", *count);
         return 1;
     }
     
@@ -108,7 +101,7 @@ long track_query(char *file_path, char *query, long *total_word_count, int *tota
 
     //printf("%d", line_no);
     
-    //g_hash_table_destroy(hash_map); 
+    g_hash_table_destroy(hash_map); 
 
     fclose(file);
 
