@@ -41,26 +41,25 @@ typedef struct Node {
     struct Node* next;
 }node;
 
-void insert(node** head, int newPage) {
+void insert(node** head, int pageNumber) {
     node* newNode = (node*)malloc(sizeof(node));
-    newNode->value = newPage; 
+    newNode->page = pageNumber; 
     newNode->next = *head;
     *head = newNode;
 }
 
-int create_hashtable(GHashTable* hash_map, char* word){
+int create_hashtable(GHashTable* hash_map, char* word, int page){
     
-    int* count = g_hash_table_lookup(hash_map, word);
+    node* head = g_hash_table_lookup(hash_map, word);
 
-    if (count == NULL)
+    if (head == NULL)
     {
-        int* count = malloc(sizeof(int));
-        *count = 1;
-        g_hash_table_insert(hash_map, g_strdup(word), (gpointer)(count));
+        node* newNode = (node*)malloc(sizeof(node));
+        newNode->page = page;
+        g_hash_table_insert(hash_map, g_strdup(word), (gpointer)(newNode));
         return 1;
     } else {
-        *count += 1;
-        return 1;
+        insert(&head, page);
     }
 
     return 0;
@@ -73,8 +72,12 @@ int search_hashtable(GHashTable* hash_map, char* word) {
        printf("the word does not exist\n");
        return 1;
     } else {
-        int* count = (int*) g_hash_table_lookup(hash_map, word);
-        printf("The query is there: %d\n", *count);
+        node* currentnode = (node*) g_hash_table_lookup(hash_map, word);
+        while (currentnode != NULL)
+            {
+                printf("The word, was found on this page: %d\n", currentnode->page); 
+                currentnode = currentnode->next;
+            }        
         return 1;
     }
     
@@ -99,12 +102,12 @@ long track_query(char *file_path, char *query, long *total_word_count, int *tota
     while (next_word(file, word, &line_no)){
         *total_word_count += 1;
 
-    //     if (line_no == 50){
-    //     page += 1;
-    //     line_no = 0; 
-    //    }
+        if (line_no == 50){
+        page += 1;
+        line_no = 0; 
+       }
 
-        create_hashtable(hash_map, word); 
+        create_hashtable(hash_map, word, page); 
         
         //printf("%s\n", word);
     }
