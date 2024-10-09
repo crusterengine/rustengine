@@ -151,13 +151,7 @@ int get_page(int* line){
     return page;
 }
 
-int file_processing(char* file_path, long* word_count, GHashTable* index){
-    
-    FILE *file = fopen(file_path, "r");
-    if (file == NULL) {
-       printf("File not found: %s\n", file_path);
-       return 1;
-   }
+int file_processing(FILE* file, long* word_count, GHashTable* index){
 
     char word[512];
     int line = 1; 
@@ -169,15 +163,13 @@ int file_processing(char* file_path, long* word_count, GHashTable* index){
     //insert_index(word, index);
     addpagenode_index(word, index, page);
    }
-   printf("file_processing found: %ld\n", *word_count);
   
-   fclose(file);
    return 0;
 }
 
 
 int main(int argc, char *argv[]) {
- if (argc != 4) {
+ if (argc != 3) {
        printf("Missing argument, check file or counter\n");
        return 1;
    }
@@ -185,20 +177,28 @@ int main(int argc, char *argv[]) {
    char* file_path = argv[1];
    long word_count = 0;
    int itr = (int)atoi(argv[2]);
-   char* query = argv[3];
+
+    FILE *file = fopen(file_path, "r");
+    if (file == NULL) {
+       printf("File not found: %s\n", file_path);
+       return 1;
+   }
 
    GHashTable *index = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
 
     for (size_t i = 0; i < itr; i++)
     {
-        file_processing(file_path, &word_count, index);
+        file_processing(file, &word_count, index);
+        rewind(file);
     }
 
     // print_linked(index);
     // find_linked_q(index, query);
-    printf("main got: %ld\n", word_count);
+    printf("Total wordcount: %ld\n", word_count);
 
     free_linked(index);
     g_hash_table_destroy(index);
+
+    fclose(file);
    return 0;
 }
