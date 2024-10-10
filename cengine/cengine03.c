@@ -29,6 +29,23 @@ void addpagenode_hash_map(char* word, GHashTable* hash_map, int page){
     }
 }
 
+void find_linked_q(GHashTable* hash_map, char* query){
+    gpointer value = g_hash_table_lookup(hash_map, query);
+    printf("%s: ", query);
+
+    if (value != NULL){
+        PageNode* current = (PageNode*)value;
+        while (current != NULL) {
+            printf("%d, ", current->page);
+            current = current->next;
+            // Modify to return a list
+        }
+    } else {
+        printf(" not found.\n");
+    }
+    printf("\n");
+}
+
 void print_linked(GHashTable* hash_map){
     GHashTableIter iter;
     gpointer key, value;
@@ -40,6 +57,7 @@ void print_linked(GHashTable* hash_map){
         }
     }
 }
+
 
 
 void free_pagenode(PageNode* node) {
@@ -117,21 +135,14 @@ int word_processing(FILE* file, char* word, int* line){
     }
 }
 
-// int get_page(int* line){
-//     int page = 1; 
-//     page += *line/50;
-//     return page;
-// }
-
 int file_processing(FILE* file, long* word_count, GHashTable* hash_map){
 
     char word[512];
     int line = 1; 
-    int page = line/50;
 
    while(word_processing(file, word, &line)){
     *word_count += 1; 
-    //int page = get_page(&line);
+    int page = line/50 + 1;
     addpagenode_hash_map(word, hash_map, page);
    }
   
