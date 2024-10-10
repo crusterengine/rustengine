@@ -1,54 +1,42 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include <ctype.h>
 
-
-int word_processing(FILE* file, char* word){
-
-    char* line[512];
-
-    while (fgets(line, 512, file) != EOF){
-            
-    }
-    
-
-
-    char current;
-    int index = 0;
-    memset(word, '\0', 512);
-
-    while((current = fgets(file)) != EOF){
-
-        if(!isspace(current)){
-            word[index] = current;
-            index++;
-        } else if (index>0){ //checks that there is not multiple spaces. 
-            return 1;
-        }
-    }
-    //Ensure that the last word of the file is always handled eventhough we meet the EOF tag.  
-    if (index>0)
-    {
-        return 1;
-    }
-    else
-    {
-        return 0;
+void process_word(char* word, long* wordcount) {
+    if (strlen(word) > 0) {
+        printf("Processed word: %s\n", word);
+        (*wordcount)++; //later to put word in index
     }
 }
 
-int file_processing(FILE* file){
-    
-    int count = 0;
+void file_processing(FILE* file, long* word_count){
     char word[512];
+    char line[512];
+    int linecount = 0;
 
-   while(word_processing(file, word)){
-    count++; 
-    printf("%s\n", word); 
-   }
-  
-   return count;
+    while (fgets(line, 512, file) != NULL){
+        linecount++;
+        bool new_word =false;
+        int word_index = 0;
+
+            for (int i = 0; line[i] != '\0'; i++) {
+            if (isspace(line[i])) {
+                if (new_word) {
+                    //word[word_index] = '\0';
+                    process_word(word, word_count);
+                    word_index = 0; // Nulstil for næste ord
+                    new_word = false;
+                    memset(word, '\0', 512);
+                }
+            } else {
+                // Vi er midt i et ord
+                word[word_index++] = line[i];
+                new_word = true;
+            }
+        }
+    }
 }
 
 
@@ -70,7 +58,8 @@ int main(int argc, char *argv[]) {
    int number_of_iterations = (int)atoi(argv[2]);
 
    for (int i = 0; i < number_of_iterations; i++) {
-        word_count += file_processing(file);
+        file_processing(file, &word_count);
+        rewind(file);
    }
   
    printf("The file contains %ld words.\n", word_count);
