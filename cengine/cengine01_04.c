@@ -3,25 +3,6 @@
 #include <string.h>
 #include <ctype.h>
 
-void trim_word(char *word)
-{
-    int len = strlen(word);
-
-    if (!isalpha(word[0]))
-    {
-        for (size_t i = 0; i < len - 1; i++)
-        {
-            word[i] = word[i + 1];
-        }
-        word[len - 1] = '\0';
-    }
-
-    if (!isalpha(word[len - 1]))
-    {
-        word[len - 1] = '\0';
-    }
-}
-
 int word_processing(FILE *file, char *word)
 {
     char current;
@@ -38,7 +19,6 @@ int word_processing(FILE *file, char *word)
         }
         else if (index > 0)
         { // checks that there is not multiple spaces.
-            trim_word(word);
             return 1;
         }
     }
@@ -67,7 +47,7 @@ int file_processing(char *file_path, long *word_count)
 
     while (word_processing(file, word))
     {
-        *word_count = +1;
+        *word_count += 1;
     }
 
     fclose(file);
