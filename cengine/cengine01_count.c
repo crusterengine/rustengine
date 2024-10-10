@@ -41,6 +41,7 @@ void file_processing(FILE* file, long* word_count){
 
 
 int main(int argc, char *argv[]) {
+    
  if (argc != 3) {
        printf("Missing argument, check file or counter\n");
        return 1;
