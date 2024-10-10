@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <glib.h> //`pkg-config --cflags --libs glib-2.0` 
+#include <glib.h>  
 
 typedef struct PageNode{
     int page; 
@@ -17,46 +17,30 @@ PageNode* createpagenode(int page, PageNode* prev){
     return newNode; 
 }
 
-void addpagenode_index(char* word, GHashTable* index, int page){
-    PageNode* value = (PageNode*) g_hash_table_lookup(index, word);
+void addpagenode_hash_map(char* word, GHashTable* hash_map, int page){
+    PageNode* value = (PageNode*) g_hash_table_lookup(hash_map, word);
 
     if(value != NULL){
         PageNode* newnode = createpagenode(page, value);
-        g_hash_table_insert(index, g_strdup(word) , newnode);
+        g_hash_table_insert(hash_map, g_strdup(word) , newnode);
     } else{
         PageNode* node = createpagenode(page, NULL);
-        g_hash_table_insert(index, g_strdup(word) , node);
+        g_hash_table_insert(hash_map, g_strdup(word) , node);
     }
 }
 
-void find_linked_q(GHashTable* index, char* query){
-    gpointer value = g_hash_table_lookup(index, query);
-    printf("%s: ", query);
-
-    if (value != NULL){
-        PageNode* current = (PageNode*)value;
-        while (current != NULL) {
-            printf("%d, ", current->page);
-            current = current->next;
-            // Modify to return a list
-        }
-    } else {
-        printf(" not found.\n");
-    }
-    printf("\n");
-}
-
-void print_linked(GHashTable* index){
+void print_linked(GHashTable* hash_map){
     GHashTableIter iter;
     gpointer key, value;
 
-    g_hash_table_iter_init(&iter, index);
+    g_hash_table_iter_init(&iter, hash_map);
     while(g_hash_table_iter_next(&iter, &key, &value)){
         if(value != NULL){
-            find_linked_q(index, key);
+            find_linked_q(hash_map, key);
         }
     }
 }
+
 
 void free_pagenode(PageNode* node) {
     PageNode* current = node;
@@ -67,11 +51,11 @@ void free_pagenode(PageNode* node) {
     }
 }
 
-void free_linked(GHashTable* index){
+void free_linked(GHashTable* hash_map){
     GHashTableIter iter;
     gpointer key, value;
 
-    g_hash_table_iter_init(&iter, index);
+    g_hash_table_iter_init(&iter, hash_map);
     while(g_hash_table_iter_next(&iter, &key, &value)){
         if(value != NULL){
             free_pagenode(value);
@@ -100,23 +84,11 @@ void trim_word(char* word){
     {
         word[i] = '\0';
     }
-    
-    // if (!isalpha(word[0])){
-    //    for (size_t i = 0; i < len-1; i++)
-    //    {
-    //     word[i] = word[i+1];
-    //    }
-    //    word[len-1] = '\0';
-    // }
-
-    // if(!isalpha(word[len-1])){
-    //    word[len-1] = '\0';
-    // }
 }
 
 int word_processing(FILE* file, char* word, int* line){
     char current;
-    int index = 0;
+    int hash_map = 0;
     memset(word, '\0', 512);
 
     while((current = fgetc(file)) != EOF){
@@ -126,15 +98,15 @@ int word_processing(FILE* file, char* word, int* line){
         }
 
         if(!isspace(current)){
-            word[index] = current;
-            index++;
-        } else if (index>0){ //checks that there is not multiple spaces. 
+            word[hash_map] = current;
+            hash_map++;
+        } else if (hash_map>0){ //checks that there is not multiple spaces. 
             trim_word(word); 
             return 1;
         }
     }
     //Ensure that the last word of the file is always handled eventhough we meet the EOF tag.  
-    if (index>0)
+    if (hash_map>0)
     {
         trim_word(word); 
         return 1;
@@ -145,23 +117,22 @@ int word_processing(FILE* file, char* word, int* line){
     }
 }
 
-int get_page(int* line){
-    int page = 1; 
-    page += *line/50;
-    return page;
-}
+// int get_page(int* line){
+//     int page = 1; 
+//     page += *line/50;
+//     return page;
+// }
 
-int file_processing(FILE* file, long* word_count, GHashTable* index){
+int file_processing(FILE* file, long* word_count, GHashTable* hash_map){
 
     char word[512];
     int line = 1; 
-    
+    int page = line/50;
+
    while(word_processing(file, word, &line)){
-    (*word_count)++; 
-    int page = get_page(&line);
-    //printf("%s is on page: %d\n", word, page); 
-    //insert_index(word, index);
-    addpagenode_index(word, index, page);
+    *word_count += 1; 
+    //int page = get_page(&line);
+    addpagenode_hash_map(word, hash_map, page);
    }
   
    return 0;
@@ -169,6 +140,7 @@ int file_processing(FILE* file, long* word_count, GHashTable* index){
 
 
 int main(int argc, char *argv[]) {
+
  if (argc != 3) {
        printf("Missing argument, check file or counter\n");
        return 1;
@@ -184,20 +156,20 @@ int main(int argc, char *argv[]) {
        return 1;
    }
 
-   GHashTable *index = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
+   GHashTable *hash_map = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
 
     for (size_t i = 0; i < itr; i++)
     {
-        file_processing(file, &word_count, index);
+        file_processing(file, &word_count, hash_map);
         rewind(file);
     }
 
-    // print_linked(index);
-    // find_linked_q(index, query);
+    print_linked(hash_map);
+
     printf("Total wordcount: %ld\n", word_count);
 
-    free_linked(index);
-    g_hash_table_destroy(index);
+    free_linked(hash_map);
+    g_hash_table_destroy(hash_map);
 
     fclose(file);
    return 0;
