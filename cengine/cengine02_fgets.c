@@ -6,13 +6,15 @@
 #include <glib.h> //`pkg-config --cflags --libs glib-2.0`
 
 void update_index(GHashTable* index, char* word, int page){
-    gpointer value = g_hash_table_lookup(index, word);
+    int* value = (int*) g_hash_table_lookup(index, word);
 
     if (value != NULL) {
-        int new_value = GPOINTER_TO_INT(value)+1;
-        g_hash_table_insert(index, g_strdup(word) , GINT_TO_POINTER(new_value));
+        (*value) += 1; 
+        printf("Updated value for '%s': %d\n", word, *value);
     } else {
-        g_hash_table_insert(index, g_strdup(word) , GINT_TO_POINTER(1));
+        int* new_value = malloc(sizeof(int));
+        *new_value = 1;
+        g_hash_table_insert(index, g_strdup(word) , new_value);
         printf("this '%s' word is on the way to the index\n", word);
     }
 }
@@ -94,7 +96,7 @@ int main(int argc, char *argv[]) {
 
    long word_count = 0;
    int itr = (int)atoi(argv[2]);
-   GHashTable *index = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
+   GHashTable *index = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
 
    for (int i = 0; i < itr; i++) {
         file_processing(file, &word_count, index);
