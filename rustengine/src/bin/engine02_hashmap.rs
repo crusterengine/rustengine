@@ -1,52 +1,51 @@
 use std::env;
 use std::fs::File;
 use std::io::{self, BufRead};
-use std::collections::{HashMap, LinkedList};
+use std::collections::{HashMap};
 
-fn insert_word(hash_map: &mut HashMap<String, LinkedList<i32>>, word_key: String, page :i32){
-    
-    if hash_map.contains_key(&word_key){
-       let pages = hash_map.get_mut(&word_key); 
-       pages.expect("could not find likedlist").push_back(page);
-    } 
-    else {
-     let mut page_list = LinkedList::new();
-     page_list.push_back(page);
-     hash_map.insert(word_key, page_list); 
+// fn insert_word(hash_map: &mut HashMap<String, i64>, word_key: String){
+
+//     let count = hash_map.get_mut(&word_key);
+//     match count {
+//         Some(i) => Some(*i+1),
+//         None => hash_map.insert(word_key, 1), 
+//     };
+
+// }
+
+fn insert_word(hash_map: &mut HashMap<String, i64>, word_key: String){
+
+    let mut count = hash_map.get_mut(&word_key);
+    if count != None {
+        hash_map.insert(word_key, Some(i) => Some(i+1));
+    } else {
+        hash_map.insert(word_key, 1);
     }
+
 }
 
 
-fn file_processing(file_path: &str, total_word_count: &mut usize, hash_map: &mut HashMap<String, LinkedList<i32>>){
+fn file_processing(file_path: &str, total_word_count: &mut i64, hash_map: &mut HashMap<String, i64>){
 
     let file = File::open(file_path).expect("File not found"); 
     let reader = io::BufReader::new(file); 
 
-    let mut line_no = 1;
-
     for line in reader.lines() {
         let line = line.expect("Expected to find a line");
-
-        line_no += 1;
-        let page = line_no/50 + 1;
 
         for word in line.split_whitespace(){
             *total_word_count += 1;
             let trimmed_word = word.trim_matches(|c: char| !c.is_alphabetic()).to_string(); //trimmed_word is type &str
-            insert_word(hash_map, trimmed_word, page);
+            insert_word(hash_map, trimmed_word);
         }
     }
 }
 
-// fn search_hash_map(hash_map: &HashMap<String, LinkedList<i32>>){
-//     for (word, pages) in hash_map.iter() {
-//         print!("Word '{word}' on page");
-//         for page in pages{
-//             print!(", {}", page);
-//         }
-//         println!();
-//     }
-// }
+fn search_hash_map(hash_map: &HashMap<String, i64>){
+    for (word, count) in hash_map.iter() {
+        println!("Word '{word}' is there {count}");
+    }
+}
 
 fn main() {
 
@@ -61,13 +60,13 @@ fn main() {
 
     let number_of_iterations: usize = args[2].trim().parse().expect("Not a valid number of iterations");
     let mut total_word_count = 0;
-    let mut hash_map: HashMap<String, LinkedList<i32>> = HashMap::new();
+    let mut hash_map: HashMap<String, i64> = HashMap::new();
 
     for _ in 0..number_of_iterations{
         file_processing(file_path, &mut total_word_count, &mut hash_map);
     } 
     
-    //search_hash_map(&hash_map);
+    search_hash_map(&hash_map);
     
     println!("The file contains {} words.", total_word_count);
 
