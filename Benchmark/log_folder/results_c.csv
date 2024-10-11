@@ -1,3 +1,0 @@
-      Total Number of Cores: 8 (4 performance and 4 efficiency),MacBookPro17,1
-timestamp,elapsed_time,user_time,sys_time,cpu_usage,max_memory,major_faults,minor_faults,voluntary_switches,involuntary_switches,number_of_iterations,program,file
-2024-09-26 10:40:28,0.00,0.00,0.00,66%,992,3,165,7,3,1,./cengine01,the-champion.txt
