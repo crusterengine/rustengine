@@ -3,25 +3,17 @@ use std::fs::File;
 use std::io::{self, BufRead};
 use std::collections::{HashMap};
 
-// fn insert_word(hash_map: &mut HashMap<String, i64>, word_key: String){
-
-//     let count = hash_map.get_mut(&word_key);
-//     match count {
-//         Some(i) => Some(*i+1),
-//         None => hash_map.insert(word_key, 1), 
-//     };
-
-// }
-
 fn insert_word(hash_map: &mut HashMap<String, i64>, word_key: String){
 
-    let mut count = hash_map.get_mut(&word_key);
-    if count != None {
-        hash_map.insert(word_key, Some(i) => Some(i+1));
-    } else {
-        hash_map.insert(word_key, 1);
-    }
-
+    let count = hash_map.get_mut(&word_key);
+    
+    match count {
+        Some(i) => *i += 1,
+        
+        None => {
+            hash_map.insert(word_key, 1);
+        } , 
+    };
 }
 
 
