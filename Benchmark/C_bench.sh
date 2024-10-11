@@ -5,7 +5,7 @@
 number_of_iterations="100"
 
 #The program to be benchmarked
-compiled_program="./cengine01"
+compiled_program="./c1"
 
 #This creates a 'variable' that contains the path to the file I want to use in my program
 input_file="../data/the-champion.txt"
@@ -18,6 +18,8 @@ log_folder="../Benchmark/log_folder"
 
 # Tag for the log-file
 input_filename=$(basename "$input_file")
+compile_filename="C:${compiled_program}"
+
 
 #Go into the directory of the file you want to time
 cd ../cengine
@@ -35,5 +37,5 @@ fi
 
 #for i in {0..10}
 #do
-gtime -f "$(date +%Y-%m-%d\ %H:%M:%S),%e,%U,%S,%P,%M,%F,%R,%c,%w,"$number_of_iterations","$compiled_program","$input_filename"" "$compiled_program" "$input_file" "$number_of_iterations" 2>> "$log_folder/results_c.csv"
+gtime -f "$(date +%Y-%m-%d\ %H:%M:%S),%e,%U,%S,%P,%M,%F,%R,%c,%w,"$number_of_iterations","$compile_filename","$input_filename"" "$compiled_program" "$input_file" "$number_of_iterations" 2>> "$log_folder/results_c.csv"
 #done
