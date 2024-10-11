@@ -19,3 +19,5 @@ To run the benchmarking of the rust-program. Make sure the parameters of the Rus
     ls -l Rust_bench.sh
     chmod +x Rust_bench.sh
     ./Rust_bench.sh
+
+To run C code with a hashmap (so 02 and 03) use the following command: gcc "program_name" -o "compiled version name" $(pkg-config --cflags --libs glib-2.0)
