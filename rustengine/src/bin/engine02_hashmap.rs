@@ -1,7 +1,7 @@
 use std::env;
 use std::fs::File;
 use std::io::{self, BufRead};
-use std::collections::{HashMap};
+use std::collections::HashMap;
 
 fn insert_word(hash_map: &mut HashMap<String, i64>, word_key: String){
 
@@ -35,7 +35,7 @@ fn file_processing(file_path: &str, total_word_count: &mut i64, hash_map: &mut H
 
 fn search_hash_map(hash_map: &HashMap<String, i64>){
     for (word, count) in hash_map.iter() {
-        println!("Word '{word}' is there {count}");
+        println!("The word: '{word}' is there {count} time(s)");
     }
 }
 
