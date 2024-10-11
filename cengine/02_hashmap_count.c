@@ -45,7 +45,7 @@ void trim_word(char* word){
 void process_word(char* word, long* wordcount, int page) {
     if (strlen(word) > 0) {
         trim_word(word);
-        (*wordcount)++; //later to put word in index
+        *wordcount += 1; //later to put word in index
     }
 }
 
