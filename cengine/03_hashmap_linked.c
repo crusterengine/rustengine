@@ -2,8 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 #include <ctype.h>
-#include <glib.h> //`pkg-config --cflags --libs glib-2.0` 
+#include <glib.h> //`pkg-config --cflags --libs glib-2.0`
 
 void print_page (gpointer data, gpointer user_data){
     printf("%d, ", GPOINTER_TO_INT(data));
@@ -84,61 +85,43 @@ void trim_word(char* word){
     }
 }
 
-void word_processing(FILE* file, char* word, int* line){
-    char line_buffer[512];
-    int index = 0;
-    memset(word, '\0', 512);
-    *line = 0;
+void process_word(char* word, long* wordcount, int page) {
+    if (strlen(word) > 0) {
+        trim_word(word);
+        *wordcount += 1; //later to put word in index
+    }
+}
 
-    bool new_word = false; 
+void file_processing(FILE* file, long* word_count, GHashTable* index){
+    char word[512];
+    char line[512];
+    int linecount = 0;
 
-    while (fgets(line_buffer, sizeof(line_buffer), file) != NULL) {
-        (*line)++; 
+    while (fgets(line, 512, file) != NULL){
+        linecount++;
+        bool new_word =false;
+        int word_index = 0;
 
-        for (int i = 0; line_buffer[i] != '\0'; i++) {
-            char current = line_buffer[i];
-
-            if (isspace(current)) {
-                new_word = false;
-            } else {
-                if (!new_word) {
-                  
-                    new_word = true;
-                    index = 0;
-                    while (current != '\0' && !isspace(current) && index < 511) {
-                        word[index++] = current;
-                        current = line_buffer[++i];
-                    }
-                    word[index] = '\0';
-                    trim_word(word);
+            for (int i = 0; line[i] != '\0'; i++) {
+            if (isspace(line[i])) {
+                if (new_word) {
+                    //word[word_index] = '\0';
+                    int page = linecount/50 + 1;
+                    process_word(word, word_count, page);
+                    addnode_index(word, index, page);
+                    word_index = 0; // Nulstil for næste ord
+                    new_word = false;
+                    memset(word, '\0', 512);
                 }
+            } else {
+                // Vi er midt i et ord
+                word[word_index++] = line[i];
+                new_word = true;
             }
         }
     }
 }
 
-int file_processing(char* file_path, long* word_count, GHashTable* index){
-    
-    FILE *file = fopen(file_path, "r");
-    if (file == NULL) {
-       printf("File not found: %s\n", file_path);
-       return 1;
-   }
-
-    char word[512];
-    int line = 1; 
-    
-   while(word_processing(file, word, &line)){
-    (*word_count)++; 
-    int page = line/50 + 1; 
-    addnode_index(word, index, page);
-   }
-
-   printf("file_processing found: %ld\n", *word_count);
-  
-   fclose(file);
-   return 0;
-}
 
 
 int main(int argc, char *argv[]) {
@@ -148,6 +131,13 @@ int main(int argc, char *argv[]) {
    }
 
    char* file_path = argv[1];
+
+    FILE *file = fopen(file_path, "r");
+    if (file == NULL) {
+       printf("File not found: %s\n", file_path);
+       return 1;
+   }
+
    long word_count = 0;
    int itr = (int)atoi(argv[2]);
    char* query = argv[3];
@@ -156,15 +146,18 @@ int main(int argc, char *argv[]) {
 
     for (size_t i = 0; i < itr; i++)
     {
-        file_processing(file_path, &word_count, index);
-        //rewind(file);
+        file_processing(file, &word_count, index);
+        rewind(file);
     }
+
+    printf("The file contains %ld words.\n", word_count);
 
     print_index(index);
     print_query(index, query);
-    printf("main got: %ld\n", word_count);
 
     free_linked(index);
     g_hash_table_destroy(index);
+
+    fclose(file);
    return 0;
 }

@@ -96,6 +96,7 @@ int main(int argc, char *argv[]) {
 
    long word_count = 0;
    int itr = (int)atoi(argv[2]);
+   
    GHashTable *index = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
 
    for (int i = 0; i < itr; i++) {
