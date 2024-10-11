@@ -1,6 +1,6 @@
 use std::env;
 use std::fs::File;
-use std::io::{self, BufRead};
+use std::io::{self, BufRead, Seek, SeekFrom};
 use std::collections::HashMap;
 
 fn insert_word(hash_map: &mut HashMap<String, i64>, word_key: String){
@@ -17,9 +17,8 @@ fn insert_word(hash_map: &mut HashMap<String, i64>, word_key: String){
 }
 
 
-fn file_processing(file_path: &str, total_word_count: &mut i64, hash_map: &mut HashMap<String, i64>){
+fn file_processing(file: &File, total_word_count: &mut i64, hash_map: &mut HashMap<String, i64>){
 
-    let file = File::open(file_path).expect("File not found"); 
     let reader = io::BufReader::new(file); 
 
     for line in reader.lines() {
@@ -49,13 +48,16 @@ fn main() {
     }
 
     let file_path = &args[1];
+    let mut file = File::open(file_path).expect("Should have been able to read the file");
+
 
     let number_of_iterations: usize = args[2].trim().parse().expect("Not a valid number of iterations");
     let mut total_word_count = 0;
     let mut hash_map: HashMap<String, i64> = HashMap::new();
 
     for _ in 0..number_of_iterations{
-        file_processing(file_path, &mut total_word_count, &mut hash_map);
+        file_processing(&file, &mut total_word_count, &mut hash_map);
+        file.seek(SeekFrom::Start(0)).expect("Could not rewind file");
     } 
     
     search_hash_map(&hash_map);
@@ -63,12 +65,3 @@ fn main() {
     println!("The file contains {} words.", total_word_count);
 
 }
-
-//Files are automatically closed when they go out of scope. 
-//Errors detected on closing are ignored by the implementation of Drop. 
-//File does not buffer reads and writes. For efficiency, 
-//wrapping the file in a BufReader or BufWriter when performing many 
-//small read or write calls, unless unbuffered reads and writes are required.
-// fn print_type_of<T>(_: &T) {
-//     println!("{}", std::any::type_name::<T>());
-// }
