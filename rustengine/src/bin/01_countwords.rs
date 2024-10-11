@@ -38,7 +38,7 @@ fn main() {
 
     let file_path = &args[1];
 
-    let mut file = File::open(file_path).expect("Should have been able to read the file");
+    let mut file = File::open(file_path).expect("File not found");
 
     let mut word_count = 0;
     let itr: usize = args[2]

@@ -13,6 +13,17 @@ fn search_hash_map(hash_map: &HashMap<String, LinkedList<i32>>){
     }
 }
 
+fn search_hash_map_query(hash_map: &HashMap<String, LinkedList<i32>>, query: &String){
+    for (word, pages) in hash_map.iter() {
+        if word == query {
+            for page in pages{
+                print!(", {}", page);
+            }
+        }
+        //println!();
+    }
+}
+
 fn insert_word(hash_map: &mut HashMap<String, LinkedList<i32>>, word_key: String, page :i32){
     
     if hash_map.contains_key(&word_key){
@@ -52,10 +63,10 @@ fn main() {
 
     let args: Vec<String> = env::args().collect();
 
-    if args.len() != 3 {
-        println!("Missing argument, check file or counter");
-        return;
-    }
+    // if args.len() != 4 {
+    //     println!("Missing argument, check file or counter");
+    //     return;
+    // }
 
     let file_path = &args[1];
     let mut word_count = 0;
@@ -65,13 +76,15 @@ fn main() {
 
     let mut hash_map: HashMap<String, LinkedList<i32>> = HashMap::new();
 
+    let query = &args[3];
+
     for _ in 0..itr{
         file_processing(&file, &mut word_count, &mut hash_map);
         file.seek(SeekFrom::Start(0)).expect("Could not rewind file");
     } 
     
-    search_hash_map(&hash_map);
-    
+    //search_hash_map(&hash_map);
+    search_hash_map_query(&hash_map, query);
     println!("Total wordcount: {}", word_count);
 
 }

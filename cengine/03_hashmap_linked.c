@@ -80,17 +80,20 @@ void addnode_index(char *word, GHashTable *index, int page)
 void trim_word(char *word)
 {
     int len = strlen(word);
+    int new_len = 0; 
     int first = 0;
     int last = len - 1;
 
     while (first < len && !isalpha(word[first]))
     {
         first++;
+        new_len++;
     }
 
     while (last >= first && !isalpha(word[last]))
     {
         last--;
+        new_len++;
     }
 
     for (int i = first; i <= last; i++)
@@ -98,10 +101,8 @@ void trim_word(char *word)
         word[i - first] = word[i];
     }
 
-    for (int i = last + 1; i < len; i++)
-    {
-        word[i] = '\0';
-    }
+    word[len-new_len] = '\0';
+
 }
 
 void process_word(char *word, long *wordcount, int page)
@@ -171,21 +172,21 @@ int main(int argc, char *argv[])
     int itr = (int)atoi(argv[2]);
     char *query = argv[3];
 
-    GHashTable *index = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
+    GHashTable *word_index = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
 
     for (size_t i = 0; i < itr; i++)
     {
-        file_processing(file, &word_count, index);
+        file_processing(file, &word_count, word_index);
         rewind(file);
     }
 
-    print_index(index);
+    print_index(word_index);
     printf("The search found, ");
-    print_query(index, query);
+    print_query(word_index, query);
     printf("The file contains %ld words.\n", word_count);
 
-    free_linked(index);
-    g_hash_table_destroy(index);
+    free_linked(word_index);
+    g_hash_table_destroy(word_index);
     fclose(file);
     return 0;
 }
