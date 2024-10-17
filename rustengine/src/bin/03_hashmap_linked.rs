@@ -53,7 +53,7 @@ fn file_processing(file: &File, word_count: &mut usize, hash_map: &mut HashMap<S
 
         for word in line.split_whitespace(){
             *word_count += 1;
-            let trimmed_word = word.trim_matches(|c: char| !c.is_alphabetic()).to_string();
+            let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic()).to_string();
             insert_word(hash_map, trimmed_word, page);
         }
     }
@@ -84,7 +84,7 @@ fn main() {
     } 
     
     //search_hash_map(&hash_map);
-    search_hash_map_query(&hash_map, query);
+    //search_hash_map_query(&hash_map, query);
     println!("Total wordcount: {}", word_count);
 
 }
