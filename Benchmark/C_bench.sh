@@ -5,7 +5,7 @@
 number_of_iterations="100"
 
 #The program to be benchmarked
-compiled_program="./c1"
+compiled_program="./c2"
 
 #This creates a 'variable' that contains the path to the file I want to use in my program
 input_file="../data/the-champion.txt"
@@ -35,7 +35,7 @@ if [ ! -f $log_folder/results_c.csv ]; then
     echo "timestamp,elapsed_time,user_time,sys_time,cpu_usage,max_memory,major_faults,minor_faults,voluntary_switches,involuntary_switches,number_of_iterations,program,file" >>  "$log_folder/results_c.csv"
 fi
 
-#for i in {0..10}
+#for i in {0..9}
 #do
-gtime -f "$(date +%Y-%m-%d\ %H:%M:%S),%e,%U,%S,%P,%M,%F,%R,%c,%w,"$number_of_iterations","$compile_filename","$input_filename"" "$compiled_program" "$input_file" "$number_of_iterations" 2>> "$log_folder/results_c.csv"
+gtime -f "$(date +%Y-%m-%d\ %H:%M:%S),%e,%U,%S,%P,%M,%F,%R,%c,%w,"$number_of_iterations","$compile_filename","$input_filename"" "$compiled_program" "$input_file" "$number_of_iterations" "of" 2>> "$log_folder/results_c.csv"
 #done

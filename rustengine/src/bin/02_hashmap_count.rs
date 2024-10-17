@@ -9,9 +9,9 @@ fn print_word_index(word_index: &HashMap<String, i64>) {
     }
 }
 
-fn update_word_index(word_index: &mut HashMap<String, i64>, word: String) {
+fn update_word_index(word_index: &mut HashMap<String, i64>, word: String, map_word_count: &mut usize) {
     let count = word_index.get_mut(&word);
-
+    *map_word_count += 1;
     match count {
         Some(i) => *i += 1,
 
@@ -21,15 +21,15 @@ fn update_word_index(word_index: &mut HashMap<String, i64>, word: String) {
     };
 }
 
-fn file_processing(file: &File, word_count: &mut usize, word_index: &mut HashMap<String, i64>) {
+fn file_processing(file: &File, word_count: &mut usize, map_word_count: &mut usize, word_index: &mut HashMap<String, i64>) {
     let reader = io::BufReader::new(file);
 
     for line in reader.lines() {
 
         for word in line.expect("Expected to find a line").split_whitespace() {
             *word_count += 1;
-            let trimmed_word = word.trim_matches(|c: char| !c.is_alphabetic()).to_string(); //trimmed_word is type &str
-            update_word_index(word_index, trimmed_word);
+            let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic()).to_string(); //trimmed_word is type &str
+            update_word_index(word_index, trimmed_word, map_word_count);
         }
     }
 }
@@ -47,6 +47,7 @@ fn main() {
     let mut file = File::open(file_path).expect("File not found");
 
     let mut word_count: usize = 0;
+    let mut map_word_count:usize = 0;
     let itr: usize = args[2]
         .trim()
         .parse()
@@ -55,12 +56,15 @@ fn main() {
     let mut word_index: HashMap<String, i64> = HashMap::new();
 
     for _ in 0..itr {
-        file_processing(&file, &mut word_count, &mut word_index);
+        file_processing(&file, &mut word_count, &mut map_word_count, &mut word_index);
         file.seek(SeekFrom::Start(0))
             .expect("Could not rewind file");
     }
 
     print_word_index(&word_index);
+    let map_size: usize = word_index.len();
+    println!("The size of the map is: {}", map_size);
+    println!("The map contains: {} elements", map_word_count);
     println!("Rust found the file contains {} words.", word_count);
 
 }

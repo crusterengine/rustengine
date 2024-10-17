@@ -21,3 +21,10 @@ To run the benchmarking of the rust-program. Make sure the parameters of the Rus
     ./Rust_bench.sh
 
 To run C code with a hashmap (so 02 and 03) use the following command: gcc "program_name" -o "compiled version name" $(pkg-config --cflags --libs glib-2.0)
+
+Compiling programs for benchmarking:
+C:
+gcc -O3 -o "name_of_the_compiled_program" "the_program_to_compile".c 
+
+Rust:
+cargo build --release --bin "the_program_to_compile"

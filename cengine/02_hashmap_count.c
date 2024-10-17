@@ -23,10 +23,10 @@ void print_word_index(GHashTable *word_index)
     }
 }
 
-void update_word_index(GHashTable *word_index, char *word)
+void update_word_index(GHashTable *word_index, char *word, long* map_word_count)
 {
     int *value = (int *)g_hash_table_lookup(word_index, word);
-
+    *map_word_count += 1;
     if (value != NULL)
     {
         (*value) += 1;
@@ -67,7 +67,7 @@ void trim_word(char *word)
 
 }
 
-void file_processing(FILE *file, long *word_count, GHashTable *word_index)
+void file_processing(FILE *file, long *word_count, long *map_word_count, GHashTable *word_index)
 {
     char word[512];
     char line[512];
@@ -85,8 +85,7 @@ void file_processing(FILE *file, long *word_count, GHashTable *word_index)
                 {
                     *word_count += 1;
                     trim_word(word);
-                    printf("%s\n", word);
-                    update_word_index(word_index, word);
+                    update_word_index(word_index, word, map_word_count);
                     char_index = 0; // Nulstil for næste ord
                     new_word = false;
                     memset(word, '\0', 512);
@@ -121,17 +120,22 @@ int main(int argc, char *argv[])
     }
 
     long word_count = 0;
+    long map_word_count = 0;
     int itr = (int)atoi(argv[2]);
 
     GHashTable *word_index = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
 
     for (int i = 0; i < itr; i++)
     {
-        file_processing(file, &word_count, word_index);
+        file_processing(file, &word_count, &map_word_count, word_index);
         rewind(file);
     }
 
     print_word_index(word_index);
+
+    int map_size = g_hash_table_size(word_index);
+    printf("The size of the map is: %d\n", map_size);
+    printf("The map contains: %ld elements\n", map_word_count);
     printf("C found the file contains %ld words.\n", word_count);
 
     g_hash_table_destroy(word_index);
