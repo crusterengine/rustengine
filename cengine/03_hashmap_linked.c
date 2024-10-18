@@ -57,23 +57,36 @@ void free_linked(GHashTable *index)
     }
 }
 
-GList *updatelist(int page, GList *list)
+typedef struct list_pointers
 {
-    return g_list_append(list, GINT_TO_POINTER(page));
+    GList* head; 
+    GList* tail;
+}list_pointers;
+
+
+void updatelist(int page, list_pointers* list)
+{
+    //GList* new_tail = ??;
+    GList* updated = g_list_append(list->tail, GINT_TO_POINTER(page));
+    list->tail = GINT_TO_POINTER(page);
+    //return updated;
 }
 
 void addnode_index(char *word, GHashTable *index, int page)
 {
-    GList *knownlist = (GList *)g_hash_table_lookup(index, word);
+    list_pointers* knownlist = (list_pointers*)g_hash_table_lookup(index, word);
     if (knownlist != NULL)
     {
-        knownlist = updatelist(page, knownlist);
+        updatelist(page, knownlist);
+        //knowlist.tail -> 
     }
     else
     {
-        GList *list = NULL;
-        list = updatelist(page, list);
-        g_hash_table_insert(index, g_strdup(word), list);
+        list_pointers* new_list = NULL;
+        new_list->head = GINT_TO_POINTER(page);
+        updatelist(page, new_list);
+        //new_list.tail -> new_list.head; 
+        g_hash_table_insert(index, g_strdup(word), new_list);
     }
 }
 
