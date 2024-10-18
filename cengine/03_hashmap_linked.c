@@ -90,6 +90,7 @@ void addnode_index(char *word, GHashTable *index, int page)
     else
     {
         list* new_list = (list*) malloc (sizeof(list));
+        new_list->head = NULL;
         new_list->head = g_list_append(new_list->head, GINT_TO_POINTER(page));
         new_list->tail = new_list->head;
         g_hash_table_insert(index, g_strdup(word), new_list);
@@ -199,9 +200,9 @@ int main(int argc, char *argv[])
         rewind(file);
     }
 
-    print_index(word_index);
-    printf("The search found, ");
-    print_query(word_index, query);
+    // print_index(word_index);
+    // printf("The search found, ");
+    // print_query(word_index, query);
     printf("The file contains %ld words.\n", word_count);
 
     free_linked(word_index);
