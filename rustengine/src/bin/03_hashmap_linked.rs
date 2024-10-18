@@ -83,8 +83,8 @@ fn main() {
         file.seek(SeekFrom::Start(0)).expect("Could not rewind file");
     } 
     
-    //search_hash_map(&hash_map);
-    //search_hash_map_query(&hash_map, query);
+    search_hash_map(&hash_map);
+    search_hash_map_query(&hash_map, query);
     println!("Total wordcount: {}", word_count);
 
 }

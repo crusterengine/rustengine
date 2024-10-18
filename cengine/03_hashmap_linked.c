@@ -6,6 +6,13 @@
 #include <ctype.h>
 #include <glib.h> //`pkg-config --cflags --libs glib-2.0`
 
+typedef struct list_pointers
+{
+    GList* head; 
+    GList* tail;
+}list_pointers;
+
+
 void print_page(gpointer data, gpointer user_data)
 {
     printf("%d, ", GPOINTER_TO_INT(data));
@@ -13,7 +20,10 @@ void print_page(gpointer data, gpointer user_data)
 
 void print_query(GHashTable *index, char *query)
 {
-    GList *list = (GList *)g_hash_table_lookup(index, query); // hvilken type retur??
+    //GList *list = (GList *)g_hash_table_lookup(index, query); // hvilken type retur??
+    
+    list_pointers* known_list = (list_pointers*)g_hash_table_lookup(index, query);
+    GList* list = known_list->head;
     printf("%s: ", query);
 
     if (list != NULL)
@@ -57,34 +67,34 @@ void free_linked(GHashTable *index)
     }
 }
 
-typedef struct list_pointers
-{
-    GList* head; 
-    GList* tail;
-}list_pointers;
-
-
-void updatelist(int page, list_pointers* list)
-{
-    //GList* new_tail = ??;
-    GList* updated = g_list_append(list->tail, GINT_TO_POINTER(page));
-    list->tail = GINT_TO_POINTER(page);
-    //return updated;
-}
+// GList* updatelist(int page, GList* list)
+// {
+//     GList* updated = g_list_append(list, GINT_TO_POINTER(page));
+//     return list;
+// }
 
 void addnode_index(char *word, GHashTable *index, int page)
 {
     list_pointers* knownlist = (list_pointers*)g_hash_table_lookup(index, word);
+    
     if (knownlist != NULL)
     {
-        updatelist(page, knownlist);
-        //knowlist.tail -> 
+        GList* new_node = g_list_alloc();
+        new_node->data = GINT_TO_POINTER(page);
+        //knownlist->tail = new_node;
+        knownlist->tail->next = new_node;
+
+        // GList* old_tail = knownlist->tail;
+        // GList* udgangspunktet_for_min_liste = g_list_append(old_tail, GINT_TO_POINTER(page));
+        // //old_tail->next = new_node; 
+        // knownlist->tail = old_tail->next;
     }
     else
     {
-        list_pointers* new_list = NULL;
-        new_list->head = GINT_TO_POINTER(page);
-        updatelist(page, new_list);
+        list_pointers* new_list = (list_pointers*) malloc (sizeof(list_pointers));
+        new_list->head = g_list_append(new_list->head, GINT_TO_POINTER(page));
+        //GList* headz = updatelist(page, new_list->head);
+        new_list->tail = new_list->head;
         //new_list.tail -> new_list.head; 
         g_hash_table_insert(index, g_strdup(word), new_list);
     }
