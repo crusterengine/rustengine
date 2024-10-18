@@ -205,8 +205,8 @@ int main(int argc, char *argv[])
     // print_query(word_index, query);
     printf("The file contains %ld words.\n", word_count);
 
-    free_linked(word_index);
-    g_hash_table_destroy(word_index);
-    fclose(file);
+    // free_linked(word_index);
+    // g_hash_table_destroy(word_index);
+    // fclose(file);
     return 0;
 }

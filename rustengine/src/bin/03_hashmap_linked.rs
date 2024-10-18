@@ -2,6 +2,7 @@ use std::env;
 use std::fs::File;
 use std::io::{self, BufRead, Seek, SeekFrom};
 use std::collections::{HashMap, LinkedList};
+use std::process;
 
 fn search_hash_map(hash_map: &HashMap<String, LinkedList<i32>>){
     for (word, pages) in hash_map.iter() {
@@ -83,8 +84,12 @@ fn main() {
         file.seek(SeekFrom::Start(0)).expect("Could not rewind file");
     } 
     
-    search_hash_map(&hash_map);
-    search_hash_map_query(&hash_map, query);
+    // search_hash_map(&hash_map);
+    // search_hash_map_query(&hash_map, query);
     println!("Total wordcount: {}", word_count);
+
+    println!("Breaking now");
+
+    process::exit(0);
 
 }
