@@ -6,11 +6,11 @@
 #include <ctype.h>
 #include <glib.h> //`pkg-config --cflags --libs glib-2.0`
 
-typedef struct list_pointers
+typedef struct list
 {
     GList* head; 
     GList* tail;
-}list_pointers;
+}list;
 
 
 void print_page(gpointer data, gpointer user_data)
@@ -22,8 +22,9 @@ void print_query(GHashTable *index, char *query)
 {
     //GList *list = (GList *)g_hash_table_lookup(index, query); // hvilken type retur??
     
-    list_pointers* known_list = (list_pointers*)g_hash_table_lookup(index, query);
+    list* known_list = (list*)g_hash_table_lookup(index, query);
     GList* list = known_list->head;
+
     printf("%s: ", query);
 
     if (list != NULL)
@@ -75,27 +76,22 @@ void free_linked(GHashTable *index)
 
 void addnode_index(char *word, GHashTable *index, int page)
 {
-    list_pointers* knownlist = (list_pointers*)g_hash_table_lookup(index, word);
+    list* knownlist = (list*)g_hash_table_lookup(index, word);
     
     if (knownlist != NULL)
     {
         GList* new_node = g_list_alloc();
         new_node->data = GINT_TO_POINTER(page);
-        //knownlist->tail = new_node;
-        knownlist->tail->next = new_node;
 
-        // GList* old_tail = knownlist->tail;
-        // GList* udgangspunktet_for_min_liste = g_list_append(old_tail, GINT_TO_POINTER(page));
-        // //old_tail->next = new_node; 
-        // knownlist->tail = old_tail->next;
+        GList* old_tail = knownlist->tail;
+        old_tail->next = new_node; //appender to the list
+        knownlist->tail = new_node; //moves the tail pointer to the new node
     }
     else
     {
-        list_pointers* new_list = (list_pointers*) malloc (sizeof(list_pointers));
+        list* new_list = (list*) malloc (sizeof(list));
         new_list->head = g_list_append(new_list->head, GINT_TO_POINTER(page));
-        //GList* headz = updatelist(page, new_list->head);
         new_list->tail = new_list->head;
-        //new_list.tail -> new_list.head; 
         g_hash_table_insert(index, g_strdup(word), new_list);
     }
 }
