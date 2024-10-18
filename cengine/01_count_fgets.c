@@ -8,8 +8,7 @@ void process_word(char *word, long *wordcount)
 {
     if (strlen(word) > 0)
     {
-        printf("Processed word: %s\n", word);
-        (*wordcount)++; // later to put word in index
+        *wordcount += 1; // later to put word in index
     }
 }
 
@@ -17,11 +16,9 @@ void file_processing(FILE *file, long *word_count)
 {
     char word[512];
     char line[512];
-    int linecount = 0;
 
     while (fgets(line, 512, file) != NULL)
     {
-        linecount++;
         bool new_word = false;
         int word_index = 0;
 
@@ -31,7 +28,6 @@ void file_processing(FILE *file, long *word_count)
             {
                 if (new_word)
                 {
-                    // word[word_index] = '\0';
                     process_word(word, word_count);
                     word_index = 0; // Nulstil for næste ord
                     new_word = false;
@@ -67,9 +63,9 @@ int main(int argc, char *argv[])
     }
 
     long word_count = 0;
-    int number_of_iterations = (int)atoi(argv[2]);
+    int itr = (int)atoi(argv[2]);
 
-    for (int i = 0; i < number_of_iterations; i++)
+    for (int i = 0; i < itr; i++)
     {
         file_processing(file, &word_count);
         rewind(file);

@@ -2,6 +2,7 @@ use std::env;
 use std::fs::File;
 use std::io::{self, BufRead, Seek, SeekFrom};
 use std::collections::{HashMap, LinkedList};
+use std::process;
 
 fn search_hash_map(hash_map: &HashMap<String, LinkedList<i32>>){
     for (word, pages) in hash_map.iter() {
@@ -10,6 +11,17 @@ fn search_hash_map(hash_map: &HashMap<String, LinkedList<i32>>){
             print!(", {}", page);
         }
         println!();
+    }
+}
+
+fn search_hash_map_query(hash_map: &HashMap<String, LinkedList<i32>>, query: &String){
+    for (word, pages) in hash_map.iter() {
+        if word == query {
+            for page in pages{
+                print!(", {}", page);
+            }
+        }
+        //println!();
     }
 }
 
@@ -42,7 +54,7 @@ fn file_processing(file: &File, word_count: &mut usize, hash_map: &mut HashMap<S
 
         for word in line.split_whitespace(){
             *word_count += 1;
-            let trimmed_word = word.trim_matches(|c: char| !c.is_alphabetic()).to_string();
+            let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic()).to_string();
             insert_word(hash_map, trimmed_word, page);
         }
     }
@@ -52,10 +64,10 @@ fn main() {
 
     let args: Vec<String> = env::args().collect();
 
-    if args.len() != 3 {
-        println!("Missing argument, check file or counter");
-        return;
-    }
+    // if args.len() != 4 {
+    //     println!("Missing argument, check file or counter");
+    //     return;
+    // }
 
     let file_path = &args[1];
     let mut word_count = 0;
@@ -65,13 +77,19 @@ fn main() {
 
     let mut hash_map: HashMap<String, LinkedList<i32>> = HashMap::new();
 
+    let query = &args[3];
+
     for _ in 0..itr{
         file_processing(&file, &mut word_count, &mut hash_map);
         file.seek(SeekFrom::Start(0)).expect("Could not rewind file");
     } 
     
-    search_hash_map(&hash_map);
-    
+    // search_hash_map(&hash_map);
+    // search_hash_map_query(&hash_map, query);
     println!("Total wordcount: {}", word_count);
+
+    println!("Breaking now");
+
+    process::exit(0);
 
 }

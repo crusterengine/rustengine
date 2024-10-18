@@ -5,38 +5,57 @@
 #include <ctype.h>
 #include <glib.h> //`pkg-config --cflags --libs glib-2.0`
 
-void update_index(GHashTable *index, char *word, int page)
+void print_word_index(GHashTable *word_index)
 {
-    int *value = (int *)g_hash_table_lookup(index, word);
 
+    GHashTableIter iter;
+    gpointer key, value;
+
+    g_hash_table_iter_init(&iter, word_index);
+    while (g_hash_table_iter_next(&iter, &key, &value))
+    {
+        if (value != NULL)
+        {
+            int *count = (int *)g_hash_table_lookup(word_index, key);
+            char *word = (char *)key;
+            printf("%s: %d\n", word, *count);
+        }
+    }
+}
+
+void update_word_index(GHashTable *word_index, char *word, long* map_word_count)
+{
+    int *value = (int *)g_hash_table_lookup(word_index, word);
+    *map_word_count += 1;
     if (value != NULL)
     {
         (*value) += 1;
-        printf("Updated value for '%s': %d\n", word, *value);
     }
     else
     {
         int *new_value = malloc(sizeof(int));
         *new_value = 1;
-        g_hash_table_insert(index, g_strdup(word), new_value);
-        printf("this '%s' word is on the way to the index\n", word);
+        g_hash_table_insert(word_index, g_strdup(word), new_value);
     }
 }
 
 void trim_word(char *word)
 {
     int len = strlen(word);
+    int new_len = 0; 
     int first = 0;
     int last = len - 1;
 
     while (first < len && !isalpha(word[first]))
     {
         first++;
+        new_len++;
     }
 
     while (last >= first && !isalpha(word[last]))
     {
         last--;
+        new_len++;
     }
 
     for (int i = first; i <= last; i++)
@@ -44,32 +63,19 @@ void trim_word(char *word)
         word[i - first] = word[i];
     }
 
-    for (int i = last + 1; i < len; i++)
-    {
-        word[i] = '\0';
-    }
+    word[len-new_len] = '\0';
+
 }
 
-void process_word(char *word, long *wordcount, int page)
-{
-    if (strlen(word) > 0)
-    {
-        trim_word(word);
-        *wordcount += 1; // later to put word in index
-    }
-}
-
-void file_processing(FILE *file, long *word_count, GHashTable *index)
+void file_processing(FILE *file, long *word_count, long *map_word_count, GHashTable *word_index)
 {
     char word[512];
     char line[512];
-    int linecount = 0;
 
     while (fgets(line, 512, file) != NULL)
     {
-        linecount++;
         bool new_word = false;
-        int word_index = 0;
+        int char_index = 0;
 
         for (int i = 0; line[i] != '\0'; i++)
         {
@@ -77,11 +83,10 @@ void file_processing(FILE *file, long *word_count, GHashTable *index)
             {
                 if (new_word)
                 {
-                    // word[word_index] = '\0';
-                    int page = linecount / 50 + 1;
-                    process_word(word, word_count, page);
-                    update_index(index, word, page);
-                    word_index = 0; // Nulstil for næste ord
+                    *word_count += 1;
+                    trim_word(word);
+                    update_word_index(word_index, word, map_word_count);
+                    char_index = 0; // Nulstil for næste ord
                     new_word = false;
                     memset(word, '\0', 512);
                 }
@@ -89,7 +94,7 @@ void file_processing(FILE *file, long *word_count, GHashTable *index)
             else
             {
                 // Vi er midt i et ord
-                word[word_index++] = line[i];
+                word[char_index++] = line[i];
                 new_word = true;
             }
         }
@@ -115,19 +120,25 @@ int main(int argc, char *argv[])
     }
 
     long word_count = 0;
+    long map_word_count = 0;
     int itr = (int)atoi(argv[2]);
 
-    GHashTable *index = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
+    GHashTable *word_index = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
 
     for (int i = 0; i < itr; i++)
     {
-        file_processing(file, &word_count, index);
+        file_processing(file, &word_count, &map_word_count, word_index);
         rewind(file);
     }
 
-    printf("The file contains %ld words.\n", word_count);
+    print_word_index(word_index);
 
-    g_hash_table_destroy(index);
+    int map_size = g_hash_table_size(word_index);
+    printf("The size of the map is: %d\n", map_size);
+    printf("The map contains: %ld elements\n", map_word_count);
+    printf("C found the file contains %ld words.\n", word_count);
+
+    g_hash_table_destroy(word_index);
     fclose(file);
     return 0;
 }
