@@ -86,9 +86,9 @@ fn main() {
         file.seek(SeekFrom::Start(0)).expect("Could not rewind file");
     } 
     
-    print_word_index(&word_index);
-    print!("The search found, ");
-    print_query(&word_index, query);
+    // print_word_index(&word_index);
+    // print!("The search found, ");
+    // print_query(&word_index, query);
     println!("Rust found the file contains {} words.", word_count);
 
     process::exit(0);
