@@ -5,7 +5,7 @@ use std::io::{self, BufRead, Seek, SeekFrom};
 
 fn print_word_index(word_index: &HashMap<String, i64>) {
     for (word, count) in word_index.iter() {
-        //println!("{word}: {count}");
+        println!("{word}: {count}");
     }
 }
 
@@ -28,7 +28,7 @@ fn file_processing(file: &File, word_count: &mut usize, map_word_count: &mut usi
 
         for word in line.expect("Expected to find a line").split_whitespace() {
             *word_count += 1;
-            let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic()); //trimmed_word is type &str
+            let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic());
             update_word_index(word_index, &trimmed_word, map_word_count);
         }
     }
@@ -61,8 +61,9 @@ fn main() {
             .expect("Could not rewind file");
     }
 
-    print_word_index(&word_index);
-    let map_size: usize = word_index.len();
+    //print_word_index(&word_index);
+
+    //let map_size: usize = word_index.len();
     // println!("The size of the map is: {}", map_size);
     println!("The map contains: {} elements", map_word_count);
     // println!("Rust found the file contains {} words.", word_count);

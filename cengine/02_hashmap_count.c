@@ -14,22 +14,19 @@ void print_word_index(GHashTable *word_index)
     g_hash_table_iter_init(&iter, word_index);
     while (g_hash_table_iter_next(&iter, &key, &value))
     {
-        if (value != NULL)
-        {
             int *count = (int *)g_hash_table_lookup(word_index, key);
             char *word = (char *)key;
-            //printf("%s: %d\n", word, *count);
-        }
+            printf("%s: %d\n", word, *count);
     }
 }
 
 void update_word_index(GHashTable *word_index, char *word, long* map_word_count)
 {
-    int *value = (int *)g_hash_table_lookup(word_index, word);
+    int *count = (int *)g_hash_table_lookup(word_index, word);
     *map_word_count += 1;
-    if (value != NULL)
+    if (count != NULL)
     {
-        (*value) += 1;
+        *count += 1;
     }
     else
     {
@@ -41,7 +38,7 @@ void update_word_index(GHashTable *word_index, char *word, long* map_word_count)
 
 void trim_word(char *word)
 {
-    int len = strlen(word);
+    int len = strlen(word); //Can this be done different??
     int new_len = 0; 
     int first = 0;
     int last = len - 1;
@@ -131,9 +128,9 @@ int main(int argc, char *argv[])
         rewind(file);
     }
 
-    print_word_index(word_index);
+    //print_word_index(word_index);
 
-    int map_size = g_hash_table_size(word_index);
+    //int map_size = g_hash_table_size(word_index);
     // printf("The size of the map is: %d\n", map_size);
     printf("The map contains: %ld elements\n", map_word_count);
     // printf("C found the file contains %ld words.\n", word_count);
