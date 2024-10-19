@@ -25,18 +25,34 @@ fn search_hash_map_query(hash_map: &HashMap<String, LinkedList<i32>>, query: &St
     }
 }
 
-fn insert_word(hash_map: &mut HashMap<String, LinkedList<i32>>, word_key: String, page :i32){
+// fn insert_word(hash_map: &mut HashMap<String, LinkedList<i32>>, word_key: String, page :i32){
     
-    if hash_map.contains_key(&word_key){
-       let pages = hash_map.get_mut(&word_key); 
-       pages.expect("could not find likedlist").push_back(page);
-    } 
-    else {
-     let mut page_list = LinkedList::new();
-     page_list.push_back(page);
-     hash_map.insert(word_key, page_list); 
-    }
+//     let pages: Option<&mut LinkedList<i32>> = hash_map.get_mut(&word_key); 
+
+//     if pages.is_none() {
+//        pages.expect("could not find likedlist").push_back(page);
+//     } 
+//     else {
+//      let mut page_list = LinkedList::new();
+//      page_list.push_back(page);
+//      hash_map.insert(word_key, page_list); 
+//     }
+// }
+
+fn insert_word(hash_map: &mut HashMap<String, LinkedList<i32>>, word_key: String, page :i32,) {
+   
+   let pages = hash_map.get_mut(&word_key);
+    
+    match pages {
+        Some(i) => i.push_back(page),
+
+        None => {
+            let mut page_list = LinkedList::new();
+            page_list.push_back(page);
+            hash_map.insert(word_key, page_list);         }
+    };
 }
+
 
 
 fn file_processing(file: &File, word_count: &mut usize, hash_map: &mut HashMap<String, LinkedList<i32>>){
