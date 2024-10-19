@@ -34,5 +34,11 @@ fi
 
 #for i in {0..9}
 #do
-gtime -f "$(date +%Y-%m-%d\ %H:%M:%S),%e,%U,%S,%P,%M,%F,%R,%c,%w,"$number_of_iterations","$compile_filename","$input_filename"" "$compiled_program" "$input_file" "$number_of_iterations" "of" 2>> "$log_folder/results_rust.csv"
+gtime -f "$(date +%Y-%m-%d\ %H:%M:%S),%e,%U,%S,%P,%M,%F,%R,%c,%w,"$number_of_iterations","$compile_filename","$input_filename"" "$compiled_program" "$input_file" "$number_of_iterations" 2>> "$log_folder/results_rust.csv"
+#done
+
+#For version 3:
+#for i in {0..9}
+#do
+#gtime -f "$(date +%Y-%m-%d\ %H:%M:%S),%e,%U,%S,%P,%M,%F,%R,%c,%w,"$number_of_iterations","$compile_filename","$input_filename"" "$compiled_program" "$input_file" "$number_of_iterations" "of" 2>> "$log_folder/results_rust.csv"
 #done

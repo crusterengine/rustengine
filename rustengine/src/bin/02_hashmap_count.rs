@@ -5,18 +5,18 @@ use std::io::{self, BufRead, Seek, SeekFrom};
 
 fn print_word_index(word_index: &HashMap<String, i64>) {
     for (word, count) in word_index.iter() {
-        println!("{word}: {count}");
+        //println!("{word}: {count}");
     }
 }
 
-fn update_word_index(word_index: &mut HashMap<String, i64>, word: String, map_word_count: &mut usize) {
-    let count = word_index.get_mut(&word);
+fn update_word_index(word_index: &mut HashMap<String, i64>, word: &str, map_word_count: &mut usize) {
+    let count = word_index.get_mut(word);
     *map_word_count += 1;
     match count {
         Some(i) => *i += 1,
 
         None => {
-            word_index.insert(word, 1);
+            word_index.insert(word.to_string(), 1);
         }
     };
 }
@@ -28,8 +28,8 @@ fn file_processing(file: &File, word_count: &mut usize, map_word_count: &mut usi
 
         for word in line.expect("Expected to find a line").split_whitespace() {
             *word_count += 1;
-            let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic()).to_string(); //trimmed_word is type &str
-            update_word_index(word_index, trimmed_word, map_word_count);
+            let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic()); //trimmed_word is type &str
+            update_word_index(word_index, &trimmed_word, map_word_count);
         }
     }
 }
@@ -63,8 +63,8 @@ fn main() {
 
     print_word_index(&word_index);
     let map_size: usize = word_index.len();
-    println!("The size of the map is: {}", map_size);
+    // println!("The size of the map is: {}", map_size);
     println!("The map contains: {} elements", map_word_count);
-    println!("Rust found the file contains {} words.", word_count);
+    // println!("Rust found the file contains {} words.", word_count);
 
 }

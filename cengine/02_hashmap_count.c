@@ -18,7 +18,7 @@ void print_word_index(GHashTable *word_index)
         {
             int *count = (int *)g_hash_table_lookup(word_index, key);
             char *word = (char *)key;
-            printf("%s: %d\n", word, *count);
+            //printf("%s: %d\n", word, *count);
         }
     }
 }
@@ -134,9 +134,9 @@ int main(int argc, char *argv[])
     print_word_index(word_index);
 
     int map_size = g_hash_table_size(word_index);
-    printf("The size of the map is: %d\n", map_size);
+    // printf("The size of the map is: %d\n", map_size);
     printf("The map contains: %ld elements\n", map_word_count);
-    printf("C found the file contains %ld words.\n", word_count);
+    // printf("C found the file contains %ld words.\n", word_count);
 
     g_hash_table_destroy(word_index);
     fclose(file);

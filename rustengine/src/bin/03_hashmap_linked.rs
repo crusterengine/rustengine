@@ -39,9 +39,9 @@ fn search_hash_map_query(hash_map: &HashMap<String, LinkedList<i32>>, query: &St
 //     }
 // }
 
-fn insert_word(hash_map: &mut HashMap<String, LinkedList<i32>>, word_key: String, page :i32,) {
+fn insert_word(hash_map: &mut HashMap<String, LinkedList<i32>>, word_key: &str, page :i32,) {
    
-   let pages = hash_map.get_mut(&word_key);
+   let pages = hash_map.get_mut(word_key);
     
     match pages {
         Some(i) => i.push_back(page),
@@ -49,7 +49,7 @@ fn insert_word(hash_map: &mut HashMap<String, LinkedList<i32>>, word_key: String
         None => {
             let mut page_list = LinkedList::new();
             page_list.push_back(page);
-            hash_map.insert(word_key, page_list);         }
+            hash_map.insert(word_key.to_string(), page_list);         }
     };
 }
 
@@ -70,8 +70,8 @@ fn file_processing(file: &File, word_count: &mut usize, hash_map: &mut HashMap<S
 
         for word in line.split_whitespace(){
             *word_count += 1;
-            let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic()).to_string();
-            insert_word(hash_map, trimmed_word, page);
+            let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic());
+            insert_word(hash_map, &trimmed_word, page);
         }
     }
 }
