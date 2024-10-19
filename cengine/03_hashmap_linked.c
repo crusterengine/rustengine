@@ -63,7 +63,9 @@ void free_linked(GHashTable *word_index)
     {
         if (value != NULL)
         {
-            g_list_free(value);
+            list* list_to_free = (list*) value;
+            g_list_free(list_to_free->head);
+            free(list_to_free);
         }
     }
 }
@@ -199,8 +201,8 @@ int main(int argc, char *argv[])
     // print_query(word_index, query);
     printf("C found the file contains %ld words.\n", word_count);
 
-    // free_linked(word_index);
-    // g_hash_table_destroy(word_index);
-    // fclose(file);
+    free_linked(word_index);
+    g_hash_table_destroy(word_index);
+    fclose(file);
     return 0;
 }
