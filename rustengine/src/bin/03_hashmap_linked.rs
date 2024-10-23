@@ -26,19 +26,26 @@ fn print_word_index(word_index: &HashMap<String, LinkedList<i32>>){
     }
 }
 
-fn update_word_index(word_index: &mut HashMap<String, LinkedList<i32>>, word: &str, page :i32,) {
-   
-   let page_list = word_index.get_mut(word);
-    
-    match page_list {
-        Some(page_list) => page_list.push_back(page),
 
-        None => {
-            let mut new_page_list = LinkedList::new();
-            new_page_list.push_back(page);
-            word_index.insert(word.to_string(), new_page_list);         }
-    };
-}
+fn update_word_index(word_index: &mut HashMap<String, LinkedList<i32>>, word: &str, page:i32,) {
+   
+    let page_list = word_index.get_mut(word);
+     
+     match page_list {
+ 
+         Some(page_list) if page_list.back() != Some(&page) => {
+  
+                 page_list.push_back(page)
+         },
+
+         Some(_) => return,
+
+         None => {
+             let mut new_page_list = LinkedList::new();
+             new_page_list.push_back(page);
+             word_index.insert(word.to_string(), new_page_list);         }
+     };
+ }
 
 
 
@@ -86,9 +93,9 @@ fn main() {
         file.seek(SeekFrom::Start(0)).expect("Could not rewind file");
     } 
     
-    // print_word_index(&word_index);
-    // print!("The search found, ");
-    // print_query(&word_index, query);
+    print_word_index(&word_index);
+    print!("The search found, ");
+    print_query(&word_index, query);
     println!("Rust found the file contains {} words.", word_count);
 
     process::exit(0);

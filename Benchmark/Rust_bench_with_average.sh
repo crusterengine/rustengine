@@ -4,7 +4,7 @@
 number_of_iterations="1000"
 
 #The program to be benchmarked
-compiled_program="./01_countwords"
+compiled_program="./03_hashmap_linked"
 
 #This creates a 'variable' that contains the path to the file you want to use in the benchmarking 
 input_file="../../../data/the-champion.txt"
@@ -37,7 +37,7 @@ if [ ! -f $log_folder/results_rust.csv ]; then
 fi
 
 for i in {0..9}; do
-    output=$(gtime -o temp_gtime.txt -f "%e %U %S %P %M %F %R %c %w" "$compiled_program" "$input_file" "$number_of_iterations" 2>&1)
+    output=$(gtime -o temp_gtime.txt -f "%e %U %S %P %M %F %R %c %w" "$compiled_program" "$input_file" "$number_of_iterations" "fellow" 2>&1)
     
     read elapsed_time user_time sys_time cpu_usage max_memory major_faults minor_faults voluntary_switches involuntary_switches < temp_gtime.txt
 
