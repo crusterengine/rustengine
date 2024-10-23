@@ -128,12 +128,12 @@ int main(int argc, char *argv[])
         rewind(file);
     }
 
-    //print_word_index(word_index);
+    print_word_index(word_index);
 
     //int map_size = g_hash_table_size(word_index);
     // printf("The size of the map is: %d\n", map_size);
     printf("The map contains: %ld elements\n", map_word_count);
-    // printf("C found the file contains %ld words.\n", word_count);
+    printf("C found the file contains %ld words.\n", word_count);
 
     g_hash_table_destroy(word_index);
     fclose(file);

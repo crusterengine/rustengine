@@ -76,13 +76,14 @@ void update_word_index(GHashTable *word_index, char *word, int page)
     
     if (page_list != NULL)
     {
+        if(GPOINTER_TO_INT(page_list->tail->data) != page){
         GList* new_page = g_list_alloc();
         new_page->data = GINT_TO_POINTER(page);
 
         GList* old_tail = page_list->tail;
         old_tail->next = new_page; //appends the new node to the list
         page_list->tail = new_page; //moves the tail pointer to the new node
-    }
+    }}
     else
     {
         list* new_page_list = (list*) malloc (sizeof(list));
@@ -196,9 +197,9 @@ int main(int argc, char *argv[])
         rewind(file);
     }
 
-    // print_word_index(word_index);
+    print_word_index(word_index);
     // printf("The search found, ");
-    // print_query(word_index, query);
+    print_query(word_index, query);
     printf("C found the file contains %ld words.\n", word_count);
 
     free_linked(word_index);
