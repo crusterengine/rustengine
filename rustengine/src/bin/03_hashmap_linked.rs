@@ -4,58 +4,60 @@ use std::io::{self, BufRead, Seek, SeekFrom};
 use std::collections::{HashMap, LinkedList};
 use std::process;
 
-fn search_hash_map(hash_map: &HashMap<String, LinkedList<i32>>){
-    for (word, pages) in hash_map.iter() {
-        print!("Word '{word}' on page");
+fn print_query(word_index: &HashMap<String, LinkedList<i32>>, query: &String){
+    for (word, pages) in word_index.iter() {
+        if word == query {
+            print!("{}: ", word);
+            for page in pages{
+                print!("{}, ", page);
+            }
+        }
+    }
+    println!();
+}
+
+fn print_word_index(word_index: &HashMap<String, LinkedList<i32>>){
+    for (word, pages) in word_index.iter() {
+        print!("{word}: ");
         for page in pages{
-            print!(", {}", page);
+            print!("{}, ", page);
         }
         println!();
     }
 }
 
-fn search_hash_map_query(hash_map: &HashMap<String, LinkedList<i32>>, query: &String){
-    for (word, pages) in hash_map.iter() {
-        if word == query {
-            for page in pages{
-                print!(", {}", page);
-            }
-        }
-        //println!();
-    }
-}
-
-fn insert_word(hash_map: &mut HashMap<String, LinkedList<i32>>, word_key: String, page :i32){
+fn update_word_index(word_index: &mut HashMap<String, LinkedList<i32>>, word: &str, page :i32,) {
+   
+   let page_list = word_index.get_mut(word);
     
-    if hash_map.contains_key(&word_key){
-       let pages = hash_map.get_mut(&word_key); 
-       pages.expect("could not find likedlist").push_back(page);
-    } 
-    else {
-     let mut page_list = LinkedList::new();
-     page_list.push_back(page);
-     hash_map.insert(word_key, page_list); 
-    }
+    match page_list {
+        Some(page_list) => page_list.push_back(page),
+
+        None => {
+            let mut new_page_list = LinkedList::new();
+            new_page_list.push_back(page);
+            word_index.insert(word.to_string(), new_page_list);         }
+    };
 }
 
 
-fn file_processing(file: &File, word_count: &mut usize, hash_map: &mut HashMap<String, LinkedList<i32>>){
+
+fn file_processing(file: &File, word_count: &mut usize, word_index: &mut HashMap<String, LinkedList<i32>>){
 
     let reader = io::BufReader::new(file); 
 
-    let mut lines: i32 = 1;
+    let mut linecount: i32 = 0;
 
     for line in reader.lines() {
         let line = line.expect("Expected to find a line");
 
-        lines += 1;
-
-        let page = lines/50 + 1;
+        linecount += 1;
 
         for word in line.split_whitespace(){
             *word_count += 1;
-            let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic()).to_string();
-            insert_word(hash_map, trimmed_word, page);
+            let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic());
+            let page = linecount/50 + 1;
+            update_word_index(word_index, &trimmed_word, page);
         }
     }
 }
@@ -64,31 +66,30 @@ fn main() {
 
     let args: Vec<String> = env::args().collect();
 
-    // if args.len() != 4 {
-    //     println!("Missing argument, check file or counter");
-    //     return;
-    // }
+    if args.len() != 4 {
+        println!("Missing argument, check file or counter");
+        return;
+    }
 
     let file_path = &args[1];
-    let mut word_count = 0;
-    let itr: usize = args[2].trim().parse().expect("Not a valid number of iterations");
-    
+
     let mut file = File::open(file_path).expect("File not found"); 
 
-    let mut hash_map: HashMap<String, LinkedList<i32>> = HashMap::new();
+    let mut word_count = 0;
+    let itr: usize = args[2].trim().parse().expect("Not a valid number of iterations");
+    let query = &args[3];    
 
-    let query = &args[3];
+    let mut word_index: HashMap<String, LinkedList<i32>> = HashMap::new();
 
     for _ in 0..itr{
-        file_processing(&file, &mut word_count, &mut hash_map);
+        file_processing(&file, &mut word_count, &mut word_index);
         file.seek(SeekFrom::Start(0)).expect("Could not rewind file");
     } 
     
-    // search_hash_map(&hash_map);
-    // search_hash_map_query(&hash_map, query);
-    println!("Total wordcount: {}", word_count);
-
-    println!("Breaking now");
+    // print_word_index(&word_index);
+    // print!("The search found, ");
+    // print_query(&word_index, query);
+    println!("Rust found the file contains {} words.", word_count);
 
     process::exit(0);
 
