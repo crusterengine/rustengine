@@ -40,6 +40,8 @@ if [ ! -f $log_folder/results_rust.csv ]; then
     echo "timestamp,elapsed_time,user_time,sys_time,cpu_usage,max_memory,major_faults,minor_faults,voluntary_switches,involuntary_switches,number_of_iterations,program,file" >>  "$log_folder/results_rust.csv"
 fi
 
+count=1
+
 for i in {0..9}; do
     output=$(gtime -o temp_gtime.txt -f "%e %U %S %P %M %F %R %c %w" "$compiled_program" "$input_file" "$number_of_iterations" "fellow" 2>&1)
     
@@ -51,6 +53,10 @@ for i in {0..9}; do
 
     # Log each iteration's output
     echo "$(date +%Y-%m-%d\ %H:%M:%S),$elapsed_time,$user_time,$sys_time,$cpu_usage,$max_memory,$major_faults,$minor_faults,$voluntary_switches,$involuntary_switches,$number_of_iterations,$compile_filename,$input_filename" >> "$log_folder/results_rust.csv"
+
+    echo "done with iteration $count"
+    count=$((count + 1))
+
 done
 
 # Calculate the average user time and max memory

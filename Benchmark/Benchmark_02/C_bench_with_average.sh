@@ -39,6 +39,8 @@ if [ ! -f "$log_folder/results_c.csv" ]; then
     echo "timestamp,elapsed_time,user_time,sys_time,cpu_usage,max_memory,major_faults,minor_faults,voluntary_switches,involuntary_switches,number_of_iterations,program,file" >> "$log_folder/results_c.csv"
 fi
 
+count=1
+
 # Loop over the specified number of iterations
 for i in {0..9}; do
     # Run the program and capture gtime output
@@ -53,6 +55,8 @@ for i in {0..9}; do
 
     # Log each iteration's output
     echo "$(date +%Y-%m-%d\ %H:%M:%S),$elapsed_time,$user_time,$sys_time,$cpu_usage,$max_memory,$major_faults,$minor_faults,$voluntary_switches,$involuntary_switches,$number_of_iterations,$compile_filename,$input_filename" >> "$log_folder/results_c.csv"
+    echo "done with iteration $count"
+    count=$((count + 1))
 done
 
 # Calculate the average user time and max memory
