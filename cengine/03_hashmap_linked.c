@@ -197,13 +197,13 @@ int main(int argc, char *argv[])
         rewind(file);
     }
 
-    print_word_index(word_index);
+    //print_word_index(word_index);
     // printf("The search found, ");
-    print_query(word_index, query);
+    // print_query(word_index, query);
     printf("C found the file contains %ld words.\n", word_count);
 
-    free_linked(word_index);
-    g_hash_table_destroy(word_index);
-    fclose(file);
+    // free_linked(word_index);
+    // g_hash_table_destroy(word_index);
+    // fclose(file);
     return 0;
 }

@@ -24,7 +24,7 @@ To run C code with a hashmap (so 02 and 03) use the following command: gcc "prog
 
 Compiling programs for benchmarking:
 C:
-gcc -O3 -o "name_of_the_compiled_program" "the_program_to_compile".c 
+gcc -O3 -o "name_of_the_compiled_program" "the_program_to_compile".c $(pkg-config --cflags --libs glib-2.0)
 
 Rust:
 cargo build --release --bin "the_program_to_compile"

@@ -1,10 +1,7 @@
 #!/bin/bash
 
 # How many times to read over the same input file (to simulate a larger file size)
-number_of_iterations="1000"
-
-# The program to be benchmarked
-compiled_program="./01_countwords"
+number_of_iterations="1"
 
 # The input file
 input_file="../data/the-champion.txt"
@@ -13,14 +10,20 @@ input_file="../data/the-champion.txt"
 mkdir -p "log_folder"
 
 #This captures the path to where the log files should be located
-log_folder="../Benchmark/log_folder"
+log_folder="../Benchmark/Benchmark_01/log_folder"
+
+# Go into the directory of the file you want to time
+cd ../../cengine
+
+#Compile the program
+gcc -O3 -o 01_countwords 01_countwords.c
+
+# The program to be benchmarked
+compiled_program="./01_countwords"
 
 # Tag for the log-file
 input_filename=$(basename "$input_file")
 compile_filename="C:${compiled_program}"
-
-# Go into the directory of the file you want to time
-cd ../cengine
 
 # Collect system information
 machine_info=$(system_profiler SPHardwareDataType | grep "Total Number of Cores")
@@ -36,6 +39,8 @@ if [ ! -f "$log_folder/results_c.csv" ]; then
     echo "timestamp,elapsed_time,user_time,sys_time,cpu_usage,max_memory,major_faults,minor_faults,voluntary_switches,involuntary_switches,number_of_iterations,program,file" >> "$log_folder/results_c.csv"
 fi
 
+count=1
+
 # Loop over the specified number of iterations
 for i in {0..9}; do
     # Run the program and capture gtime output
@@ -50,6 +55,8 @@ for i in {0..9}; do
 
     # Log each iteration's output
     echo "$(date +%Y-%m-%d\ %H:%M:%S),$elapsed_time,$user_time,$sys_time,$cpu_usage,$max_memory,$major_faults,$minor_faults,$voluntary_switches,$involuntary_switches,$number_of_iterations,$compile_filename,$input_filename" >> "$log_folder/results_c.csv"
+    echo "done with iteration $count"
+    count=$((count + 1))
 done
 
 # Calculate the average user time and max memory
