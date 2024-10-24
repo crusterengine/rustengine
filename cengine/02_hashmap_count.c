@@ -95,6 +95,12 @@ void file_processing(FILE *file, long *word_count, long *map_word_count, GHashTa
                 new_word = true;
             }
         }
+        if (new_word)
+        {
+            *word_count += 1;
+            trim_word(word);
+            update_word_index(word_index, word, map_word_count);
+        }
     }
 }
 
@@ -130,8 +136,8 @@ int main(int argc, char *argv[])
 
     print_word_index(word_index);
 
-    //int map_size = g_hash_table_size(word_index);
-    // printf("The size of the map is: %d\n", map_size);
+    int map_size = g_hash_table_size(word_index);
+    printf("The size of the map is: %d\n", map_size);
     printf("The map contains: %ld elements\n", map_word_count);
     printf("C found the file contains %ld words.\n", word_count);
 

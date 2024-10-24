@@ -165,6 +165,16 @@ void file_processing(FILE *file, long *word_count, GHashTable *word_index)
                 new_word = true;
             }
         }
+                if (new_word)
+        {
+                    // word[char_index] = '\0';
+                    process_word(word, word_count);
+                    int page = linecount/50 + 1;
+                    update_word_index(word_index, word, page);
+                    char_index = 0; // Nulstil for næste ord
+                    new_word = false;
+                    memset(word, '\0', 512);
+        }
     }
 }
 
@@ -200,7 +210,7 @@ int main(int argc, char *argv[])
     //print_word_index(word_index);
     // printf("The search found, ");
     // print_query(word_index, query);
-    printf("C found the file contains %ld words.\n", word_count);
+    // printf("C found the file contains %ld words.\n", word_count);
 
     // free_linked(word_index);
     // g_hash_table_destroy(word_index);
