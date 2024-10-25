@@ -44,9 +44,6 @@ void file_processing(FILE *file, long *word_count)
         if (new_word)
         {
             process_word(word, word_count);
-            word_index = 0; // Nulstil for næste ord
-            new_word = false;
-            memset(word, '\0', 512);
         }
     }
 }
