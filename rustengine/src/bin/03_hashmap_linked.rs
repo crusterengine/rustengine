@@ -4,6 +4,10 @@ use std::io::{self, BufRead, Seek, SeekFrom};
 use std::collections::{HashMap, LinkedList};
 use std::process;
 
+struct Node () {
+    let int = 0; 
+}
+
 fn print_query(word_index: &HashMap<String, LinkedList<i32>>, query: &String){
     for (word, pages) in word_index.iter() {
         if word == query {
