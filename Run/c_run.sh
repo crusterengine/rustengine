@@ -1,7 +1,7 @@
 #Costumizable parameters for the script: 
 cd ..
 cd cengine
-gcc cengine02.c -o cengine02
+gcc 03_hashmap_linked.c -o cengine02 `pkg-config --cflags --libs glib-2.0`
 
 #The program to be benchmarked
 compiled_program="./cengine02"
@@ -16,4 +16,4 @@ number_of_iterations="1"
 query="fellow"
 
 #Command line
-"$compiled_program" "$input_file" "$number_of_iterations" "$query"
+"$compiled_program" "$input_file" "$number_of_iterations" "fellow"
