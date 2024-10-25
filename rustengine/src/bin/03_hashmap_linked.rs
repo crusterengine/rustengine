@@ -96,7 +96,7 @@ fn main() {
     //print_word_index(&word_index);
     //print!("The search found, ");
     //print_query(&word_index, query);
-    println!("Rust found the file contains {} words.", word_count);
+    // println!("Rust found the file contains {} words.", word_count);
 
     process::exit(0);
 

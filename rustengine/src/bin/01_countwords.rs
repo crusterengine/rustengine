@@ -52,5 +52,5 @@ fn main() {
             .expect("Could not rewind file");
     }
 
-    println!("The file contains {} words.", word_count);
+    //println!("The file contains {} words.", word_count);
 }

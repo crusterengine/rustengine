@@ -57,21 +57,22 @@ for i in {0..9}; do
 
     # Log each iteration's output
     echo "$(date +%Y-%m-%d\ %H:%M:%S),$elapsed_time,$user_time,$sys_time,$cpu_usage,$max_memory,$major_faults,$minor_faults,$voluntary_switches,$involuntary_switches,$number_of_iterations,$compile_filename,$input_filename" >> "$log_folder/results_c.csv"
-    echo "done with iteration $count"
+    
+    echo "done with iteration $count for $number_of_iterations iterations"
     count=$((count + 1))
 done
 
  # Calculate the average user time and max memory
-    average_user_time=$(echo "$total_user_time / 10" | bc -l)
-    average_max_memory=$(echo "$total_max_memory / 10" | bc -l)
+average_user_time=$(echo "$total_user_time / 10" | bc -l)
+average_max_memory=$(echo "$total_max_memory / 10" | bc -l)
 
     # Log the final averages
-    echo "Average user time: $average_user_time seconds for $number_of_iterations iterations" >> "$log_folder/results_c.csv"
-    echo "Average max memory: $average_max_memory kilobytes for $number_of_iterations iterations" >> "$log_folder/results_c.csv"
+echo "Average user time: $average_user_time seconds for $number_of_iterations iterations" >> "$log_folder/results_c.csv"
+echo "Average max memory: $average_max_memory kilobytes for $number_of_iterations iterations" >> "$log_folder/results_c.csv"
 
 # Clean up temporary file
 rm -f temp_gtime.txt
 
-    echo "done with benchmarking"
+echo "done with benchmarking"
 
 

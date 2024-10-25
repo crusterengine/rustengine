@@ -71,8 +71,8 @@ int main(int argc, char *argv[])
         rewind(file);
     }
 
-    printf("The file contains %ld words.\n", word_count);
+    // printf("The file contains %ld words.\n", word_count);
 
-    fclose(file);
+    // fclose(file);
     return 0;
 }
