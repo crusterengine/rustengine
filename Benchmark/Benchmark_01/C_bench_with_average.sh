@@ -7,10 +7,10 @@ number_of_iterations="1"
 input_file="../data/the-champion.txt"
 
 # Log folder setup
-mkdir -p "log_folder"
+mkdir -p "log_folder_01"
 
 #This captures the path to where the log files should be located
-log_folder="../Benchmark/Benchmark_01/log_folder"
+log_folder="../Benchmark/Benchmark_01/log_folder_01"
 
 # Go into the directory of the file you want to time
 cd ../../cengine
@@ -42,6 +42,8 @@ fi
 count=1
 
 # Loop over the specified number of iterations
+
+
 for i in {0..9}; do
     # Run the program and capture gtime output
     output=$(gtime -o temp_gtime.txt -f "%e %U %S %P %M %F %R %c %w" "$compiled_program" "$input_file" "$number_of_iterations" 2>&1)
@@ -59,15 +61,17 @@ for i in {0..9}; do
     count=$((count + 1))
 done
 
-# Calculate the average user time and max memory
-average_user_time=$(echo "$total_user_time / 10" | bc -l)
-average_max_memory=$(echo "$total_max_memory / 10" | bc -l)
+ # Calculate the average user time and max memory
+    average_user_time=$(echo "$total_user_time / 10" | bc -l)
+    average_max_memory=$(echo "$total_max_memory / 10" | bc -l)
 
-# Log the final averages
-echo "Average user time: $average_user_time seconds for $number_of_iterations iterations" >> "$log_folder/results_c.csv"
-echo "Average max memory: $average_max_memory kilobytes for $number_of_iterations iterations" >> "$log_folder/results_c.csv"
+    # Log the final averages
+    echo "Average user time: $average_user_time seconds for $number_of_iterations iterations" >> "$log_folder/results_c.csv"
+    echo "Average max memory: $average_max_memory kilobytes for $number_of_iterations iterations" >> "$log_folder/results_c.csv"
 
 # Clean up temporary file
 rm -f temp_gtime.txt
 
-echo "done with benchmarking"
+    echo "done with benchmarking"
+
+

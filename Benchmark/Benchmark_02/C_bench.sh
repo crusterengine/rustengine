@@ -8,10 +8,10 @@ number_of_iterations="1"
 input_file="../data/the-champion.txt"
 
 #This creates a folder for the logs if it does not already exist
-mkdir -p "log_folder"
+mkdir -p "log_folder_02"
 
 #This captures the path to where the log files should be located
-log_folder="../Benchmark/Benchmark_02/log_folder"
+log_folder="../Benchmark/Benchmark_02/log_folder_02"
 
 #Go into the directory of the file you want to time
 cd ../../cengine

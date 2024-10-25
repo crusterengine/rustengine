@@ -1,16 +1,16 @@
 #Costumizable parameters for the script: 
 
 #How many times to read over the same inputfile (to simulate a larger file size)
-number_of_iterations="1"
+number_of_iterations="10000"
 
 #This creates a 'variable' that contains the path to the file you want to use in the benchmarking 
 input_file="../../../data/the-champion.txt"
 
 #This creates a folder for the logs if it does not already exist
-mkdir -p "log_folder"
+mkdir -p "log_folder_02"
 
 #This captures the path to where the log files should be located
-log_folder="../../../Benchmark/Benchmark_02/log_folder"
+log_folder="../../../Benchmark/Benchmark_02/log_folder_02"
 
 #Compile the program
 cd ../../rustengine

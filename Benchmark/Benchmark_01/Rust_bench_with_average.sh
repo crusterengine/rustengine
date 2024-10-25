@@ -1,16 +1,16 @@
 #Costumizable parameters for the script: 
 
 #How many times to read over the same inputfile (to simulate a larger file size)
-number_of_iterations="1"
+number_of_iterations="10000"
 
 #This creates a 'variable' that contains the path to the file you want to use in the benchmarking 
 input_file="../../../data/the-champion.txt"
 
 #This creates a folder for the logs if it does not already exist
-mkdir -p "log_folder"
+mkdir -p "log_folder_01"
 
 #This captures the path to where the log files should be located
-log_folder="../../../Benchmark/Benchmark_01/log_folder"
+log_folder="../../../Benchmark/Benchmark_01/log_folder_01"
 
 #Compile the program
 cd ../../rustengine
@@ -43,6 +43,8 @@ fi
 count=1
 
 for i in {0..9}; do
+
+for i in {0..9}; do
     output=$(gtime -o temp_gtime.txt -f "%e %U %S %P %M %F %R %c %w" "$compiled_program" "$input_file" "$number_of_iterations" 2>&1)
     
     read elapsed_time user_time sys_time cpu_usage max_memory major_faults minor_faults voluntary_switches involuntary_switches < temp_gtime.txt
@@ -54,10 +56,12 @@ for i in {0..9}; do
     # Log each iteration's output
     echo "$(date +%Y-%m-%d\ %H:%M:%S),$elapsed_time,$user_time,$sys_time,$cpu_usage,$max_memory,$major_faults,$minor_faults,$voluntary_switches,$involuntary_switches,$number_of_iterations,$compile_filename,$input_filename" >> "$log_folder/results_rust.csv"
 
-    echo "done with iteration $count"
+    echo "done with iteration $count for $number_of_iterations iterations"
     count=$((count + 1))
 
 done
+
+count=1
 
 # Calculate the average user time and max memory
 average_user_time=$(echo "$total_user_time / 10" | bc -l)
@@ -67,8 +71,14 @@ average_max_memory=$(echo "$total_max_memory / 10" | bc -l)
 echo "Average user time: $average_user_time seconds for $number_of_iterations iterations" >> "$log_folder/results_rust.csv"
 echo "Average max memory: $average_max_memory kilobytes for $number_of_iterations iterations" >> "$log_folder/results_rust.csv"
 
+number_of_iterations=$((number_of_iterations + 10000))
+
+echo "done with benchmarking"
+
+done
+
+
 # Clean up temporary file
 rm -f temp_gtime.txt
 
-echo "done with benchmarking"
 
