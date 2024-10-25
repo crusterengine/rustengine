@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # How many times to read over the same input file (to simulate a larger file size)
-number_of_iterations="10000"
+number_of_iterations="1"
 
 # The input file
 input_file="../data/the-champion.txt"
@@ -43,7 +43,6 @@ count=1
 
 # Loop over the specified number of iterations
 
-for i in {0..9}; do
 
 for i in {0..9}; do
     # Run the program and capture gtime output
@@ -61,8 +60,8 @@ for i in {0..9}; do
     echo "done with iteration $count"
     count=$((count + 1))
 done
-    count=0
-    # Calculate the average user time and max memory
+
+ # Calculate the average user time and max memory
     average_user_time=$(echo "$total_user_time / 10" | bc -l)
     average_max_memory=$(echo "$total_max_memory / 10" | bc -l)
 
@@ -70,12 +69,9 @@ done
     echo "Average user time: $average_user_time seconds for $number_of_iterations iterations" >> "$log_folder/results_c.csv"
     echo "Average max memory: $average_max_memory kilobytes for $number_of_iterations iterations" >> "$log_folder/results_c.csv"
 
-    number_of_iterations=$((number_of_iterations + 10000))
+# Clean up temporary file
+rm -f temp_gtime.txt
 
     echo "done with benchmarking"
 
-done
-
-# Clean up temporary file
-rm -f temp_gtime.txt
 
