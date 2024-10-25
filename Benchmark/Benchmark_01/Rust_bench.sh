@@ -7,10 +7,10 @@ number_of_iterations="1"
 input_file="../../../data/the-champion.txt"
 
 #This creates a folder for the logs if it does not already exist
-mkdir -p "log_folder"
+mkdir -p "log_folder_01"
 
 #This captures the path to where the log files should be located
-log_folder="../../../Benchmark/Benchmark_01/log_folder"
+log_folder="../../../Benchmark/Benchmark_01/log_folder_01"
 
 #Compile the program
 cd ../../rustengine
