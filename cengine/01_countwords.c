@@ -66,6 +66,9 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    char buffer[8192];
+    setvbuf(file, buffer, _IOFBF, 8192);
+
     long word_count = 0;
     int itr = (int)atoi(argv[2]);
 
