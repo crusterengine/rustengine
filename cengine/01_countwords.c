@@ -41,6 +41,13 @@ void file_processing(FILE *file, long *word_count)
                 new_word = true;
             }
         }
+        if (new_word)
+        {
+            process_word(word, word_count);
+            word_index = 0; // Nulstil for næste ord
+            new_word = false;
+            memset(word, '\0', 512);
+        }
     }
 }
 
@@ -71,7 +78,7 @@ int main(int argc, char *argv[])
         rewind(file);
     }
 
-    // printf("The file contains %ld words.\n", word_count);
+    printf("The file contains %ld words.\n", word_count);
 
     // fclose(file);
     return 0;
