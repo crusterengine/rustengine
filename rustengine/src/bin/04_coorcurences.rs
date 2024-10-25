@@ -70,14 +70,6 @@ fn update_word_index(word_index: &mut HashMap<String, Node>, word: &str) {
                 edges: Vec::new() 
             };
 
-            let edge = Edge {
-                node1_id: id_counter,
-                node2_id: id_counter+1,
-                cooccurences_count: 1
-            };
-
-            node.edges.push(edge);
-
             word_index.insert(word.to_string(), node);         }
      };
  }
