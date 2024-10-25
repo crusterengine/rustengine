@@ -1,5 +1,5 @@
 use std::collections::HashMap;
-use std::env;
+use std::{env, process};
 use std::fs::File;
 use std::io::{self, BufRead, Seek, SeekFrom};
 
@@ -61,11 +61,13 @@ fn main() {
             .expect("Could not rewind file");
     }
 
-    //print_word_index(&word_index);
+    print_word_index(&word_index);
 
-    //let map_size: usize = word_index.len();
-    // println!("The size of the map is: {}", map_size);
+    let map_size: usize = word_index.len();
+    println!("The size of the map is: {}", map_size);
     println!("The map contains: {} elements", map_word_count);
-    // println!("Rust found the file contains {} words.", word_count);
+    println!("Rust found the file contains {} words.", word_count);
+
+    process::exit(0);
 
 }
