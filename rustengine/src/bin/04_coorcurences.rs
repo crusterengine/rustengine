@@ -49,26 +49,27 @@ struct Edge {
     cooccurences_count: usize
 }
 
-fn update_word_index(word_index: &mut HashMap<String, Node>, word: &str) {
+fn update_word_index(word_index: &mut HashMap<String, Node>, word: &str, id_counter : &mut usize) {
    
+   //let previous_node;
     let existing_node = word_index.get_mut(word);
-    let mut id_counter: usize = 0;
-    id_counter += 1;
 
      match existing_node {
  
          Some(existing_node) => {
             existing_node.count += 1;
-            
+            //previous_node = existing_node;
          },
 
          None => {
-            let mut node = Node { 
-                id: id_counter, 
+            let node = Node { 
+                id: *id_counter, 
                 word: word.to_string(), 
                 count: 1, 
                 edges: Vec::new() 
             };
+
+            //previous_node = &mut node;
 
             word_index.insert(word.to_string(), node);         }
      };
@@ -86,7 +87,7 @@ fn file_processing(file: &File, word_count: &mut usize, word_index: &mut HashMap
         for word in line.split_whitespace(){
             *word_count += 1;
             let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic());
-            update_word_index(word_index, &trimmed_word);
+            update_word_index(word_index, &trimmed_word, word_count);
         }
     }
 }
@@ -95,7 +96,7 @@ fn main() {
 
     let args: Vec<String> = env::args().collect();
 
-    if args.len() != 4 {
+    if args.len() != 5 {
         println!("Missing argument, check file or counter");
         return;
     }
@@ -106,7 +107,8 @@ fn main() {
 
     let mut word_count = 0;
     let itr: usize = args[2].trim().parse().expect("Not a valid number of iterations");
-    let query = &args[3];    
+    let query_one = &args[3];    
+    let query_two = &args[4];    
 
     let mut word_index: HashMap<String, Node> = HashMap::new();
 

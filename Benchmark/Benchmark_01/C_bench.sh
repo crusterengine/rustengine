@@ -2,7 +2,7 @@
 #Costumizable parameters for the script: 
 
 #How many times to read over the same inputfile (to simulate a larger file size)
-number_of_iterations="1"
+number_of_iterations="100000"
 
 #This creates a 'variable' that contains the path to the file I want to use in my program
 input_file="../data/the-champion.txt"

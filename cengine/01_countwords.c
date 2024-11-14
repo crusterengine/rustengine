@@ -29,9 +29,10 @@ void file_processing(FILE *file, long *word_count)
                 if (new_word)
                 {
                     process_word(word, word_count);
+                    //printf("word: %s \n", word);
                     word_index = 0; // Nulstil for næste ord
                     new_word = false;
-                    memset(word, '\0', 512);
+                    memset(word, '\0', word_index);
                 }
             }
             else
@@ -66,10 +67,13 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    char buffer[8192];
-    setvbuf(file, buffer, _IOFBF, 8192);
+    // char buffer[8192];
+    // setvbuf(file, buffer, _IOFBF, 8192);
 
     long word_count = 0;
+    //printf("Before processing: %ld\n", &word_count);
+    //printf("Before processing: %ld\n", word_count);
+
     int itr = (int)atoi(argv[2]);
 
     for (int i = 0; i < itr; i++)
@@ -78,7 +82,7 @@ int main(int argc, char *argv[])
         rewind(file);
     }
 
-    printf("The file contains %ld words.\n", word_count);
+    //printf("The file contains %ld words.\n", word_count);
 
     // fclose(file);
     return 0;

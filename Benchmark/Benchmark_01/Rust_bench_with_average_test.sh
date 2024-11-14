@@ -1,7 +1,7 @@
 #Costumizable parameters for the script: 
 
 #How many times to read over the same inputfile (to simulate a larger file size)
-number_of_iterations="100000"
+number_of_iterations="1"
 
 #This creates a 'variable' that contains the path to the file you want to use in the benchmarking 
 input_file="../../../data/the-champion.txt"
@@ -14,13 +14,13 @@ log_folder="../../../Benchmark/Benchmark_01/log_folder_01"
 
 #Compile the program
 cd ../../rustengine
-cargo build --release --bin 01_countwords
+cargo build --release --bin test
 
 #Go into the directory of the file you want to time
 cd ../rustengine/target/release
 
 #The program to be benchmarked
-compiled_program="./01_countwords"
+compiled_program="./test"
 
 # Tag for the log-file
 input_filename=$(basename "$input_file")

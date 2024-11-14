@@ -4,6 +4,8 @@ use std::io::{self, BufRead, Seek, SeekFrom};
 
 fn file_processing(file: &File, word_count: &mut usize) {
     let reader = io::BufReader::new(file); //Type = std::io::buffered::bufreader::BufReader<std::fs::File>
+    
+    //let reader: io::BufReader<&File> = io::BufReader::with_capacity(8192, file);
 
     for line in reader.lines() {
         *word_count += line
@@ -39,8 +41,12 @@ fn main() {
     let file_path = &args[1];
 
     let mut file = File::open(file_path).expect("File not found");
+    
+    let mut word_count:usize = 0;
+//     let mut word_countz: i32 = 0;
+//    let address = &word_countz as *const i32;
+//     println!("Before processing: {:?} ", address);
 
-    let mut word_count = 0;
     let itr: usize = args[2]
         .trim()
         .parse()

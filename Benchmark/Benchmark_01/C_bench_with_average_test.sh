@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # How many times to read over the same input file (to simulate a larger file size)
-number_of_iterations="100000"
+number_of_iterations="10000"
 
 # The input file
 input_file="../data/the-champion.txt"
@@ -16,10 +16,10 @@ log_folder="../Benchmark/Benchmark_01/log_folder_01"
 cd ../../cengine
 
 #Compile the program
-gcc -O3 -o 01_countwords 01_countwords.c
+gcc -O3 -o test test.c
 
 # The program to be benchmarked
-compiled_program="./01_countwords"
+compiled_program="./test"
 
 # Tag for the log-file
 input_filename=$(basename "$input_file")
