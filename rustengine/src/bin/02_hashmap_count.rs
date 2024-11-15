@@ -13,19 +13,21 @@ fn update_word_index(word_index: &mut HashMap<String, i64>, word: &str, map_word
     let count = word_index.get_mut(word); //while we have this reference, no one else is allowed to have a reference to it
     *map_word_count += 1;
     match count {
-        Some(i) => *i += 1,
-
         None => {
             word_index.insert(word.to_string(), 1);
+        }
+
+        Some(value) => {
+            *value += 1
         }
     };
 }
 
 //anden udgave af ovenstående program
-fn update_word_index(word_index: &mut HashMap<String, i64>, word: &str, map_word_count: &mut usize) {
-    *map_word_count += 1;
-    *word_index.entry(word.to_string()).or_insert(0) += 1;
-}
+// fn update_word_index(word_index: &mut HashMap<String, i64>, word: &str, map_word_count: &mut usize) {
+//     *map_word_count += 1;
+//     *word_index.entry(word.to_string()).or_insert(0) += 1;
+// }
 
 
 fn file_processing(file: &File, word_count: &mut usize, map_word_count: &mut usize, word_index: &mut HashMap<String, i64>) {
@@ -68,7 +70,7 @@ fn main() {
             .expect("Could not rewind file");
     }
 
-    //print_word_index(&word_index);
+    print_word_index(&word_index);
 
     // let map_size: usize = word_index.len();
     // println!("The size of the map is: {}", map_size);

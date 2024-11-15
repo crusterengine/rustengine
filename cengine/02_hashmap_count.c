@@ -22,6 +22,25 @@
 //     }
 // }
 
+void free_values_word_index(GHashTable *word_index)
+{
+
+    GHashTableIter iter;
+    gpointer key, value;
+
+    g_hash_table_iter_init(&iter, word_index);
+    while (g_hash_table_iter_next(&iter, &key, &value))
+    {
+            //int *count = value;
+            //printf("%d\n", *count);
+            g_free(key);
+            g_free(value);
+            //printf("%d\n", *count);
+
+    }
+}
+
+
 // void free_keys_word_index(GHashTable *word_index)
 // {
 //     // Get a list of all keys
@@ -56,22 +75,6 @@
 // }
 
 
-// void print_word_index(GHashTable *word_index)
-// {
-
-//     GHashTableIter iter;
-//     gpointer key, value;
-
-//     g_hash_table_iter_init(&iter, word_index);
-//     while (g_hash_table_iter_next(&iter, &key, &value))
-//     {
-//             int *count = (int *)g_hash_table_lookup(word_index, key);
-//             char *word = (char *)key;
-//             printf("%s: %d\n", word, *count);
-//     }
-// }
-
-
 void print_word_index(GHashTable *word_index)
 {
 
@@ -81,26 +84,25 @@ void print_word_index(GHashTable *word_index)
     g_hash_table_iter_init(&iter, word_index);
     while (g_hash_table_iter_next(&iter, &key, &value))
     {
-            long count = (long)(char *)g_hash_table_lookup(word_index, key);
+            int *count = (int *)g_hash_table_lookup(word_index, key);
             char *word = (char *)key;
-            printf("%s: %ld\n", word, count);
+            printf("%s: %d\n", word, *count);
     }
 }
 
-//Peters version 4:
-// void update_word_index(GHashTable *word_index, char *word, long *map_word_count)
+
+// void print_word_index(GHashTable *word_index)
 // {
-//     void* p = g_hash_table_lookup(word_index, word);
 
-//     if (p != NULL)
-//     {
-//         p = (void*)((char*)p + 1);
-//         g_hash_table_replace(word_index, (gchar *)word, p);
+//     GHashTableIter iter;
+//     gpointer key, value;
 
-//     }
-//     else
+//     g_hash_table_iter_init(&iter, word_index);
+//     while (g_hash_table_iter_next(&iter, &key, &value))
 //     {
-//         g_hash_table_insert(word_index, g_strdup(word), GINT_TO_POINTER(1));
+//             long count = (long)(char *)g_hash_table_lookup(word_index, key);
+//             char *word = (char *)key;
+//             printf("%s: %ld\n", word, count);
 //     }
 // }
 
@@ -184,6 +186,23 @@ void print_word_index(GHashTable *word_index)
 //     }
 // }
 
+//ENDELIG VERSION
+ void update_word_index(GHashTable *word_index, char *word, long* map_word_count)
+ {
+     int *count = (int *)g_hash_table_lookup(word_index, word);
+     *map_word_count += 1;
+     if (count == NULL)
+     {
+        int *new_value = g_malloc(sizeof(int));
+         *new_value = 1;
+         g_hash_table_insert(word_index, g_strdup(word), new_value);
+     }
+     else
+     {
+         *count += 1;
+     }
+ }
+
 // Peters version 1 - nævn at det er lavet om til g_malloc for at holde os til at bruge biblioteket, og denne sikre mod visse fejl:
 //  void update_word_index(GHashTable *word_index, char *word, long* map_word_count)
 //  {
@@ -262,14 +281,14 @@ void print_word_index(GHashTable *word_index)
 // }
 
 //Peters version 5:
-void update_word_index(GHashTable *word_index, char *word, long *map_word_count)
-{
-    void* p = g_hash_table_lookup(word_index, word);
+// void update_word_index(GHashTable *word_index, char *word, long *map_word_count)
+// {
+//     void* p = g_hash_table_lookup(word_index, word);
 
-        p = (void*)((char*)p + 1);
-        g_hash_table_replace(word_index, g_strdup(word), p);
+//         p = (void*)((char*)p + 1);
+//         g_hash_table_replace(word_index, g_strdup(word), p);
     
-}
+// }
 
 
 // void update_word_index(GHashTable *word_index, const char *word, long *map_word_count)
@@ -407,16 +426,17 @@ int main(int argc, char *argv[])
         rewind(file);
     }
 
-    //free_values_word_index(word_index);
+    free_values_word_index(word_index);
     //free_keys_word_index(word_index);
-    //print_word_index(word_index);
+    print_word_index(word_index);
+
 
     // int map_size = g_hash_table_size(word_index);
     // printf("The size of the map is: %d\n", map_size);
     // printf("The map contains: %ld elements\n", map_word_count);
     // printf("C found the file contains %ld words.\n", word_count);
 
-    // g_hash_table_destroy(word_index);
+    g_hash_table_destroy(word_index);
     // fclose(file);
     return 0;
 }
