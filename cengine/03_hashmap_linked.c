@@ -8,9 +8,9 @@
 
 typedef struct list
 {
-    GList* head; 
-    GList* tail;
-}list;
+    GList *head;
+    GList *tail;
+} list;
 
 void print_page(gpointer data, gpointer user_data)
 {
@@ -19,12 +19,11 @@ void print_page(gpointer data, gpointer user_data)
 
 void print_query(GHashTable *word_index, char *query)
 {
-    //GList *list = (GList *)g_hash_table_lookup(index, query); // hvilken type retur??
-    
+    // GList *list = (GList *)g_hash_table_lookup(index, query); // hvilken type retur??
+
     list
-* page_list = (list*)g_hash_table_lookup(word_index, query);
-    GList* list
- = page_list->head;
+        *page_list = (list *)g_hash_table_lookup(word_index, query);
+    GList *list = page_list->head;
 
     printf("%s: ", query);
 
@@ -64,7 +63,7 @@ void free_linked(GHashTable *word_index)
     {
         if (value != NULL)
         {
-            list *page_list = (list*) value;
+            list *page_list = (list *)value;
             g_list_free(page_list->head);
             free(page_list);
         }
@@ -74,7 +73,7 @@ void free_linked(GHashTable *word_index)
 void trim_word(char *word)
 {
     int len = strlen(word);
-    int new_len = 0; 
+    int new_len = 0;
     int first = 0;
     int last = len - 1;
 
@@ -95,8 +94,7 @@ void trim_word(char *word)
         word[i - first] = word[i];
     }
 
-    word[len-new_len] = '\0';
-
+    word[len - new_len] = '\0';
 }
 
 void process_word(char *word, long *word_count, GHashTable *word_index, int *linecount)
@@ -108,13 +106,13 @@ void process_word(char *word, long *word_count, GHashTable *word_index, int *lin
 
     trim_word(word);
 
-    int page = *linecount/50 + 1;
+    int page = *linecount / 50 + 1;
 
-    list* page_list = (list*)g_hash_table_lookup(word_index, word);
-    
+    list *page_list = (list *)g_hash_table_lookup(word_index, word);
+
     if (page_list == NULL)
     {
-        list* new_page_list = (list*) malloc (sizeof(list));
+        list *new_page_list = (list *)malloc(sizeof(list));
         new_page_list->head = g_list_alloc();
         new_page_list->head->next = NULL;
         new_page_list->head->data = GINT_TO_POINTER(page);
@@ -123,13 +121,14 @@ void process_word(char *word, long *word_count, GHashTable *word_index, int *lin
     }
     else
     {
-        if(GPOINTER_TO_INT(page_list->tail->data) != page){
-        GList* new_page = g_list_alloc();
-        new_page->data = GINT_TO_POINTER(page);
+        if (GPOINTER_TO_INT(page_list->tail->data) != page)
+        {
+            GList *new_page = g_list_alloc();
+            new_page->data = GINT_TO_POINTER(page);
 
-        GList* old_tail = page_list->tail;
-        old_tail->next = new_page;
-        page_list->tail = new_page; 
+            GList *old_tail = page_list->tail;
+            old_tail->next = new_page;
+            page_list->tail = new_page;
         }
     }
 }
@@ -142,31 +141,29 @@ void file_processing(FILE *file, long *word_count, GHashTable *word_index)
 
     while (fgets(line, 512, file) != NULL)
     {
-        bool new_word = false;
         int char_index = 0;
         linecount++;
 
         for (int i = 0; line[i] != '\0'; i++)
         {
-            if (isspace(line[i]))
+            if (!isspace(line[i]))
             {
-                if (new_word)
-                {
-                    process_word(word, word_count, word_index, &linecount);
-                    char_index = 0; // Nulstil for næste ord
-                    new_word = false;
-                    memset(word, '\0', 512);
-                }
+                word[char_index++] = line[i];
             }
             else
             {
-                word[char_index++] = line[i];
-                new_word = true;
+                if (char_index > 0)
+                {
+                    word[char_index] = '\0';
+                    process_word(word, word_count, word_index, &linecount);
+                    char_index = 0;
+                }
             }
         }
-                if (new_word)
+        if (char_index > 0)
         {
-                    process_word(word, word_count, word_index, &linecount);
+            word[char_index] = '\0';
+            process_word(word, word_count, word_index, &linecount);
         }
     }
 }
@@ -200,15 +197,14 @@ int main(int argc, char *argv[])
         rewind(file);
     }
 
-     print_word_index(word_index);
-     printf("C found the file contains %ld words.\n", word_count);
+    print_word_index(word_index);
+    printf("C found the file contains %ld words.\n", word_count);
 
-     printf("The search found, ");
-     print_query(word_index, query);
-    
+    printf("The search found, ");
+    print_query(word_index, query);
 
-     free_linked(word_index);
-     g_hash_table_destroy(word_index);
-     fclose(file);
+    free_linked(word_index);
+    g_hash_table_destroy(word_index);
+    fclose(file);
     return 0;
 }

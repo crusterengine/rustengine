@@ -5,17 +5,18 @@
 #include <ctype.h>
 #include <glib.h> //`pkg-config --cflags --libs glib-2.0`
 
-void free_values(GHashTable *word_index){
+void free_values(GHashTable *word_index)
+{
     GHashTableIter iter;
     gpointer key, value;
 
     g_hash_table_iter_init(&iter, word_index);
     while (g_hash_table_iter_next(&iter, &key, &value))
     {
-            g_free(key);
-            g_free(value);
+        g_free(key);
+        g_free(value);
     }
-   //g_hash_table_remove_all(word_index);
+    // g_hash_table_remove_all(word_index);
 }
 
 void print_word_index(GHashTable *word_index)
@@ -27,16 +28,16 @@ void print_word_index(GHashTable *word_index)
     g_hash_table_iter_init(&iter, word_index);
     while (g_hash_table_iter_next(&iter, &key, &value))
     {
-            int *count = (int *)g_hash_table_lookup(word_index, key);
-            char *word = (char *)key;
-            printf("%s: %d\n", word, *count);
+        int *count = (int *)g_hash_table_lookup(word_index, key);
+        char *word = (char *)key;
+        printf("%s: %d\n", word, *count);
     }
 }
 
 void trim_word(char *word)
 {
-    int len = strlen(word); //Can this be done different??
-    int new_len = 0; 
+    int len = strlen(word);
+    int new_len = 0;
     int first = 0;
     int last = len - 1;
 
@@ -57,8 +58,7 @@ void trim_word(char *word)
         word[i - first] = word[i];
     }
 
-    word[len-new_len] = '\0';
-
+    word[len - new_len] = '\0';
 }
 
 void process_word(char *word, long *word_count, GHashTable *word_index)
@@ -88,31 +88,29 @@ void file_processing(FILE *file, long *word_count, GHashTable *word_index)
     char word[512];
     char line[512];
 
-    while (fgets(line, 512, file) != NULL)
+    while (fgets(line, sizeof(line), file) != NULL)
     {
-        bool new_word = false;
         int char_index = 0;
 
         for (int i = 0; line[i] != '\0'; i++)
         {
-            if (isspace(line[i]))
+            if (!isspace(line[i]))
             {
-                if (new_word)
-                {
-                    process_word(word, word_count, word_index);
-                    char_index = 0; // Nulstil for næste ord
-                    new_word = false;
-                    memset(word, '\0', 512);
-                }
+                word[char_index++] = line[i];
             }
             else
             {
-                word[char_index++] = line[i];
-                new_word = true;
+                if (char_index > 0)
+                {
+                    word[char_index] = '\0';
+                    process_word(word, word_count, word_index);
+                    char_index = 0;
+                }
             }
         }
-        if (new_word)
-        {         
+        if (char_index > 0)
+        {
+            word[char_index] = '\0';
             process_word(word, word_count, word_index);
         }
     }
@@ -150,9 +148,9 @@ int main(int argc, char *argv[])
     print_word_index(word_index);
     printf("C found the file contains %ld words.\n", word_count);
     free_values(word_index);
-    print_word_index(word_index);
+    // print_word_index(word_index);
     g_hash_table_destroy(word_index);
-    
+
     // fclose(file);
     return 0;
 }

@@ -19,29 +19,27 @@ void file_processing(FILE *file, long *word_count)
 
     while (fgets(line, 512, file) != NULL)
     {
-        bool new_word = false;
         int char_index = 0;
 
         for (int i = 0; line[i] != '\0'; i++)
         {
-            if (isspace(line[i]))
+            if (!isspace(line[i]))
             {
-                if (new_word)
-                {
-                    process_word(word, word_count);
-                    char_index = 0; // Nulstil for næste ord
-                    new_word = false;
-                    memset(word, '\0', 512);
-                }
+                word[char_index++] = line[i];
             }
             else
             {
-                word[char_index++] = line[i];
-                new_word = true;
+                if (char_index > 0)
+                {
+                    word[char_index] = '\0';
+                    process_word(word, word_count);
+                    char_index = 0;
+                }
             }
         }
-        if (new_word)
+        if (char_index > 0)
         {
+            word[char_index] = '\0';
             process_word(word, word_count);
         }
     }
