@@ -139,7 +139,7 @@ void file_processing(FILE *file, long *word_count, GHashTable *word_index)
     char line[512];
     int linecount = 0;
 
-    while (fgets(line, 512, file) != NULL)
+    while (fgets(line, sizeof(line), file) != NULL)
     {
         int char_index = 0;
         linecount++;
@@ -189,7 +189,7 @@ int main(int argc, char *argv[])
     int itr = (int)atoi(argv[2]);
     char *query = argv[3];
 
-    GHashTable *word_index = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
+    GHashTable *word_index = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, (GDestroyNotify)free_linked);
 
     for (size_t i = 0; i < itr; i++)
     {
@@ -200,10 +200,9 @@ int main(int argc, char *argv[])
     print_word_index(word_index);
     printf("C found the file contains %ld words.\n", word_count);
 
-    printf("The search found, ");
     print_query(word_index, query);
 
-    free_linked(word_index);
+    //free_linked(word_index); // Violating free, risk of dobbel free.
     g_hash_table_destroy(word_index);
     fclose(file);
     return 0;

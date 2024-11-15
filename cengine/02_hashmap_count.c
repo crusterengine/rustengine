@@ -147,10 +147,11 @@ int main(int argc, char *argv[])
 
     print_word_index(word_index);
     printf("C found the file contains %ld words.\n", word_count);
+
     free_values(word_index);
-    // print_word_index(word_index);
+    // print_word_index(word_index); // Illustrating dangling pointers
     g_hash_table_destroy(word_index);
 
-    // fclose(file);
+    fclose(file);
     return 0;
 }

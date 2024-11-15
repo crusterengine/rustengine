@@ -17,7 +17,7 @@ void file_processing(FILE *file, long *word_count)
     char word[512];
     char line[512];
 
-    while (fgets(line, 512, file) != NULL)
+    while (fgets(line, sizeof(line), file) != NULL)
     {
         int char_index = 0;
 
@@ -64,8 +64,9 @@ int main(int argc, char *argv[])
     }
 
     long word_count = 0;
-    int itr = (int)atoi(argv[2]);
+    int itr = (int)atoi(argv[2]); // Error handling? 
 
+    // Simulating a larger file, da original input. 
     for (int i = 0; i < itr; i++)
     {
         file_processing(file, &word_count);
@@ -74,6 +75,6 @@ int main(int argc, char *argv[])
 
     printf("C found that the file contains %ld words.\n", word_count);
 
-    // fclose(file);
+    fclose(file);
     return 0;
 }
