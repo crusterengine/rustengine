@@ -19,10 +19,7 @@ void print_page(gpointer data, gpointer user_data)
 
 void print_query(GHashTable *word_index, char *query)
 {
-    // GList *list = (GList *)g_hash_table_lookup(index, query); // hvilken type retur??
-
-    list
-        *page_list = (list *)g_hash_table_lookup(word_index, query);
+    list *page_list = (list *)g_hash_table_lookup(word_index, query);
     GList *list = page_list->head;
 
     printf("%s: ", query);
@@ -189,7 +186,7 @@ int main(int argc, char *argv[])
     int itr = (int)atoi(argv[2]);
     char *query = argv[3];
 
-    GHashTable *word_index = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, (GDestroyNotify)free_linked);
+    GHashTable *word_index = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
 
     for (size_t i = 0; i < itr; i++)
     {
@@ -202,7 +199,7 @@ int main(int argc, char *argv[])
 
     print_query(word_index, query);
 
-    //free_linked(word_index); // Violating free, risk of dobbel free.
+    free_linked(word_index);
     g_hash_table_destroy(word_index);
     fclose(file);
     return 0;
