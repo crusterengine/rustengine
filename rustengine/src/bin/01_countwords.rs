@@ -13,21 +13,6 @@ fn file_processing(file: &File, word_count: &mut usize) {
     }
 }
 
-// fn file_processing(file_path: &str, word_count: &mut usize){
-
-//     let file = File::open(file_path).expect("Should have been able to read the file"); //Type = std::fs::File
-//     let reader = io::BufReader::new(file); //Type = std::io::buffered::bufreader::BufReader<std::fs::File>
-
-//     for line in reader.lines() {
-//         let line = line.expect("Expected to find a line");
-
-//         for _word in line.split_whitespace() {
-//             *word_count += 1;
-//         }
-
-//     }
-// }
-
 fn main() {
     let args: Vec<String> = env::args().collect();
 

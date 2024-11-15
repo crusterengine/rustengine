@@ -1,7 +1,7 @@
 use std::collections::HashMap;
-use std::{env, process};
 use std::fs::File;
 use std::io::{self, BufRead, Seek, SeekFrom};
+use std::{env, process};
 
 fn print_word_index(word_index: &HashMap<String, i64>) {
     for (word, count) in word_index.iter() {
@@ -9,27 +9,25 @@ fn print_word_index(word_index: &HashMap<String, i64>) {
     }
 }
 
-fn update_word_index(word_index: &mut HashMap<String, i64>, word: &str, map_word_count: &mut usize) {
-    let count = word_index.get_mut(word);
-    *map_word_count += 1;
+fn process_word(word: &str, word_count: &mut usize, word_index: &mut HashMap<String, i64>) {
+    *word_count += 1;
+    let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic());
+    let count = word_index.get_mut(trimmed_word);
     match count {
         Some(i) => *i += 1,
 
         None => {
-            word_index.insert(word.to_string(), 1);
+            word_index.insert(trimmed_word.to_string(), 1);
         }
     };
 }
 
-fn file_processing(file: &File, word_count: &mut usize, map_word_count: &mut usize, word_index: &mut HashMap<String, i64>) {
+fn file_processing(file: &File, word_count: &mut usize, word_index: &mut HashMap<String, i64>) {
     let reader = io::BufReader::new(file);
 
     for line in reader.lines() {
-
         for word in line.expect("Expected to find a line").split_whitespace() {
-            *word_count += 1;
-            let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic());
-            update_word_index(word_index, &trimmed_word, map_word_count);
+            process_word(word, word_count, word_index);
         }
     }
 }
@@ -47,27 +45,19 @@ fn main() {
     let mut file = File::open(file_path).expect("File not found");
 
     let mut word_count: usize = 0;
-    let mut map_word_count:usize = 0;
-    let itr: usize = args[2]
-        .trim()
-        .parse()
-        .expect("Not a valid number of iterations");
+
+    let itr: usize = args[2].parse().expect("Not a valid number of iterations");
 
     let mut word_index: HashMap<String, i64> = HashMap::new();
 
     for _ in 0..itr {
-        file_processing(&file, &mut word_count, &mut map_word_count, &mut word_index);
+        file_processing(&file, &mut word_count, &mut word_index);
         file.seek(SeekFrom::Start(0))
             .expect("Could not rewind file");
     }
 
-    // print_word_index(&word_index);
-
-    // let map_size: usize = word_index.len();
-    // println!("The size of the map is: {}", map_size);
-    // println!("The map contains: {} elements", map_word_count);
-    // println!("Rust found the file contains {} words.", word_count);
+    print_word_index(&word_index);
+    println!("Rust found the file contains {} words.", word_count);
 
     process::exit(0);
-
 }

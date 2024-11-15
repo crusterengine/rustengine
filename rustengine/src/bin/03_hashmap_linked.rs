@@ -27,9 +27,11 @@ fn print_word_index(word_index: &HashMap<String, LinkedList<i32>>){
 }
 
 
-fn update_word_index(word_index: &mut HashMap<String, LinkedList<i32>>, word: &str, page:i32,) {
-   
-    let page_list = word_index.get_mut(word);
+fn process_word(word: &str, word_count: &mut usize, word_index: &mut HashMap<String, LinkedList<i32>>,  linecount:i32) {
+    *word_count += 1;
+    let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic());
+    let page = linecount/50 + 1;
+    let page_list = word_index.get_mut(trimmed_word);
      
      match page_list {
  
@@ -43,7 +45,7 @@ fn update_word_index(word_index: &mut HashMap<String, LinkedList<i32>>, word: &s
          None => {
              let mut new_page_list = LinkedList::new();
              new_page_list.push_back(page);
-             word_index.insert(word.to_string(), new_page_list);         }
+             word_index.insert(trimmed_word.to_string(), new_page_list);         }
      };
  }
 
@@ -61,10 +63,7 @@ fn file_processing(file: &File, word_count: &mut usize, word_index: &mut HashMap
         linecount += 1;
 
         for word in line.split_whitespace(){
-            *word_count += 1;
-            let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic());
-            let page = linecount/50 + 1;
-            update_word_index(word_index, &trimmed_word, page);
+            process_word(word, word_count, word_index, linecount);
         }
     }
 }
@@ -95,8 +94,8 @@ fn main() {
     
     //print_word_index(&word_index);
     //print!("The search found, ");
-    //print_query(&word_index, query);
-    // println!("Rust found the file contains {} words.", word_count);
+    print_query(&word_index, query);
+    println!("Rust found the file contains {} words.", word_count);
 
     process::exit(0);
 
