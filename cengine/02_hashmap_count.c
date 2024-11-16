@@ -13,7 +13,7 @@ void free_values(GHashTable *word_index)
     g_hash_table_iter_init(&iter, word_index);
     while (g_hash_table_iter_next(&iter, &key, &value))
     {
-        g_free(key);
+       //g_free(key);
         g_free(value);
     }
     // g_hash_table_remove_all(word_index);
@@ -71,6 +71,7 @@ void process_word(char *word, long *word_count, GHashTable *word_index)
     trim_word(word);
 
     int *count = (int *)g_hash_table_lookup(word_index, word);
+
     if (count == NULL)
     {
         int *new_value = g_malloc(sizeof(int));

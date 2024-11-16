@@ -109,11 +109,11 @@ void process_word(char *word, long *word_count, GHashTable *word_index, int *lin
 
     if (page_list == NULL)
     {
-        list *new_page_list = (list *)malloc(sizeof(list));
+        list *new_page_list = (list *)g_malloc(sizeof(list));
         new_page_list->head = g_list_alloc();
+        new_page_list->tail = new_page_list->head;
         new_page_list->head->next = NULL;
         new_page_list->head->data = GINT_TO_POINTER(page);
-        new_page_list->tail = new_page_list->head;
         g_hash_table_insert(word_index, g_strdup(word), new_page_list);
     }
     else
