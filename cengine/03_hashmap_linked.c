@@ -6,11 +6,11 @@
 #include <ctype.h>
 #include <glib.h> //`pkg-config --cflags --libs glib-2.0`
 
-typedef struct list
+typedef struct meta_list
 {
     GList *head;
     GList *tail;
-} list;
+} meta_list;
 
 void print_page(gpointer data, gpointer user_data)
 {
@@ -19,7 +19,7 @@ void print_page(gpointer data, gpointer user_data)
 
 void print_query(GHashTable *word_index, char *query)
 {
-    list *page_list = (list *)g_hash_table_lookup(word_index, query);
+    meta_list *page_list = (meta_list *)g_hash_table_lookup(word_index, query);
     GList *list = page_list->head;
 
     printf("%s: ", query);
@@ -60,7 +60,7 @@ void free_linked(GHashTable *word_index)
     {
         if (value != NULL)
         {
-            list *page_list = (list *)value;
+            meta_list *page_list = (meta_list *)value;
             g_list_free(page_list->head);
             free(page_list);
         }
@@ -105,11 +105,11 @@ void process_word(char *word, long *word_count, GHashTable *word_index, int *lin
 
     int page = *linecount / 50 + 1;
 
-    list *page_list = (list *)g_hash_table_lookup(word_index, word);
+    meta_list *page_list = (meta_list *)g_hash_table_lookup(word_index, word);
 
     if (page_list == NULL)
     {
-        list *new_page_list = (list *)g_malloc(sizeof(list));
+        meta_list *new_page_list = (meta_list *)g_malloc(sizeof(meta_list));
         new_page_list->head = g_list_alloc();
         new_page_list->tail = new_page_list->head;
         new_page_list->head->next = NULL;
@@ -186,7 +186,7 @@ int main(int argc, char *argv[])
     int itr = (int)atoi(argv[2]);
     char *query = argv[3];
 
-    GHashTable *word_index = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
+    GHashTable *word_index = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
 
     for (size_t i = 0; i < itr; i++)
     {
@@ -199,7 +199,10 @@ int main(int argc, char *argv[])
 
     print_query(word_index, query);
 
-    free_linked(word_index);
+    //free_linked(word_index);
+    
+    //print_word_index(word_index);
+
     g_hash_table_destroy(word_index);
     fclose(file);
     return 0;
