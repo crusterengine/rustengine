@@ -9,6 +9,19 @@ fn print_word_index(word_index: &HashMap<String, i64>) {
     }
 }
 
+fn find_most_frequent_word(word_index: &HashMap<String, i64>){
+    let mut currently_highest = 0;
+    let mut word_appear :String = String::new();
+
+    for (word, count) in word_index.iter() {
+        if count > &currently_highest {
+            currently_highest = *count;
+            word_appear = word.clone();
+        }
+    }
+    println!("The word appearing the most times is: '{word_appear}', it appeared {currently_highest} times");
+}
+
 fn process_word(word: &str, word_count: &mut usize, word_index: &mut HashMap<String, i64>) {
     *word_count += 1;
     let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic());
@@ -58,6 +71,7 @@ fn main() {
 
     print_word_index(&word_index);
     println!("Rust found the file contains {} words.", word_count);
+    find_most_frequent_word(&word_index);
 
     process::exit(0);
 }

@@ -19,6 +19,25 @@ void free_values(GHashTable *word_index)
     // g_hash_table_remove_all(word_index);
 }
 
+void find_most_frequent_word(GHashTable *word_index){
+
+    GHashTableIter iter;
+    gpointer key, value;
+    int currently_highest = 0;
+    char* word;
+
+    g_hash_table_iter_init(&iter, word_index);
+    while (g_hash_table_iter_next(&iter, &key, &value))
+    {
+        int* values = (int*) value;
+        if(*values > currently_highest){
+            currently_highest = *values;
+            word = (char *)key;
+        }
+    }
+    printf("The word appearing the most times is: '%s', it appeared %d times\n", word, currently_highest);
+}
+
 void print_word_index(GHashTable *word_index)
 {
 
@@ -148,7 +167,9 @@ int main(int argc, char *argv[])
 
     print_word_index(word_index);
     printf("C found the file contains %ld words.\n", word_count);
-
+    
+    find_most_frequent_word(word_index);
+    
     free_values(word_index);
     // print_word_index(word_index); // Illustrating dangling pointers
     g_hash_table_destroy(word_index);
