@@ -232,16 +232,16 @@ int main(int argc, char *argv[])
     }
 
     //print_word_index(word_index);
-    printf("C found the file contains %ld words.\n", word_count);
+    // printf("C found the file contains %ld words.\n", word_count);
 
-    print_query(word_index, query);
+    // print_query(word_index, query);
 
-    find_word_with_max_page_count(word_index);
-    //free_linked(word_index);
+    // find_word_with_max_page_count(word_index);
+    // //free_linked(word_index);
     
     //print_word_index(word_index);
 
-    g_hash_table_destroy(word_index);
-    fclose(file);
+    // g_hash_table_destroy(word_index);
+    // fclose(file);
     return 0;
 }

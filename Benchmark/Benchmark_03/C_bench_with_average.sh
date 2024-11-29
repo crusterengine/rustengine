@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # How many times to read over the same input file (to simulate a larger file size)
-number_of_iterations="1"
+number_of_iterations="10000"
 
 # The input file
 input_file="../data/the-champion.txt"
