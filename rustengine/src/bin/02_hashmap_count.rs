@@ -23,23 +23,24 @@ fn find_most_frequent_word(word_index: &HashMap<String, &i64>){
 }
 
 //wrong process word - requires that the initialization of the hash map is also changed in order to get the compile error
-fn process_word(word: &str, word_count: &mut usize, word_index: &mut HashMap<String, &mut Box<i64>>) {
-    *word_count += 1;
-    let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic());
-    //let trimmed_word = word.trim_matches(|c: char| !c.is_alphabetic());
-    println!("{}", trimmed_word);
-    let count = word_index.get_mut(trimmed_word);
-    match count {
-        Some(i) => { 
-            ***i += 1;
-        }
-        None => {
-            //let mut i: i64 = 1;
-            let mut first_occurence: Box<i64> = Box::new(1); 
-            word_index.insert(trimmed_word.to_string(), &mut first_occurence);
-        }
-    };
-}
+// fn process_word(word: &str, word_count: &mut usize, word_index: &mut HashMap<String, &mut Box<i64>>) {
+//     *word_count += 1;
+//     let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic());
+//     //let trimmed_word = word.trim_matches(|c: char| !c.is_alphabetic());
+//     println!("{}", trimmed_word);
+//     let count = word_index.get_mut(trimmed_word);
+//     match count {
+//         Some(i) => { 
+//             ***i += 1;
+//         }
+//         None => {
+//             //let mut i: i64 = 1;
+//             let mut first_occurence: Box<i64> = Box::new(1); 
+//             word_index.insert(trimmed_word.to_string(), &mut first_occurence);
+//         }
+//     };
+// }
+
 //wrong process word - where the value is located on the stack
 // fn process_word(word: &str, word_count: &mut usize, word_index: &mut HashMap<String, &mut i64>) {
 //     *word_count += 1;
