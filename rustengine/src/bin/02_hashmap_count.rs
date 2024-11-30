@@ -58,8 +58,6 @@ fn find_most_frequent_word(word_index: &HashMap<String, &i64>){
 //     };
 // }
 
-
-
 fn file_processing(file: &File, word_count: &mut usize, word_index: &mut HashMap<String, &mut Box<i64>>) {
     let reader = io::BufReader::new(file);
 

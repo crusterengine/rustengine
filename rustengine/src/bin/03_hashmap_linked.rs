@@ -49,9 +49,8 @@ fn find_word_with_max_page_count(word_index: &HashMap<String, LinkedList<i32>>) 
 }
 
 
-
 //Ændrer sig hver gang..
-// fn find_most_frequent_word(word_index: &HashMap<String, LinkedList<i32>>){
+// fn find_word_with_max_page_count(word_index: &HashMap<String, LinkedList<i32>>){
 //     let mut currently_highest = 0;
 //     let mut word_appear :String = String::new();
 
@@ -63,25 +62,6 @@ fn find_word_with_max_page_count(word_index: &HashMap<String, LinkedList<i32>>) 
 //     }
 //     println!("The word appearing on the highest number of different pages is: '{word_appear}', it appeared {currently_highest} times");
 // }
-
-// fn raw_pointer(word_index: &mut HashMap<String, LinkedList<i32>>, word: &String,){
-
-//     let linked_list = word_index.get_mut(word);
-
-//     if let Some(node_ptr) = linked_list.head {
-//         unsafe {
-//             let node_ref = node_ptr.as_ref(); // Convert NonNull to &Node<T>
-//             println!("Element: {:?}", node_ref.element);
-    
-//             if let Some(next_ptr) = node_ref.next {
-//                 // Access the next node
-//                 let next_node = next_ptr.as_ref();
-//                 println!("Next Element: {:?}", next_node.element);
-//             }
-//         }
-//     }
-    
-//}
 
 
 fn process_word(word: &str, word_count: &mut usize, word_index: &mut HashMap<String, LinkedList<i32>>, linecount:i32) {
