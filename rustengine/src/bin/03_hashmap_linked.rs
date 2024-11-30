@@ -63,7 +63,6 @@ fn find_word_with_max_page_count(word_index: &HashMap<String, LinkedList<i32>>) 
 //     println!("The word appearing on the highest number of different pages is: '{word_appear}', it appeared {currently_highest} times");
 // }
 
-
 fn process_word(word: &str, word_count: &mut usize, word_index: &mut HashMap<String, LinkedList<i32>>, linecount:i32) {
     *word_count += 1;
     let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic());
@@ -83,11 +82,35 @@ fn process_word(word: &str, word_count: &mut usize, word_index: &mut HashMap<Str
              let mut new_page_list = LinkedList::new();
              new_page_list.push_back(page);
              word_index.insert(trimmed_word.to_string(), new_page_list);
-             let end_marker = 0; 
-             new_page_list.push_back(end_marker);
         }
      };
  }
+
+ // Wrong process word
+// fn process_word(word: &str, word_count: &mut usize, word_index: &mut HashMap<String, LinkedList<i32>>, linecount:i32) {
+//     *word_count += 1;
+//     let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic());
+//     let page = linecount/50 + 1;
+//     let page_list = word_index.get_mut(trimmed_word);
+     
+//      match page_list {
+ 
+//          Some(page_list) if page_list.back() != Some(&page) => {
+  
+//                  page_list.push_back(page)
+//          },
+
+//          Some(_) => return,
+
+//          None => {
+//              let mut new_page_list = LinkedList::new();
+//              new_page_list.push_back(page);
+//              word_index.insert(trimmed_word.to_string(), new_page_list);
+//              let end_marker = 0; 
+//              new_page_list.push_back(end_marker);
+//         }
+//      };
+//  }
 
 fn file_processing(file: &File, word_count: &mut usize, word_index: &mut HashMap<String, LinkedList<i32>>){
 
@@ -131,7 +154,7 @@ fn main() {
     //print!("The search found, ");
     
     // println!("Rust found the file contains {} words.", word_count);
-    // print_query(&word_index, query);
+    print_query(&word_index, query);
     //find_word_with_max_page_count(&word_index);
 
     //process::exit(0);
