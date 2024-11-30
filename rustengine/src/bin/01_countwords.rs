@@ -2,27 +2,13 @@ use std::env;
 use std::fs::File;
 use std::io::{self, BufRead, Seek, SeekFrom};
 
-// fn file_processing(file: &File, word_count: &mut usize) {
-//     let reader = io::BufReader::new(file); //Type = std::io::buffered::bufreader::BufReader<std::fs::File>
-
-//     for line in reader.lines() {
-//         *word_count += line
-//             .expect("Expected to find a line")
-//             .split_whitespace()
-//             .count();
-//     }
-// }
-
-fn file_processing(file: &File, word_count: &mut usize){
-
-    let reader = io::BufReader::new(file); //Type = std::io::buffered::bufreader::BufReader<std::fs::File>
+fn file_processing(file: &File, word_count: &mut usize) {
+    let reader = io::BufReader::new(file);
 
     for line in reader.lines() {
-        for word in line.expect("Expected to find a line").split_whitespace() {
+        for _word in line.expect("Expected to find a line").split_whitespace() {
             *word_count += 1;
-            println!("{}", word)
         }
-
     }
 }
 

@@ -109,20 +109,15 @@ fn process_word(word: &str, word_count: &mut usize, word_index: &mut HashMap<Str
      };
  }
 
-
-
 fn file_processing(file: &File, word_count: &mut usize, word_index: &mut HashMap<String, LinkedList<i32>>){
 
-    let reader = io::BufReader::new(file); 
+    let reader = io::BufReader::new(file);
 
     let mut linecount: i32 = 0;
 
     for line in reader.lines() {
-        let line = line.expect("Expected to find a line");
-
         linecount += 1;
-
-        for word in line.split_whitespace(){
+        for word in line.expect("Expected to find a line").split_whitespace() {
             process_word(word, word_count, word_index, linecount);
         }
     }
