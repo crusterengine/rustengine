@@ -126,10 +126,6 @@ fn main() {
         file_processing(&file, &mut word_count, &mut word_index);
         file.seek(SeekFrom::Start(0)).expect("Could not rewind file");
     } 
-    
-    //let stri = String::from("hello");
-
-    //raw_pointer(&mut word_index, &stri);
 
     //print_word_index(&word_index);
     //print!("The search found, ");
