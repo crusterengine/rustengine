@@ -8,6 +8,7 @@ void process_word(char *word, long *wordcount)
 {
     if (strlen(word) > 0)
     {
+        printf("%s\n", word);
         *wordcount += 1;
     }
 }

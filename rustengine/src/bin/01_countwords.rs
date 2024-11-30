@@ -2,16 +2,30 @@ use std::env;
 use std::fs::File;
 use std::io::{self, BufRead, Seek, SeekFrom};
 
-fn file_processing(file: &File, word_count: &mut usize) {
+// fn file_processing(file: &File, word_count: &mut usize) {
+//     let reader = io::BufReader::new(file); //Type = std::io::buffered::bufreader::BufReader<std::fs::File>
+
+//     for line in reader.lines() {
+//         *word_count += line
+//             .expect("Expected to find a line")
+//             .split_whitespace()
+//             .count();
+//     }
+// }
+
+fn file_processing(file: &File, word_count: &mut usize){
+
     let reader = io::BufReader::new(file); //Type = std::io::buffered::bufreader::BufReader<std::fs::File>
 
     for line in reader.lines() {
-        *word_count += line
-            .expect("Expected to find a line")
-            .split_whitespace()
-            .count();
+        for word in line.expect("Expected to find a line").split_whitespace() {
+            *word_count += 1;
+            println!("{}", word)
+        }
+
     }
 }
+
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -37,5 +51,5 @@ fn main() {
             .expect("Could not rewind file");
     }
 
-    //println!("The file contains {} words.", word_count);
+    println!("Rust found that the file contains {} words.", word_count);
 }

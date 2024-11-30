@@ -26,8 +26,65 @@ fn print_word_index(word_index: &HashMap<String, LinkedList<i32>>){
     }
 }
 
+fn find_word_with_max_page_count(word_index: &HashMap<String, LinkedList<i32>>) {
+    let mut max_count = 0;
+    let mut word_appear = Vec::new();
 
-fn process_word(word: &str, word_count: &mut usize, word_index: &mut HashMap<String, LinkedList<i32>>,  linecount:i32) {
+    for (word, count) in word_index.iter() {
+        if count.len() > max_count {
+            max_count = count.len();
+            word_appear.clear();
+            word_appear.push(word);
+        } else if count.len() == max_count {
+            word_appear.push(word);
+        }
+    }
+
+    print!("These words appears on the highest number of different pages: ");
+    for word in word_appear {
+            print!("'{word}', ");
+    }
+    println!("they appeared {max_count} times ");
+
+}
+
+
+
+//Ændrer sig hver gang..
+// fn find_most_frequent_word(word_index: &HashMap<String, LinkedList<i32>>){
+//     let mut currently_highest = 0;
+//     let mut word_appear :String = String::new();
+
+//     for (word, count) in word_index.iter() {
+//         if count.len() > currently_highest {
+//             currently_highest = count.len();
+//             word_appear = word.clone();
+//         }
+//     }
+//     println!("The word appearing on the highest number of different pages is: '{word_appear}', it appeared {currently_highest} times");
+// }
+
+// fn raw_pointer(word_index: &mut HashMap<String, LinkedList<i32>>, word: &String,){
+
+//     let linked_list = word_index.get_mut(word);
+
+//     if let Some(node_ptr) = linked_list.head {
+//         unsafe {
+//             let node_ref = node_ptr.as_ref(); // Convert NonNull to &Node<T>
+//             println!("Element: {:?}", node_ref.element);
+    
+//             if let Some(next_ptr) = node_ref.next {
+//                 // Access the next node
+//                 let next_node = next_ptr.as_ref();
+//                 println!("Next Element: {:?}", next_node.element);
+//             }
+//         }
+//     }
+    
+//}
+
+
+fn process_word(word: &str, word_count: &mut usize, word_index: &mut HashMap<String, LinkedList<i32>>, linecount:i32) {
     *word_count += 1;
     let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic());
     let page = linecount/50 + 1;
@@ -45,7 +102,10 @@ fn process_word(word: &str, word_count: &mut usize, word_index: &mut HashMap<Str
          None => {
              let mut new_page_list = LinkedList::new();
              new_page_list.push_back(page);
-             word_index.insert(trimmed_word.to_string(), new_page_list);         }
+             word_index.insert(trimmed_word.to_string(), new_page_list);
+             let end_marker = 0; 
+             new_page_list.push_back(end_marker);
+        }
      };
  }
 
@@ -92,11 +152,17 @@ fn main() {
         file.seek(SeekFrom::Start(0)).expect("Could not rewind file");
     } 
     
+    //let stri = String::from("hello");
+
+    //raw_pointer(&mut word_index, &stri);
+
     //print_word_index(&word_index);
     //print!("The search found, ");
-    print_query(&word_index, query);
-    println!("Rust found the file contains {} words.", word_count);
+    
+    // println!("Rust found the file contains {} words.", word_count);
+    // print_query(&word_index, query);
+    //find_word_with_max_page_count(&word_index);
 
-    process::exit(0);
+    //process::exit(0);
 
 }
