@@ -103,8 +103,8 @@ fn process_word(word: &str, word_count: &mut usize, word_index: &mut HashMap<Str
              let mut new_page_list = LinkedList::new();
              new_page_list.push_back(page);
              word_index.insert(trimmed_word.to_string(), new_page_list);
-             let indicating_end = 0; 
-             new_page_list.push_back(indicating_end);
+             let end_marker = 0; 
+             new_page_list.push_back(end_marker);
         }
      };
  }
@@ -161,8 +161,8 @@ fn main() {
     
     // println!("Rust found the file contains {} words.", word_count);
     // print_query(&word_index, query);
-    find_word_with_max_page_count(&word_index);
+    //find_word_with_max_page_count(&word_index);
 
-    process::exit(0);
+    //process::exit(0);
 
 }
