@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
         rewind(file);
     }
 
-    printf("C found that the file contains %ld words.\n", word_count);
+    //printf("C found that the file contains %ld words.\n", word_count);
 
     fclose(file);
     return 0;

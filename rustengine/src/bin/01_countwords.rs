@@ -37,5 +37,5 @@ fn main() {
             .expect("Could not rewind file");
     }
 
-    println!("Rust found that the file contains {} words.", word_count);
+    //println!("Rust found that the file contains {} words.", word_count);
 }
