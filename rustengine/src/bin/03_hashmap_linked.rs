@@ -154,7 +154,7 @@ fn main() {
     //print!("The search found, ");
     
     // println!("Rust found the file contains {} words.", word_count);
-    print_query(&word_index, query);
+    //print_query(&word_index, query);
     //find_word_with_max_page_count(&word_index);
 
     //process::exit(0);

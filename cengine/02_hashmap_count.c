@@ -119,8 +119,6 @@ void process_word(char *word, long *word_count, GHashTable *word_index)
 
     trim_word(word);
 
-    printf("%s\n", word);
-
     int *count = (int *)g_hash_table_lookup(word_index, word);
 
     if (count == NULL)
@@ -206,6 +204,6 @@ int main(int argc, char *argv[])
     // print_word_index(word_index); // Illustrating dangling pointers
     //g_hash_table_destroy(word_index);
 
-    fclose(file);
+    //fclose(file);
     return 0;
 }
