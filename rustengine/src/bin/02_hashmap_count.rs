@@ -3,13 +3,13 @@ use std::fs::File;
 use std::io::{self, BufRead, Seek, SeekFrom};
 use std::{env, process};
 
-fn print_word_index(word_index:  &HashMap<String, &mut Box<i64>>) {
+fn print_word_index(word_index:  &HashMap<String, i64>) {
     for (word, count) in word_index.iter() {
         println!("{word}: {count}");
     }
 }
 
-fn find_most_frequent_word(word_index: &HashMap<String, &i64>){
+fn find_most_frequent_word(word_index: &HashMap<String, i64>){
     let mut currently_highest = 0;
     let mut word_appear :String = String::new();
 
@@ -20,6 +20,19 @@ fn find_most_frequent_word(word_index: &HashMap<String, &i64>){
         }
     }
     println!("The word appearing the most times is: '{word_appear}', it appeared {currently_highest} times");
+}
+
+fn process_word(word: &str, word_count: &mut usize, word_index: &mut HashMap<String, i64>) {
+    *word_count += 1;
+    let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic());
+    let count = word_index.get_mut(trimmed_word);
+    match count {
+        Some(i) => *i += 1,
+
+        None => {
+            word_index.insert(trimmed_word.to_string(), 1);
+        }
+    };
 }
 
 //wrong process word - requires that the initialization of the hash map is also changed in order to get the compile error
@@ -58,7 +71,7 @@ fn find_most_frequent_word(word_index: &HashMap<String, &i64>){
 //     };
 // }
 
-fn file_processing(file: &File, word_count: &mut usize, word_index: &mut HashMap<String, &mut Box<i64>>) {
+fn file_processing(file: &File, word_count: &mut usize, word_index: &mut HashMap<String, i64>) {
     let reader = io::BufReader::new(file);
 
     for line in reader.lines() {
@@ -84,7 +97,7 @@ fn main() {
 
     let itr: usize = args[2].parse().expect("Not a valid number of iterations");
 
-    let mut word_index: HashMap<String, &mut Box<i64>> = HashMap::new();
+    let mut word_index: HashMap<String, i64> = HashMap::new();
 
     for _ in 0..itr {
         file_processing(&file, &mut word_count, &mut word_index);
