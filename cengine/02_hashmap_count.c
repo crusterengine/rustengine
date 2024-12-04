@@ -119,8 +119,6 @@ void process_word(char *word, long *word_count, GHashTable *word_index)
 
     trim_word(word);
 
-    printf("%s\n", word);
-
     int *count = (int *)g_hash_table_lookup(word_index, word);
 
     if (count == NULL)
