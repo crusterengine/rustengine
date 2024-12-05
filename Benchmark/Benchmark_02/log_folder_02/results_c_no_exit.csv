@@ -72,3 +72,10 @@ Average max memory: 2833.20000000000000000000 kilobytes for 5000 iterations
 2024-12-05 18:51:32,32.04,31.46,0.57,99%,2784,0,986,918,0,10000,C:./02_hashmap_count,the-champion.txt
 Average user time: 31.44900000000000000000 seconds for 10000 iterations
 Average max memory: 2828.80000000000000000000 kilobytes for 10000 iterations
+2024-12-05 19:03:53,161.15,158.00,2.85,99%,2828,29,965,4642,0,50000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 19:06:33,160.16,157.31,2.81,99%,2848,0,1002,3329,0,50000,C:./02_hashmap_count,the-champion.txt
+Average user time: 160.16 seconds for 50000 iterations
+Average max memory: 2848 kilobytes for 50000 iterations
+2024-12-05 19:17:01,321.97,316.04,5.57,99%,2832,30,968,7316,3,100000,C:./02_hashmap_count,the-champion.txt
+Average user time: 321.97 seconds for 100000 iterations
+Average max memory: 2832 kilobytes for 100000 iterations
