@@ -16,10 +16,10 @@ void free_values(GHashTable *word_index)
     g_hash_table_iter_init(&iter, word_index);
     while (g_hash_table_iter_next(&iter, &key, &value))
     {
-       //g_free(key);
+        g_free(key);
         g_free(value);
     }
-    // g_hash_table_remove_all(word_index);
+    g_hash_table_remove_all(word_index);
 }
 
 void find_most_frequent_word(GHashTable *word_index){
@@ -200,10 +200,10 @@ int main(int argc, char *argv[])
     
     //find_most_frequent_word(word_index);
     
-    //free_values(word_index);
+    free_values(word_index);
     // print_word_index(word_index); // Illustrating dangling pointers
-    //g_hash_table_destroy(word_index);
+    g_hash_table_destroy(word_index);
 
-    //fclose(file);
+    fclose(file);
     return 0;
 }

@@ -109,5 +109,5 @@ fn main() {
     // println!("Rust found the file contains {} words.", word_count);
     // find_most_frequent_word(&word_index);
 
-    process::exit(0);
+    //process::exit(0);
 }

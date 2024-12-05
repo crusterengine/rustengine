@@ -1,0 +1,74 @@
+      Total Number of Cores: 4,MacBookPro16,3
+timestamp,elapsed_time,user_time,sys_time,cpu_usage,max_memory,major_faults,minor_faults,voluntary_switches,involuntary_switches,number_of_iterations,program,file
+2024-12-05 18:17:55,0.27,0.01,0.00,6%,2884,0,1011,13,0,1,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:17:55,0.01,0.01,0.00,84%,2808,0,992,15,0,1,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:17:55,0.01,0.01,0.00,83%,2860,0,1005,14,0,1,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:17:55,0.01,0.01,0.00,83%,2844,0,1001,16,0,1,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:17:55,0.01,0.01,0.00,83%,2844,0,1001,14,0,1,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:17:55,0.01,0.01,0.00,83%,2812,0,993,15,0,1,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:17:55,0.01,0.01,0.00,83%,2812,0,993,13,0,1,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:17:55,0.01,0.01,0.00,83%,2856,0,1004,14,0,1,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:17:55,0.01,0.01,0.00,83%,2836,0,999,17,0,1,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:17:55,0.01,0.01,0.00,84%,2864,0,1006,26,0,1,C:./02_hashmap_count,the-champion.txt
+Average user time: .01000000000000000000 seconds for 1 iterations
+Average max memory: 2842.00000000000000000000 kilobytes for 1 iterations
+2024-12-05 18:19:58,0.30,0.04,0.00,14%,2800,0,990,14,0,10,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:19:58,0.05,0.04,0.00,94%,2856,0,1004,28,0,10,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:19:58,0.05,0.04,0.00,94%,2912,0,1018,36,0,10,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:19:58,0.05,0.04,0.00,92%,2884,0,1011,56,0,10,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:19:58,0.05,0.04,0.00,94%,2808,0,992,22,0,10,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:19:58,0.05,0.04,0.00,94%,2816,0,994,24,0,10,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:19:58,0.05,0.04,0.00,92%,2888,0,1012,45,0,10,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:19:59,0.04,0.04,0.00,93%,2864,0,1006,22,0,10,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:19:59,0.05,0.04,0.00,92%,2912,0,1018,27,0,10,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:19:59,0.05,0.04,0.00,92%,2932,0,1023,45,0,10,C:./02_hashmap_count,the-champion.txt
+Average user time: .04000000000000000000 seconds for 10 iterations
+Average max memory: 2867.20000000000000000000 kilobytes for 10 iterations
+2024-12-05 18:22:01,0.59,0.32,0.01,56%,2900,0,1015,40,0,100,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:22:01,0.34,0.32,0.01,98%,2848,0,1002,49,0,100,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:22:02,0.34,0.32,0.01,98%,2852,0,1003,36,0,100,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:22:02,0.34,0.32,0.01,99%,2796,0,989,32,0,100,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:22:02,0.34,0.32,0.01,99%,2796,0,989,28,0,100,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:22:03,0.34,0.32,0.01,98%,2776,0,984,44,0,100,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:22:03,0.33,0.32,0.01,99%,2816,0,994,24,0,100,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:22:04,0.34,0.32,0.01,98%,2824,0,996,23,0,100,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:22:04,0.34,0.32,0.01,99%,2824,0,996,28,0,100,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:22:04,0.33,0.32,0.01,99%,2812,0,993,25,0,100,C:./02_hashmap_count,the-champion.txt
+Average user time: .32000000000000000000 seconds for 100 iterations
+Average max memory: 2824.40000000000000000000 kilobytes for 100 iterations
+2024-12-05 18:24:12,3.49,3.17,0.06,92%,2800,0,990,124,0,1000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:24:16,3.24,3.18,0.06,99%,2800,0,990,140,0,1000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:24:19,3.27,3.20,0.06,99%,2832,0,998,358,0,1000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:24:22,3.24,3.18,0.06,99%,2832,0,998,164,0,1000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:24:26,3.24,3.17,0.06,99%,2864,0,1006,184,0,1000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:24:29,3.24,3.17,0.06,99%,2880,0,1010,148,0,1000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:24:32,3.24,3.17,0.06,99%,2880,0,1010,192,0,1000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:24:35,3.23,3.17,0.06,99%,2824,0,996,102,0,1000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:24:39,3.23,3.16,0.06,99%,2808,0,992,169,0,1000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:24:42,3.22,3.15,0.06,99%,2880,0,1010,122,0,1000,C:./02_hashmap_count,the-champion.txt
+Average user time: 3.17200000000000000000 seconds for 1000 iterations
+Average max memory: 2840.00000000000000000000 kilobytes for 1000 iterations
+2024-12-05 18:27:01,16.49,15.90,0.31,98%,2876,0,1009,1656,0,5000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:27:17,16.09,15.78,0.29,99%,2876,0,1009,426,0,5000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:27:33,16.09,15.79,0.29,99%,2808,0,992,437,0,5000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:27:49,16.02,15.72,0.28,99%,2756,0,979,382,0,5000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:28:05,16.05,15.75,0.29,99%,2812,0,993,432,0,5000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:28:21,16.02,15.72,0.29,99%,2808,0,992,389,0,5000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:28:37,16.05,15.75,0.29,99%,2880,0,1010,373,0,5000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:28:53,16.10,15.80,0.29,99%,2804,0,991,512,0,5000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:29:09,16.15,15.84,0.30,99%,2888,0,1012,497,0,5000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:29:26,16.12,15.81,0.30,99%,2824,0,996,528,0,5000,C:./02_hashmap_count,the-champion.txt
+Average user time: 15.78600000000000000000 seconds for 5000 iterations
+Average max memory: 2833.20000000000000000000 kilobytes for 5000 iterations
+2024-12-05 18:46:43,32.49,31.63,0.57,99%,2860,30,975,1382,2,10000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:47:16,32.02,31.42,0.58,99%,2808,0,992,698,0,10000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:47:48,32.06,31.47,0.57,99%,2864,0,1006,764,0,10000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:48:20,32.02,31.44,0.56,99%,2776,0,984,607,0,10000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:48:52,31.96,31.39,0.56,99%,2800,0,990,582,0,10000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:49:24,32.04,31.47,0.56,99%,2864,0,1006,548,0,10000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:49:56,31.96,31.38,0.56,99%,2816,0,994,513,0,10000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:50:28,32.00,31.42,0.56,99%,2868,0,1007,512,0,10000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:51:00,31.98,31.41,0.56,99%,2848,0,1002,509,0,10000,C:./02_hashmap_count,the-champion.txt
+2024-12-05 18:51:32,32.04,31.46,0.57,99%,2784,0,986,918,0,10000,C:./02_hashmap_count,the-champion.txt
+Average user time: 31.44900000000000000000 seconds for 10000 iterations
+Average max memory: 2828.80000000000000000000 kilobytes for 10000 iterations
