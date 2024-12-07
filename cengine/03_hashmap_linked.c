@@ -223,7 +223,7 @@ int main(int argc, char *argv[])
     int itr = (int)atoi(argv[2]);
     char *query = argv[3];
 
-    GHashTable *word_index = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
+    GHashTable *word_index = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
 
     for (size_t i = 0; i < itr; i++)
     {

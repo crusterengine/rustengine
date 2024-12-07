@@ -157,6 +157,6 @@ fn main() {
     //print_query(&word_index, query);
     //find_word_with_max_page_count(&word_index);
 
-    //process::exit(0);
+    process::exit(0);
 
 }
