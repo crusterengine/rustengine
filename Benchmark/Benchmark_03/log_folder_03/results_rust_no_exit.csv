@@ -1,0 +1,6 @@
+      Total Number of Cores: 4,MacBookPro16,3
+timestamp,elapsed_time,user_time,sys_time,cpu_usage,max_memory,major_faults,minor_faults,voluntary_switches,involuntary_switches,number_of_iterations,program,file
+2024-12-07 22:50:30,732.06,164.93,533.67,95%,4823208,0,110727349,2720762,8881,10000,Rust:./03_hashmap_linked,the-champion.txt - no exit
+Command terminated by signal 2
+2024-12-08 00:28:31,29461.04,466.80,9885.32,35%,4034140,2,68659815,1119059,14469137,50000,Rust:./03_hashmap_linked,the-champion.txt
+REAL BENCHMARKS: 

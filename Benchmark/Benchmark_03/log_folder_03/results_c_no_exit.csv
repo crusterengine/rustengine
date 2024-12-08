@@ -1,0 +1,5 @@
+      Total Number of Cores: 4,MacBookPro16,3
+timestamp,elapsed_time,user_time,sys_time,cpu_usage,max_memory,major_faults,minor_faults,voluntary_switches,involuntary_switches,number_of_iterations,program,file
+2024-12-08 00:00:46,0.32,0.01,0.00,6%,3724,22,1199,73,0,1,C:./03_hashmap_linked,the-champion.txt
+2024-12-08 00:01:29,741.97,218.97,497.05,96%,4636120,1,201967008,2772039,1998,10000,C:./03_hashmap_linked,the-champion.txt - no exit
+REAL BENCHMARKS: 
