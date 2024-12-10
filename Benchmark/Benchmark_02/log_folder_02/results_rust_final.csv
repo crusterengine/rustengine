@@ -1,0 +1,170 @@
+      Total Number of Cores: 4,MacBookPro16,3
+timestamp,elapsed_time,user_time,sys_time,cpu_usage,max_memory,major_faults,minor_faults,voluntary_switches,involuntary_switches,number_of_iterations,program,file
+2024-12-10 10:12:47,0.78,0.01,0.00,2%,1984,0,723,4,3,1,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:12:47,0.01,0.00,0.00,83%,1932,0,710,3,0,1,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:12:47,0.01,0.00,0.00,83%,1968,0,719,6,0,1,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:12:47,0.01,0.00,0.00,81%,1932,0,710,6,0,1,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:12:47,0.01,0.00,0.00,81%,1932,0,710,5,0,1,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:12:47,0.01,0.00,0.00,81%,1932,0,710,4,0,1,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:12:47,0.01,0.00,0.00,81%,1932,0,710,5,0,1,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:12:47,0.01,0.00,0.00,81%,1932,0,713,3,0,1,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:12:47,0.01,0.00,0.00,81%,1976,0,721,5,0,1,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:12:47,0.01,0.00,0.00,81%,1932,0,710,3,0,1,Rust:./02_hashmap_count,the-champion.txt
+Average user time: .00100000000000000000 seconds for 1 iterations
+Average max memory: 1945.20000000000000000000 kilobytes for 1 iterations
+2024-12-10 10:14:49,0.35,0.03,0.00,11%,2052,0,740,8,2,10,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:14:49,0.04,0.03,0.00,97%,2116,0,756,19,0,10,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:14:49,0.04,0.03,0.00,95%,2108,0,754,13,0,10,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:14:49,0.04,0.03,0.00,95%,2156,0,766,41,0,10,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:14:49,0.04,0.03,0.00,95%,2076,0,746,17,0,10,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:14:49,0.04,0.03,0.00,95%,2120,0,757,13,0,10,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:14:49,0.04,0.03,0.00,95%,2144,0,763,34,0,10,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:14:49,0.04,0.03,0.00,95%,2180,0,772,66,0,10,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:14:49,0.04,0.03,0.00,92%,2084,0,748,18,0,10,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:14:49,0.04,0.03,0.00,92%,2108,0,754,19,0,10,Rust:./02_hashmap_count,the-champion.txt
+Average user time: .03000000000000000000 seconds for 10 iterations
+Average max memory: 2114.40000000000000000000 kilobytes for 10 iterations
+2024-12-10 10:16:52,0.63,0.30,0.01,49%,2256,0,791,125,2,100,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:16:52,0.31,0.30,0.00,99%,2288,0,799,92,0,100,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:16:52,0.31,0.30,0.01,98%,2244,0,788,175,0,100,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:16:53,0.31,0.30,0.00,98%,2248,0,789,184,0,100,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:16:53,0.31,0.30,0.00,98%,2224,0,783,162,0,100,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:16:53,0.32,0.30,0.00,98%,2216,0,781,144,0,100,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:16:54,0.31,0.29,0.00,99%,2220,0,782,115,0,100,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:16:54,0.31,0.30,0.00,98%,2240,0,787,164,0,100,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:16:54,0.31,0.30,0.00,98%,2264,0,793,210,0,100,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:16:55,0.31,0.30,0.00,98%,2252,0,790,167,0,100,Rust:./02_hashmap_count,the-champion.txt
+Average user time: .29900000000000000000 seconds for 100 iterations
+Average max memory: 2245.20000000000000000000 kilobytes for 100 iterations
+2024-12-10 10:18:59,3.33,2.95,0.05,90%,2336,0,811,1608,0,1000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:19:02,3.03,2.96,0.05,99%,2284,0,798,1166,0,1000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:19:05,3.04,2.97,0.05,99%,2336,0,811,1338,0,1000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:19:09,3.03,2.96,0.05,99%,2316,0,806,1171,0,1000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:19:12,3.02,2.95,0.05,99%,2288,0,799,1194,0,1000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:19:15,2.96,2.90,0.04,99%,2316,0,806,647,0,1000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:19:18,2.91,2.86,0.04,99%,2256,0,791,290,0,1000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:19:20,2.92,2.87,0.04,99%,2316,0,806,710,0,1000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:19:23,2.93,2.88,0.04,99%,2276,0,796,721,0,1000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:19:26,3.00,2.94,0.05,99%,2292,0,800,732,0,1000,Rust:./02_hashmap_count,the-champion.txt
+Average user time: 2.92400000000000000000 seconds for 1000 iterations
+Average max memory: 2301.60000000000000000000 kilobytes for 1000 iterations
+2024-12-10 10:21:59,30.56,29.65,0.49,98%,2340,0,809,8930,2,10000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:22:28,29.24,28.76,0.42,99%,2320,0,807,4952,0,10000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:22:58,29.65,29.13,0.46,99%,2336,0,811,4411,0,10000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:23:27,29.27,28.78,0.42,99%,2324,0,808,4649,0,10000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:23:57,29.22,28.74,0.42,99%,2336,0,811,4640,0,10000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:24:26,29.25,28.78,0.42,99%,2320,0,807,4303,0,10000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:24:55,29.45,28.98,0.41,99%,2336,0,811,4711,0,10000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:25:24,29.00,28.55,0.40,99%,2336,0,811,3681,0,10000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:25:54,29.19,28.73,0.41,99%,2336,0,811,4160,0,10000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:26:23,29.23,28.75,0.43,99%,2336,0,811,4863,0,10000,Rust:./02_hashmap_count,the-champion.txt
+Average user time: 28.88500000000000000000 seconds for 10000 iterations
+Average max memory: 2332.00000000000000000000 kilobytes for 10000 iterations
+2024-12-10 10:29:24,59.67,58.06,0.86,98%,2340,0,812,11028,3,20000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:30:23,58.53,57.61,0.83,99%,2336,0,811,7913,0,20000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:31:22,58.66,57.72,0.85,99%,2336,0,811,8603,0,20000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:32:20,58.24,57.33,0.81,99%,2336,0,811,7095,0,20000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:33:19,58.74,57.83,0.81,99%,2336,0,811,7690,0,20000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:34:19,60.18,58.97,0.99,99%,2336,0,811,19185,0,20000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:35:22,62.69,61.09,1.19,99%,2332,0,810,28227,0,20000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:36:25,63.09,61.09,1.08,98%,2332,0,810,20437,0,20000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:37:24,59.53,58.53,0.91,99%,2336,0,811,8318,0,20000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:38:37,72.73,70.05,1.57,98%,2336,0,811,38898,0,20000,Rust:./02_hashmap_count,the-champion.txt
+Average user time: 59.82800000000000000000 seconds for 20000 iterations
+Average max memory: 2335.60000000000000000000 kilobytes for 20000 iterations
+2024-12-10 10:42:11,90.63,88.70,1.36,99%,2340,0,812,20476,3,30000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:43:39,88.10,86.71,1.25,99%,2324,0,808,12464,0,30000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:45:07,88.44,86.98,1.30,99%,2324,0,808,13689,0,30000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:46:35,88.07,86.64,1.27,99%,2336,0,811,14414,0,30000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:48:03,87.55,86.17,1.24,99%,2336,0,811,12868,0,30000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:49:31,88.04,86.61,1.28,99%,2336,0,811,15287,0,30000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:51:00,88.47,86.98,1.34,99%,2336,0,811,13950,0,30000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:52:32,92.86,90.87,1.78,99%,2336,0,811,19247,0,30000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:54:05,92.58,90.55,1.82,99%,2336,0,811,18717,1,30000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 10:55:37,92.01,90.04,1.74,99%,2336,0,811,20853,0,30000,Rust:./02_hashmap_count,the-champion.txt
+Average user time: 88.02500000000000000000 seconds for 30000 iterations
+Average max memory: 2334.00000000000000000000 kilobytes for 30000 iterations
+2024-12-10 10:59:37,118.07,115.71,1.76,99%,2336,0,808,24939,2,40000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 11:01:34,116.79,114.88,1.68,99%,2324,0,808,18988,0,40000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 11:03:31,117.08,115.19,1.68,99%,2324,0,808,18057,0,40000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 11:05:30,119.36,117.20,1.93,99%,2336,0,811,21107,0,40000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 11:07:33,122.58,119.99,2.29,99%,2324,0,808,31294,0,40000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 11:09:35,121.58,119.04,2.27,99%,2336,0,814,23915,0,40000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 11:11:41,126.24,123.96,2.05,99%,2324,0,808,21558,0,40000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 11:13:41,120.07,118.08,1.87,99%,2336,0,811,19448,0,40000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 11:15:40,118.58,116.53,1.86,99%,2336,0,811,18608,0,40000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 11:17:36,116.80,114.93,1.67,99%,2336,0,811,17921,0,40000,Rust:./02_hashmap_count,the-champion.txt
+Average user time: 117.55100000000000000000 seconds for 40000 iterations
+Average max memory: 2331.20000000000000000000 kilobytes for 40000 iterations
+2024-12-10 11:22:06,147.47,144.69,2.16,99%,2340,0,812,27968,2,50000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 11:24:32,146.29,143.93,2.11,99%,2336,0,811,22285,0,50000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 11:27:00,147.28,144.88,2.16,99%,2336,0,811,22463,0,50000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 11:29:27,147.23,144.80,2.18,99%,2324,0,808,22915,0,50000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 11:31:55,148.11,145.70,2.13,99%,2336,0,811,27492,0,50000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 11:34:23,147.89,145.33,2.19,99%,2336,0,811,27798,0,50000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 11:36:49,146.47,144.10,2.13,99%,2336,0,811,23514,0,50000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 11:39:16,146.54,144.25,2.05,99%,2336,0,811,22061,0,50000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 11:41:42,146.20,143.89,2.08,99%,2336,0,811,21093,0,50000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 11:44:10,147.24,144.90,2.11,99%,2336,0,811,23453,0,50000,Rust:./02_hashmap_count,the-champion.txt
+Average user time: 144.64700000000000000000 seconds for 50000 iterations
+Average max memory: 2335.20000000000000000000 kilobytes for 50000 iterations
+2024-12-10 11:49:08,176.28,173.05,2.56,99%,2328,0,809,32628,3,60000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 11:52:04,176.44,173.57,2.56,99%,2324,0,808,31174,0,60000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 11:55:00,176.43,173.55,2.58,99%,2336,0,811,30225,0,60000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 11:57:57,176.21,173.30,2.61,99%,2336,0,811,28409,0,60000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 12:00:53,176.56,173.63,2.58,99%,2332,0,810,32695,0,60000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 12:03:50,176.27,173.35,2.58,99%,2328,0,809,31943,0,60000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 12:06:47,177.70,174.85,2.53,99%,2336,0,811,29256,0,60000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 12:09:43,175.47,172.63,2.54,99%,2336,0,811,28429,1,60000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 12:12:40,177.37,174.45,2.59,99%,2324,0,808,33393,0,60000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 12:15:37,176.66,173.68,2.66,99%,2320,0,807,29996,0,60000,Rust:./02_hashmap_count,the-champion.txt
+Average user time: 173.60600000000000000000 seconds for 60000 iterations
+Average max memory: 2330.00000000000000000000 kilobytes for 60000 iterations
+2024-12-10 12:24:56,206.10,202.29,3.03,99%,2328,0,813,41661,2,70000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 12:28:22,205.31,201.93,2.99,99%,2336,0,811,36183,0,70000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 12:31:47,205.58,202.26,2.98,99%,2336,0,811,33149,0,70000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 12:35:12,204.77,201.49,2.91,99%,2336,0,811,30126,0,70000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 12:38:37,205.06,201.83,2.91,99%,2336,0,811,30138,0,70000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 12:42:03,205.45,202.11,3.04,99%,2336,0,811,30616,0,70000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 12:45:38,215.68,212.31,3.00,99%,2316,0,806,35622,0,70000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 12:49:04,205.51,202.25,2.95,99%,2336,0,811,29450,0,70000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 12:52:30,206.02,202.72,2.96,99%,2336,0,811,32169,0,70000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 12:55:56,205.97,202.66,2.96,99%,2324,0,808,32122,0,70000,Rust:./02_hashmap_count,the-champion.txt
+Average user time: 203.18500000000000000000 seconds for 70000 iterations
+Average max memory: 2332.00000000000000000000 kilobytes for 70000 iterations
+2024-12-10 13:36:54,235.43,231.22,3.41,99%,2340,0,812,36632,2,80000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 13:40:50,235.24,231.50,3.40,99%,2336,0,811,31156,0,80000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 13:44:43,233.17,229.56,3.28,99%,2336,0,811,29093,0,80000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 13:48:36,233.50,229.80,3.33,99%,2336,0,811,33169,0,80000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 13:52:31,234.47,230.75,3.33,99%,2336,0,811,30372,0,80000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 13:56:24,233.37,229.66,3.33,99%,2336,0,811,33594,0,80000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 14:00:17,232.85,229.22,3.28,99%,2336,0,811,30140,0,80000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 14:04:11,233.70,230.00,3.31,99%,2336,0,811,32493,0,80000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 14:08:04,232.88,229.14,3.34,99%,2336,0,811,34219,0,80000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 14:11:57,233.20,229.54,3.30,99%,2336,0,811,30598,0,80000,Rust:./02_hashmap_count,the-champion.txt
+Average user time: 230.03900000000000000000 seconds for 80000 iterations
+Average max memory: 2336.40000000000000000000 kilobytes for 80000 iterations
+2024-12-10 14:18:52,267.88,263.22,3.83,99%,2336,0,811,43345,2,90000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 14:23:16,264.67,260.39,3.86,99%,2336,0,808,37906,0,90000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 14:27:39,262.90,258.69,3.74,99%,2336,0,811,40692,0,90000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 14:32:02,262.65,258.41,3.78,99%,2336,0,811,40519,0,90000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 14:36:25,263.28,258.85,3.85,99%,2336,0,811,50079,0,90000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 14:40:50,264.25,259.76,3.87,99%,2336,0,811,55131,0,90000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 14:45:14,263.93,259.33,3.99,99%,2332,0,810,73987,0,90000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 14:49:38,264.42,260.11,3.85,99%,2336,0,811,36986,0,90000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 14:54:00,261.83,257.75,3.68,99%,2336,0,811,33971,0,90000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 14:58:22,262.36,258.24,3.71,99%,2336,0,811,37915,0,90000,Rust:./02_hashmap_count,the-champion.txt
+Average user time: 259.47500000000000000000 seconds for 90000 iterations
+Average max memory: 2335.60000000000000000000 kilobytes for 90000 iterations
+2024-12-10 15:07:33,293.31,288.30,4.24,99%,2324,0,808,44182,2,100000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 15:12:26,293.00,288.29,4.26,99%,2324,0,808,38876,0,100000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 15:17:18,292.43,287.81,4.20,99%,2336,0,811,37840,0,100000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 15:22:10,291.67,287.07,4.16,99%,2336,0,811,38376,0,100000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 15:27:02,291.67,287.10,4.09,99%,2336,0,811,40205,0,100000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 15:31:54,292.29,287.61,4.25,99%,2336,0,811,38070,0,100000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 15:36:47,293.13,288.45,4.22,99%,2336,0,811,40200,0,100000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 15:41:39,291.89,287.38,4.10,99%,2336,0,811,36183,0,100000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 15:46:31,291.53,287.08,4.07,99%,2336,0,811,34607,0,100000,Rust:./02_hashmap_count,the-champion.txt
+2024-12-10 15:51:22,291.62,287.22,4.03,99%,2336,0,811,31293,0,100000,Rust:./02_hashmap_count,the-champion.txt
+Average user time: 287.63100000000000000000 seconds for 100000 iterations
+Average max memory: 2333.60000000000000000000 kilobytes for 100000 iterations
