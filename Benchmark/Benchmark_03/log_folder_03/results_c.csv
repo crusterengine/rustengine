@@ -168,3 +168,5 @@ Average max memory: 3275365.60000000000000000000 kilobytes for 10000 iterations
 2024-12-07 18:13:54,264.96,242.75,18.18,98%,4975908,3,8561669,133389,7,50000,C:./03_hashmap_linked,the-champion.txt
 Average user time: 234.89900000000000000000 seconds for 50000 iterations
 Average max memory: 4734011.20000000000000000000 kilobytes for 50000 iterations
+Command terminated by signal 2
+2024-12-12 11:17:57,2680.10,250.33,838.78,40%,3346480,25,19697397,362570,1306700,50000,C:./03_hashmap_linked,the-champion.txt

@@ -168,3 +168,7 @@ Average max memory: 3835402.00000000000000000000 kilobytes for 10000 iterations
 2024-12-08 11:22:27,259.53,241.93,15.99,99%,4970652,0,8561616,89732,3,50000,Rust:./03_hashmap_linked,the-champion.txt
 Average user time: 241.71900000000000000000 seconds for 50000 iterations
 Average max memory: 4939955.20000000000000000000 kilobytes for 50000 iterations
+2024-12-12 09:21:27,0.35,0.00,0.00,3%,3320,0,1057,6,3,1,Rust:./03_hashmap_linked,the-champion.txt
+2024-12-12 09:22:20,254.60,237.72,15.22,99%,2212004,0,8561620,62988,4,50000,Rust:./03_hashmap_linked,the-champion.txt
+2024-12-12 09:29:14,258.59,240.90,15.58,99%,3426256,0,8561633,86244,2,50000,Rust:./03_hashmap_linked,the-champion.txt
+2024-12-12 11:11:40,260.91,242.14,16.24,99%,1334072,3,8561619,94410,12,50000,Rust:./03_hashmap_linked,the-champion.txt
