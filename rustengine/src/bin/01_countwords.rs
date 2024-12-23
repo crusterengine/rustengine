@@ -6,6 +6,7 @@ fn file_processing(file: &File, word_count: &mut usize) {
     let reader = io::BufReader::new(file);
 
     for line in reader.lines() {
+        
         for _word in line.expect("Expected to find a line").split_whitespace() {
             *word_count += 1;
         }
