@@ -1,5 +1,15 @@
+
+### notes
+- Skal vi slette de to funktioner i program 2 + 3? 
+- Skal vi slette nogen af vores benchmarking scripts? 
+- Skal vi slette Run mappen? Vi har ikke rigtig brugt den, og der er ikke til alle programmerne
+- Har lagt excel filerne med resultaterne op (hvor hvert program har et sheet + graferne) + the-champion filen, hvis de skulle få lyst til at køre det
+- OBS Ændre path i BM til den nye fil? 
+
 # rustengine
-A Thesis Project exploring memory management for a search engine written with rust. 
+This code repository is part of a Master Thesis Project, that exploes memory management in the Rust and C programming languages.  
+
+The code repository contains three programs written in C and Rust: countwords, hashmap_count and hashmap linked. It also contains shell scripts that can be ran to benchmark the programs using the GNU time command. 
 
 # Instructions
 Below are the instructions on how to compile and run each program and how to run the benchmarking scripts.
@@ -61,10 +71,3 @@ Make sure that the parameters are set correctly in the `<script>.sh` file.
 To run the script, execute the following command:  
 
 `./<script>.sh`
-
-### notes
-- Skal vi slette de to funktioner i program 2 + 3? 
-- Skal vi slette nogen af vores benchmarking scripts? 
-- Skal vi slette Run mappen? Vi har ikke rigtig brugt den, og der er ikke til alle programmerne
-- Har lagt excel filerne med resultaterne op (hvor hvert program har et sheet + graferne) + the-champion filen, hvis de skulle få lyst til at køre det
-- OBS Ændre path i BM til den nye fil? 
