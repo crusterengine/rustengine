@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <ctype.h>
-#include <glib.h> //`pkg-config --cflags --libs glib-2.0`
+#include <glib.h>
 #include <wctype.h>
 #include <wchar.h>
 #include <locale.h>
@@ -16,24 +16,26 @@ void free_values(GHashTable *word_index)
     g_hash_table_iter_init(&iter, word_index);
     while (g_hash_table_iter_next(&iter, &key, &value))
     {
-       //g_free(key);
+        g_free(key);
         g_free(value);
     }
-    // g_hash_table_remove_all(word_index);
+    g_hash_table_remove_all(word_index);
 }
 
-void find_most_frequent_word(GHashTable *word_index){
+void find_most_frequent_word(GHashTable *word_index)
+{
 
     GHashTableIter iter;
     gpointer key, value;
     int currently_highest = 0;
-    char* word;
+    char *word;
 
     g_hash_table_iter_init(&iter, word_index);
     while (g_hash_table_iter_next(&iter, &key, &value))
     {
-        int* values = (int*) value;
-        if(*values > currently_highest){
+        int *values = (int *)value;
+        if (*values > currently_highest)
+        {
             currently_highest = *values;
             word = (char *)key;
         }
@@ -56,59 +58,32 @@ void print_word_index(GHashTable *word_index)
     }
 }
 
-// void trim_word(char *word)
-// {
-//     int len = strlen(word);
-//     int new_len = 0;
-//     int first = 0;
-//     int last = len - 1;
+void trim_word(char *word)
+{
+    int len = strlen(word);
+    int new_len = 0;
+    int first = 0;
+    int last = len - 1;
 
-//     while (first < len && !isalpha(word[first]))
-//     {
-//         first++;
-//         new_len++;
-//     }
-
-//     while (last >= first && !isalpha(word[last]))
-//     {
-//         last--;
-//         new_len++;
-//     }
-
-//     for (int i = first; i <= last; i++)
-//     {
-//         word[i - first] = word[i];
-//     }
-
-//     word[len - new_len] = '\0';
-// }
-
-
-void trim_word(char *word) {
-    gchar *start = word;  // Pointer to the first character
-    gchar *end = word + strlen(word) - 1;  // Pointer to the last character
-
-    // Skip leading non-alphabetic characters
-    while (*start && !g_unichar_isalpha(g_utf8_get_char(start))) {
-        start = g_utf8_next_char(start);  // Move to the next character
+    while (first < len && !isalpha(word[first]))
+    {
+        first++;
+        new_len++;
     }
 
-    // Skip trailing non-alphabetic characters
-    while (end > start && !g_unichar_isalpha(g_utf8_get_char(end))) {
-        end = g_utf8_prev_char(end);  // Move to the previous character
+    while (last >= first && !isalpha(word[last]))
+    {
+        last--;
+        new_len++;
     }
 
-    // Copy the trimmed content back to the beginning of the string
-    int final_len = end >= start ? (end - start + g_utf8_next_char(end) - end) : 0;
-    for (int i = 0; i < final_len; i++) {
-        word[i] = start[i];  // Copy character by character
+    for (int i = first; i <= last; i++)
+    {
+        word[i - first] = word[i];
     }
 
-    word[final_len] = '\0';  // Null-terminate the trimmed word
+    word[len - new_len] = '\0';
 }
-
-
-
 
 void process_word(char *word, long *word_count, GHashTable *word_index)
 {
@@ -195,15 +170,17 @@ int main(int argc, char *argv[])
         rewind(file);
     }
 
-    //print_word_index(word_index);
-    //printf("C found the file contains %ld words.\n", word_count);
-    
-    //find_most_frequent_word(word_index);
-    
-    //free_values(word_index);
-    // print_word_index(word_index); // Illustrating dangling pointers
-    //g_hash_table_destroy(word_index);
+    // printf("C found the file contains %ld words.\n", word_count);
+
+    // print_word_index(word_index);
+
+    // find_most_frequent_word(word_index);
+
+    free_values(word_index);
+
+    g_hash_table_destroy(word_index);
 
     fclose(file);
+
     return 0;
 }

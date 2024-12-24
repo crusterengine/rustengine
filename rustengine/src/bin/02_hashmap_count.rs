@@ -3,15 +3,15 @@ use std::fs::File;
 use std::io::{self, BufRead, Seek, SeekFrom};
 use std::{env, process};
 
-fn print_word_index(word_index:  &HashMap<String, i64>) {
+fn print_word_index(word_index: &HashMap<String, i64>) {
     for (word, count) in word_index.iter() {
         println!("{word}: {count}");
     }
 }
 
-fn find_most_frequent_word(word_index: &HashMap<String, i64>){
+fn find_most_frequent_word(word_index: &HashMap<String, i64>) {
     let mut currently_highest = 0;
-    let mut word_appear :String = String::new();
+    let mut word_appear: String = String::new();
 
     for (word, count) in word_index.iter() {
         if count > &currently_highest {
@@ -35,7 +35,7 @@ fn process_word(word: &str, word_count: &mut usize, word_index: &mut HashMap<Str
     };
 }
 
-//wrong process word - requires that the initialization of the hash map is also changed in order to get the compile error
+// wrong process_word function - requires that the type of the hash map is changed to HashMap<String, i64>
 // fn process_word(word: &str, word_count: &mut usize, word_index: &mut HashMap<String, &mut Box<i64>>) {
 //     *word_count += 1;
 //     let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic());
@@ -43,30 +43,13 @@ fn process_word(word: &str, word_count: &mut usize, word_index: &mut HashMap<Str
 //     println!("{}", trimmed_word);
 //     let count = word_index.get_mut(trimmed_word);
 //     match count {
-//         Some(i) => { 
+//         Some(i) => {
 //             ***i += 1;
 //         }
 //         None => {
 //             //let mut i: i64 = 1;
-//             let mut first_occurence: Box<i64> = Box::new(1); 
+//             let mut first_occurence: Box<i64> = Box::new(1);
 //             word_index.insert(trimmed_word.to_string(), &mut first_occurence);
-//         }
-//     };
-// }
-
-//wrong process word - where the value is located on the stack
-// fn process_word(word: &str, word_count: &mut usize, word_index: &mut HashMap<String, &mut i64>) {
-//     *word_count += 1;
-    
-//     let trimmed_word = word.trim_matches(|c: char| !c.is_ascii_alphabetic());
-
-//     let count = word_index.get_mut(trimmed_word);
-//     match count {
-//         Some(i) => **i += 1,
-
-//         None => {
-//             let mut i: i64 = 1;
-//             word_index.insert(trimmed_word.to_string(), &mut i);
 //         }
 //     };
 // }
@@ -105,9 +88,9 @@ fn main() {
             .expect("Could not rewind file");
     }
 
-    // print_word_index(&word_index);
     // println!("Rust found the file contains {} words.", word_count);
-    // find_most_frequent_word(&word_index);
 
-    process::exit(0);
+    // print_word_index(&word_index);
+
+    // find_most_frequent_word(&word_index);
 }
