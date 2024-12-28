@@ -1,11 +1,3 @@
-
-### notes
-- Skal vi slette de to funktioner i program 2 + 3? 
-- Skal vi slette nogen af vores benchmarking scripts? 
-- Skal vi slette Run mappen? Vi har ikke rigtig brugt den, og der er ikke til alle programmerne
-- Har lagt excel filerne med resultaterne op (hvor hvert program har et sheet + graferne) + the-champion filen, hvis de skulle få lyst til at køre det
-- OBS Ændre path i BM til den nye fil? 
-
 # rustengine
 This code repository is part of a Master Thesis Project, that exploes memory management in the Rust and C programming languages.  
 
