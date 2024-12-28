@@ -1,17 +1,15 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
 #include <ctype.h>
-#include <glib.h> //`pkg-config --cflags --libs glib-2.0`
+#include <glib.h>
 
-typedef struct list
+typedef struct meta_list
 {
-    GList* head; 
-    GList* tail;
-}list;
-
+    GList *head;
+    GList *tail;
+} meta_list;
 
 void print_page(gpointer data, gpointer user_data)
 {
@@ -20,10 +18,8 @@ void print_page(gpointer data, gpointer user_data)
 
 void print_query(GHashTable *word_index, char *query)
 {
-    //GList *list = (GList *)g_hash_table_lookup(index, query); // hvilken type retur??
-    
-    list* page_list = (list*)g_hash_table_lookup(word_index, query);
-    GList* list = page_list->head;
+    meta_list *page_list = (meta_list *)g_hash_table_lookup(word_index, query);
+    GList *list = page_list->head;
 
     printf("%s: ", query);
 
@@ -63,41 +59,17 @@ void free_linked(GHashTable *word_index)
     {
         if (value != NULL)
         {
-            list* list_to_free = (list*) value;
-            g_list_free(list_to_free->head);
-            free(list_to_free);
+            meta_list *page_list = (meta_list *)value;
+            g_list_free(page_list->head);
+            free(page_list);
         }
-    }
-}
-
-void update_word_index(GHashTable *word_index, char *word, int page)
-{
-    list* page_list = (list*)g_hash_table_lookup(word_index, word);
-    
-    if (page_list != NULL)
-    {
-        if(GPOINTER_TO_INT(page_list->tail->data) != page){
-        GList* new_page = g_list_alloc();
-        new_page->data = GINT_TO_POINTER(page);
-
-        GList* old_tail = page_list->tail;
-        old_tail->next = new_page; //appends the new node to the list
-        page_list->tail = new_page; //moves the tail pointer to the new node
-    }}
-    else
-    {
-        list* new_page_list = (list*) malloc (sizeof(list));
-        new_page_list->head = NULL;
-        new_page_list->head = g_list_append(new_page_list->head, GINT_TO_POINTER(page));
-        new_page_list->tail = new_page_list->head;
-        g_hash_table_insert(word_index, g_strdup(word), new_page_list);
     }
 }
 
 void trim_word(char *word)
 {
     int len = strlen(word);
-    int new_len = 0; 
+    int new_len = 0;
     int first = 0;
     int last = len - 1;
 
@@ -118,16 +90,82 @@ void trim_word(char *word)
         word[i - first] = word[i];
     }
 
-    word[len-new_len] = '\0';
-
+    word[len - new_len] = '\0';
 }
 
-void process_word(char *word, long *wordcount)
+//Testing function
+void find_word_with_max_page_count(GHashTable *word_index)
+{
+
+    GHashTableIter iter;
+    gpointer key, value;
+
+    int max_count = 0;
+    GArray *word_list = g_array_new(true, true, sizeof(char *));
+
+    g_hash_table_iter_init(&iter, word_index);
+    while (g_hash_table_iter_next(&iter, &key, &value))
+    {
+        meta_list *list = (meta_list *)value;
+        GList *first_element_of_glist = (GList *)list->head;
+
+        int lenght_of_list = (int)g_list_length(first_element_of_glist);
+
+        if (lenght_of_list > max_count)
+        {
+            g_array_remove_range(word_list, 0, word_list->len);
+            char *word = (char *)key;
+            g_array_append_val(word_list, word);
+            max_count = lenght_of_list;
+        }
+        else if (lenght_of_list == max_count)
+        {
+            char *word = (char *)key;
+            g_array_append_val(word_list, word);
+        }
+    }
+    printf("These words appears on the highest number of different pages: ");
+    int size_of_array = (int)word_list->len;
+    for (size_t i = 0; i < size_of_array; i++)
+    {
+        printf(" '%s', ", (char *)g_array_index(word_list, gpointer, i));
+    }
+    printf("they appeared %d times \n", max_count);
+}
+
+void process_word(char *word, long *word_count, GHashTable *word_index, int *linecount)
 {
     if (strlen(word) > 0)
     {
-        trim_word(word);
-        *wordcount += 1;
+        *word_count += 1;
+    }
+
+    trim_word(word);
+
+    int page = *linecount / 50 + 1;
+
+    meta_list *page_list = (meta_list *)g_hash_table_lookup(word_index, word);
+
+    if (page_list == NULL)
+    {
+        meta_list *new_page_list = (meta_list *)g_malloc(sizeof(meta_list));
+        new_page_list->head = g_list_alloc();
+        new_page_list->tail = new_page_list->head;
+        new_page_list->head->next = NULL;
+        new_page_list->head->data = GINT_TO_POINTER(page);
+        g_hash_table_insert(word_index, g_strdup(word), new_page_list);
+    }
+    else
+    {
+        if (GPOINTER_TO_INT(page_list->tail->data) != page)
+        {
+            GList *new_page = g_list_alloc();
+            new_page->data = GINT_TO_POINTER(page);
+
+            GList *old_tail = page_list->tail;
+            old_tail->next = new_page;
+            page_list->tail = new_page;
+        }
     }
 }
 
@@ -137,43 +175,31 @@ void file_processing(FILE *file, long *word_count, GHashTable *word_index)
     char line[512];
     int linecount = 0;
 
-    while (fgets(line, 512, file) != NULL)
+    while (fgets(line, sizeof(line), file) != NULL)
     {
-        linecount++;
-        bool new_word = false;
         int char_index = 0;
+        linecount++;
 
         for (int i = 0; line[i] != '\0'; i++)
         {
-            if (isspace(line[i]))
+            if (!isspace(line[i]))
             {
-                if (new_word)
-                {
-                    // word[char_index] = '\0';
-                    process_word(word, word_count);
-                    int page = linecount/50 + 1;
-                    update_word_index(word_index, word, page);
-                    char_index = 0; // Nulstil for næste ord
-                    new_word = false;
-                    memset(word, '\0', 512);
-                }
+                word[char_index++] = line[i];
             }
             else
             {
-                // Vi er midt i et ord
-                word[char_index++] = line[i];
-                new_word = true;
+                if (char_index > 0)
+                {
+                    word[char_index] = '\0';
+                    process_word(word, word_count, word_index, &linecount);
+                    char_index = 0;
+                }
             }
         }
-                if (new_word)
+        if (char_index > 0)
         {
-                    // word[char_index] = '\0';
-                    process_word(word, word_count);
-                    int page = linecount/50 + 1;
-                    update_word_index(word_index, word, page);
-                    char_index = 0; // Nulstil for næste ord
-                    new_word = false;
-                    memset(word, '\0', 512);
+            word[char_index] = '\0';
+            process_word(word, word_count, word_index, &linecount);
         }
     }
 }
@@ -207,13 +233,19 @@ int main(int argc, char *argv[])
         rewind(file);
     }
 
-    //print_word_index(word_index);
-    // printf("The search found, ");
-    // print_query(word_index, query);
     // printf("C found the file contains %ld words.\n", word_count);
 
+    // print_word_index(word_index);
+
+    // print_query(word_index, query);
+
+    // find_word_with_max_page_count(word_index);
+
     // free_linked(word_index);
+
     // g_hash_table_destroy(word_index);
+
     // fclose(file);
+
     return 0;
 }

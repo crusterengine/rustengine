@@ -8,7 +8,7 @@ void process_word(char *word, long *wordcount)
 {
     if (strlen(word) > 0)
     {
-        *wordcount += 1; // later to put word in index
+        *wordcount += 1;
     }
 }
 
@@ -17,29 +17,30 @@ void file_processing(FILE *file, long *word_count)
     char word[512];
     char line[512];
 
-    while (fgets(line, 512, file) != NULL)
+    while (fgets(line, sizeof(line), file) != NULL)
     {
-        bool new_word = false;
-        int word_index = 0;
+        int char_index = 0;
 
         for (int i = 0; line[i] != '\0'; i++)
         {
-            if (isspace(line[i]))
+            if (!isspace(line[i]))
             {
-                if (new_word)
-                {
-                    process_word(word, word_count);
-                    word_index = 0; // Nulstil for næste ord
-                    new_word = false;
-                    memset(word, '\0', 512);
-                }
+                word[char_index++] = line[i];
             }
             else
             {
-                // Vi er midt i et ord
-                word[word_index++] = line[i];
-                new_word = true;
+                if (char_index > 0)
+                {
+                    word[char_index] = '\0';
+                    process_word(word, word_count);
+                    char_index = 0;
+                }
             }
+        }
+        if (char_index > 0)
+        {
+            word[char_index] = '\0';
+            process_word(word, word_count);
         }
     }
 }
@@ -71,7 +72,7 @@ int main(int argc, char *argv[])
         rewind(file);
     }
 
-    printf("The file contains %ld words.\n", word_count);
+    printf("C found that the file contains %ld words.\n", word_count);
 
     fclose(file);
     return 0;

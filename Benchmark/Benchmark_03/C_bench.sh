@@ -5,13 +5,13 @@
 number_of_iterations="1"
 
 #This creates a 'variable' that contains the path to the file I want to use in my program
-input_file="../data/the-champion.txt"
+input_file="../Files/the-champion.txt"
 
 #This creates a folder for the logs if it does not already exist
-mkdir -p "log_folder"
+mkdir -p "log_folder_03"
 
 #This captures the path to where the log files should be located
-log_folder="../Benchmark/Benchmark_03/log_folder"
+log_folder="../Benchmark/Benchmark_03/log_folder_03"
 
 
 #Go into the directory of the file you want to time
