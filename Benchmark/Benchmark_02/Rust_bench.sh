@@ -4,7 +4,7 @@
 number_of_iterations="1"
 
 #This creates a 'variable' that contains the path to the file you want to use in the benchmarking 
-input_file="../../../data/the-champion.txt"
+input_file="../../../Files/the-champion.txt"
 
 #This creates a folder for the logs if it does not already exist
 mkdir -p "log_folder_02"
