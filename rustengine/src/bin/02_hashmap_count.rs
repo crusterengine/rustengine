@@ -9,6 +9,7 @@ fn print_word_index(word_index: &HashMap<String, i64>) {
     }
 }
 
+//Testing function
 fn find_most_frequent_word(word_index: &HashMap<String, i64>) {
     let mut currently_highest = 0;
     let mut word_appear: String = String::new();

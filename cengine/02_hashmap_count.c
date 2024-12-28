@@ -22,6 +22,7 @@ void free_values(GHashTable *word_index)
     g_hash_table_remove_all(word_index);
 }
 
+//Testing function
 void find_most_frequent_word(GHashTable *word_index)
 {
 

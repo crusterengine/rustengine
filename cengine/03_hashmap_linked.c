@@ -93,6 +93,7 @@ void trim_word(char *word)
     word[len - new_len] = '\0';
 }
 
+//Testing function
 void find_word_with_max_page_count(GHashTable *word_index)
 {
 

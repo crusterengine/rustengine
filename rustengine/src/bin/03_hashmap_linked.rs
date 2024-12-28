@@ -26,6 +26,7 @@ fn print_word_index(word_index: &HashMap<String, LinkedList<i32>>) {
     }
 }
 
+//Testing function
 fn find_word_with_max_page_count(word_index: &HashMap<String, LinkedList<i32>>) {
     let mut max_count = 0;
     let mut word_appear = Vec::new();
