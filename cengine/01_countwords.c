@@ -64,9 +64,8 @@ int main(int argc, char *argv[])
     }
 
     long word_count = 0;
-    int itr = (int)atoi(argv[2]); // Error handling? 
+    int itr = (int)atoi(argv[2]);
 
-    // Simulating a larger file, da original input. 
     for (int i = 0; i < itr; i++)
     {
         file_processing(file, &word_count);

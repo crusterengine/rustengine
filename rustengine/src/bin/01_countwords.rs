@@ -12,7 +12,6 @@ fn file_processing(file: &File, word_count: &mut usize) {
     }
 }
 
-
 fn main() {
     let args: Vec<String> = env::args().collect();
 

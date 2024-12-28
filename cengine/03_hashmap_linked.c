@@ -3,51 +3,13 @@
 #include <string.h>
 #include <stdbool.h>
 #include <ctype.h>
-#include <glib.h> //`pkg-config --cflags --libs glib-2.0`
+#include <glib.h>
 
 typedef struct meta_list
 {
     GList *head;
     GList *tail;
 } meta_list;
-
-void find_word_with_max_page_count(GHashTable *word_index){
-
-    GHashTableIter iter;
-    gpointer key, value;
-
-    int max_count = 0;
-    GArray* word_list = g_array_new (true, true, sizeof(char*)); 
-
-    g_hash_table_iter_init(&iter, word_index);
-    while (g_hash_table_iter_next(&iter, &key, &value))
-    {
-        meta_list* list = (meta_list*) value;
-        GList* first_element_of_glist = (GList*) list->head;
-        
-        int lenght_of_list = (int) g_list_length(first_element_of_glist);
-
-        if(lenght_of_list > max_count){
-            g_array_remove_range(word_list, 0, word_list->len);
-            char* word = (char *)key;
-            g_array_append_val(word_list, word);
-            max_count = lenght_of_list;
-
-        } else if (lenght_of_list == max_count) {
-            char* word = (char *)key;
-            g_array_append_val(word_list, word);
-        }
-
-    }
-        printf("These words appears on the highest number of different pages: ");
-        int size_of_array = (int) word_list->len;
-        for (size_t i = 0; i < size_of_array; i++)
-        {
-            printf(" '%s', ", (char*)g_array_index(word_list, gpointer, i));
-        }
-        printf("they appeared %d times \n", max_count);
-
-}
 
 void print_page(gpointer data, gpointer user_data)
 {
@@ -129,6 +91,46 @@ void trim_word(char *word)
     }
 
     word[len - new_len] = '\0';
+}
+
+//Testing function
+void find_word_with_max_page_count(GHashTable *word_index)
+{
+
+    GHashTableIter iter;
+    gpointer key, value;
+
+    int max_count = 0;
+    GArray *word_list = g_array_new(true, true, sizeof(char *));
+
+    g_hash_table_iter_init(&iter, word_index);
+    while (g_hash_table_iter_next(&iter, &key, &value))
+    {
+        meta_list *list = (meta_list *)value;
+        GList *first_element_of_glist = (GList *)list->head;
+
+        int lenght_of_list = (int)g_list_length(first_element_of_glist);
+
+        if (lenght_of_list > max_count)
+        {
+            g_array_remove_range(word_list, 0, word_list->len);
+            char *word = (char *)key;
+            g_array_append_val(word_list, word);
+            max_count = lenght_of_list;
+        }
+        else if (lenght_of_list == max_count)
+        {
+            char *word = (char *)key;
+            g_array_append_val(word_list, word);
+        }
+    }
+    printf("These words appears on the highest number of different pages: ");
+    int size_of_array = (int)word_list->len;
+    for (size_t i = 0; i < size_of_array; i++)
+    {
+        printf(" '%s', ", (char *)g_array_index(word_list, gpointer, i));
+    }
+    printf("they appeared %d times \n", max_count);
 }
 
 void process_word(char *word, long *word_count, GHashTable *word_index, int *linecount)
@@ -223,7 +225,7 @@ int main(int argc, char *argv[])
     int itr = (int)atoi(argv[2]);
     char *query = argv[3];
 
-    GHashTable *word_index = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_free);
+    GHashTable *word_index = g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
 
     for (size_t i = 0; i < itr; i++)
     {
@@ -231,17 +233,19 @@ int main(int argc, char *argv[])
         rewind(file);
     }
 
-    //print_word_index(word_index);
     // printf("C found the file contains %ld words.\n", word_count);
+
+    // print_word_index(word_index);
 
     // print_query(word_index, query);
 
     // find_word_with_max_page_count(word_index);
-    // //free_linked(word_index);
-    
-    //print_word_index(word_index);
+
+    // free_linked(word_index);
 
     // g_hash_table_destroy(word_index);
+
     // fclose(file);
+
     return 0;
 }
