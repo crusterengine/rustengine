@@ -5,14 +5,22 @@ use std::io::{self, BufRead, Seek, SeekFrom};
 use std::process;
 
 fn print_query(word_index: &HashMap<String, LinkedList<i32>>, query: &String) {
-    for (word, pages) in word_index.iter() {
-        if word == query {
-            print!("{}: ", word);
-            for page in pages {
+    print!("{}: ", query);
+
+    let linked = word_index.get(query);
+
+    match linked {
+        Some(page_list) => {
+            for page in page_list.iter() {
                 print!("{}, ", page);
             }
         }
+
+        None => {
+            print!("not found.");
+        }
     }
+
     println!();
 }
 

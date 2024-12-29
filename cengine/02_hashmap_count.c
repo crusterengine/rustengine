@@ -16,6 +16,18 @@ void free_values(GHashTable *word_index)
     g_hash_table_iter_init(&iter, word_index);
     while (g_hash_table_iter_next(&iter, &key, &value))
     {
+        g_free(value);
+    }
+}
+
+void free_entries(GHashTable *word_index)
+{
+    GHashTableIter iter;
+    gpointer key, value;
+
+    g_hash_table_iter_init(&iter, word_index);
+    while (g_hash_table_iter_next(&iter, &key, &value))
+    {
         g_free(key);
         g_free(value);
     }
