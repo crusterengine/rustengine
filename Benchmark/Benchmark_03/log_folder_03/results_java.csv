@@ -1,0 +1,30 @@
+      Total Number of Cores: 8 (4 performance and 4 efficiency),MacBookPro17,1
+timestamp,elapsed_time,user_time,sys_time,cpu_usage,max_memory,major_faults,minor_faults,voluntary_switches,involuntary_switches,number_of_iterations,program,file
+gtime: cannot run .: Permission denied
+Command exited with non-zero status 126
+2025-01-02 14:27:10,0.00,0.00,0.00,81%,848,0,65,1,0,1,Java:-cp
+gtime: cannot run .: Permission denied
+Command exited with non-zero status 126
+2025-01-02 14:28:13,0.00,0.00,0.00,0%,848,0,65,1,3,1,Java:-cp
+gtime: cannot run .: Permission denied
+Command exited with non-zero status 126
+2025-01-02 14:29:44,0.00,0.00,0.00,0%,816,0,64,3,3,1,Java:-cp
+gtime: cannot run .: Permission denied
+Command exited with non-zero status 126
+2025-01-02 14:30:21,0.00,0.00,0.00,0%,848,0,65,1,2,1,Java:-cp
+gtime: cannot run .: Permission denied
+Command exited with non-zero status 126
+2025-01-02 14:31:04,0.00,0.00,0.00,73%,848,0,65,1,1,100000,Java:-cp
+gtime: cannot run .: Permission denied
+Command exited with non-zero status 126
+2025-01-02 14:31:31,0.00,0.00,0.00,0%,816,0,64,1,1,1000000,Java:-cp
+Command exited with non-zero status 130
+2025-01-02 14:35:03,23.74,38.72,2.14,172%,1457476,5,733901,76606,10,1000000,Java:Java,the-champion.txt
+Command exited with non-zero status 130
+2025-01-02 14:36:06,120.56,350.66,102.58,375%,1682764,9,31997081,2976806,36,1000000,Java:Java,the-champion.txt
+Command exited with non-zero status 130
+2025-01-02 14:38:10,374.29,1233.46,296.46,408%,2075540,326,86100331,9379397,2716,10000,Java:Java,the-champion.txt
+2025-01-02 14:44:31,0.37,0.48,0.07,150%,115912,38,36607,4148,9,1,Java:Java,the-champion.txt
+2025-01-02 14:52:54,0.37,0.50,0.07,153%,115832,15,36453,4281,8,1,Java:javastrem,the-champion.txt
+2025-01-02 14:59:06,0.35,0.45,0.08,152%,114420,20,36166,4523,9,1,Java:javastrem,the-champion.txt
+2025-01-02 14:59:44,0.35,0.45,0.08,149%,112068,22,35641,4690,12,1,Java:javastrem,the-champion.txt
