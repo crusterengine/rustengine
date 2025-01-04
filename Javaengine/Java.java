@@ -93,6 +93,7 @@ public class Java {
 
         for (int i = 0; i < itr; i++) {
             fileProcessing(filePath, wordIndex);
+            System.out.println(i);
         }
         //printAll(wordIndex);
         //printstream(wordIndex);

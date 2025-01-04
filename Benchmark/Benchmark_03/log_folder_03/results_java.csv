@@ -28,3 +28,5 @@ Command exited with non-zero status 130
 2025-01-02 14:52:54,0.37,0.50,0.07,153%,115832,15,36453,4281,8,1,Java:javastrem,the-champion.txt
 2025-01-02 14:59:06,0.35,0.45,0.08,152%,114420,20,36166,4523,9,1,Java:javastrem,the-champion.txt
 2025-01-02 14:59:44,0.35,0.45,0.08,149%,112068,22,35641,4690,12,1,Java:javastrem,the-champion.txt
+gtime: invalid option -- 'D'
+Try 'gtime --help' for more information.
